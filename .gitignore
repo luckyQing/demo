@@ -2,7 +2,6 @@
 RemoteSystemsTempFiles
 Servers
 .metadata
-.git
 bin/
 lib/
 build
