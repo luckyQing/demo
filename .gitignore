@@ -1,0 +1,11 @@
+.metadata
+RemoteSystemsTempFiles
+Servers
+.metadata
+.git
+bin/
+lib/
+build
+.settings
+*.class
+*.jar
