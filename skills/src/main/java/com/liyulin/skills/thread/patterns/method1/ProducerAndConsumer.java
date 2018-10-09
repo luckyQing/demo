@@ -1,24 +1,24 @@
-package com.liyulin.skills.thread;
+package com.liyulin.skills.thread.patterns.method1;
 
 import lombok.extern.slf4j.Slf4j;
 
 /**
- * 生产者消费者简单模拟
+ * 生产者消费者模式
  * 
  * @author liyulin
  * @date 2013/07/13
  */
-public class ProducerAndCustomer {
+public class ProducerAndConsumer {
 
 	public static void main(String[] args) {
-		Product product = new Product();
-		new Producer(product);
-		new Consumer(product);
+		Factory factory = new Factory();
+		new Producer(factory);
+		new Consumer(factory);
 	}
 }
 
 @Slf4j
-class Product {
+class Factory {
 	int n;
 	boolean valueSet = false;
 
@@ -49,32 +49,32 @@ class Product {
 }
 
 class Producer implements Runnable {
-	Product product;
+	Factory factory;
 
-	Producer(Product product) {
-		this.product = product;
+	Producer(Factory factory) {
+		this.factory = factory;
 		new Thread(this, "Producer").start();
 	}
 
 	public void run() {
 		int k = 0;
 		for (int i = 0; i < 5; i++) {
-			product.put(k++);
+			factory.put(k++);
 		}
 	}
 }
 
 class Consumer implements Runnable {
-	Product product;
+	Factory factory;
 
-	Consumer(Product product) {
-		this.product = product;
+	Consumer(Factory factory) {
+		this.factory = factory;
 		new Thread(this, "Consumer").start();
 	}
 
 	public void run() {
 		for (int i = 0; i < 5; i++) {
-			product.get();
+			factory.get();
 		}
 	}
 }
