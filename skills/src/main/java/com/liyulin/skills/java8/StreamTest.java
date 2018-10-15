@@ -1,4 +1,4 @@
-package com.liyulin.skills.java8.lambda;
+package com.liyulin.skills.java8;
 
 import java.util.stream.Stream;
 
@@ -14,15 +14,13 @@ import lombok.extern.slf4j.Slf4j;
  */
 @Slf4j
 public class StreamTest {
-	
+
 	@Test
 	public void testRemoveSuffixWithRela() {
-		String[] tableNames = {"t_user", "t_user_rela", "t_product", "t_product_rela"};
+		String[] tableNames = { "t_user", "t_user_rela", "t_product", "t_product_rela" };
 		String relaSuffix = "rela";
-		tableNames = Stream.of(tableNames)
-				.filter(name -> (!name.endsWith(relaSuffix)))
-				.toArray(String[]::new);
+		tableNames = Stream.of(tableNames).filter(name -> (!name.endsWith(relaSuffix))).toArray(String[]::new);
 		Stream.of(tableNames).forEach(log::info);
 	}
-	
+
 }

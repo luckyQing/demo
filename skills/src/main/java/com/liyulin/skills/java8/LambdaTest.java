@@ -1,4 +1,4 @@
-package com.liyulin.skills.java8.lambda;
+package com.liyulin.skills.java8;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -39,8 +39,10 @@ public class LambdaTest {
 
 		log.info("======stream=========");
 
-		data.stream().filter(a -> {return a > 10;}).forEach(System.out::println);
-		
+		data.stream().filter(a -> {
+			return a > 10;
+		}).forEach(System.out::println);
+
 		boolean tag = data.parallelStream().allMatch(a -> {
 			return a > 2;
 		});
@@ -59,5 +61,5 @@ public class LambdaTest {
 			log.info("k={}; v={}", k, v);
 		});
 	}
-	
+
 }
