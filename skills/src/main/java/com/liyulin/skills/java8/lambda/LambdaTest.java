@@ -8,12 +8,15 @@ import java.util.Map;
 
 import org.junit.Test;
 
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * jdk8新特性“lambda”表达式
  *
  * @author luckytom
  * @version 1.0 2018年3月23日 下午3:48:09
  */
+@Slf4j
 public class LambdaTest {
 
 	/**
@@ -23,7 +26,7 @@ public class LambdaTest {
 	public void lambdaTest() {
 		// 匿名对象
 		Runnable runnable = () -> {
-			System.out.println("run");
+			log.info("run");
 		};
 		new Thread(runnable).start();
 
@@ -34,28 +37,26 @@ public class LambdaTest {
 
 		data.forEach(System.out::println);
 
-		System.out.println("======stream=========");
+		log.info("======stream=========");
 
-		data.stream().filter(a -> {
-			return a > 10;
-		}).forEach(System.out::println);
-
+		data.stream().filter(a -> {return a > 10;}).forEach(System.out::println);
+		
 		boolean tag = data.parallelStream().allMatch(a -> {
 			return a > 2;
 		});
-		System.out.println(tag);
+		log.info("tag={}", tag);
 
 		long c = data.parallelStream().filter(a -> {
 			return a > 2;
 		}).count();
-		System.out.println(c);
+		log.info("c={}", c);
 
 		Map<String, String> map = new HashMap<String, String>();
 		map.put("a", "1");
 		map.put("b", "2");
 		map.put("c", "3");
 		map.forEach((k, v) -> {
-			System.out.println("k=" + k + "; v=" + v);
+			log.info("k={}; v={}", k, v);
 		});
 	}
 	
