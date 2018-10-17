@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.io.StringWriter;
 import java.io.Writer;
 import java.net.URL;
-import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
 import org.xhtmlrenderer.pdf.ITextFontResolver;
 import org.xhtmlrenderer.pdf.ITextRenderer;
 
@@ -29,8 +27,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class JavaToPdfHtmlFreeMarker {
 
-	private static final String DEST = "target/bill_test.pdf";
-	private static final String HTML = "template2.html";
 	private static final String FONT = "simhei.ttf";
 
 	private static Configuration freemarkerCfg = null;
@@ -46,14 +42,6 @@ public class JavaToPdfHtmlFreeMarker {
 		} catch (IOException e) {
 			log.error(e.getMessage(), e);
 		}
-	}
-
-	@Test
-	public void testHtml2Pdf() throws IOException, DocumentException, com.lowagie.text.DocumentException {
-		Map<String, Object> data = new HashMap<>();
-		data.put("name", "鲁家宁");
-		String content = freeMarkerRender(data, HTML);
-		createPdf(content, DEST);
 	}
 
 	/**
