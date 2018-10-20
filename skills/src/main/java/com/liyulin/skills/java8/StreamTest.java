@@ -1,5 +1,7 @@
 package com.liyulin.skills.java8;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -21,6 +23,20 @@ public class StreamTest {
 		String relaSuffix = "rela";
 		tableNames = Stream.of(tableNames).filter(name -> (!name.endsWith(relaSuffix))).toArray(String[]::new);
 		Stream.of(tableNames).forEach(log::info);
+	}
+	
+	@Test
+	public void testParallelStream() {
+		int count = 100;
+		List<Integer> data = new ArrayList<>(count);
+		for (int i = 0; i < count; i++) {
+			data.add(i);
+		}
+
+		// fork/join并行处理
+		data.parallelStream().forEach(item -> {
+			log.info("{}", item);
+		});
 	}
 
 }
