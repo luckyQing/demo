@@ -4,10 +4,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
-import java.util.Queue;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import org.junit.Test;
@@ -47,6 +46,16 @@ public class StreamTest {
 			log.info("{}", item);
 		});
 	}
+	
+	@Test
+	public void testReduce() {
+		List<Long> data = new ArrayList<>();
+		for(long i=1; i<=100;i++) {
+			data.add(i);
+		}
+		Long sum = data.parallelStream().reduce((num1, num2) -> (num1 + num2)).get();
+		log.info("sum={}", sum);
+	}
 
 	@Test
 	public void test() {
@@ -59,8 +68,10 @@ public class StreamTest {
 				stockSkuDTOList.add(stockSkuDTO);
 			}
 		}
+		// 去重（需要重写dto的equals()）
+		stockSkuDTOList = stockSkuDTOList.parallelStream().distinct().collect(Collectors.toList());
 		// 分组
-		ConcurrentMap<Long, ConcurrentLinkedQueue<StockSkuDTO>> group = new ConcurrentHashMap<>();
+		/*ConcurrentMap<Long, ConcurrentLinkedQueue<StockSkuDTO>> group = new ConcurrentHashMap<>();
 		stockSkuDTOList.parallelStream().forEach(item -> {
 			ConcurrentLinkedQueue<StockSkuDTO> queue = group.get(item.getSkuId());
 			
@@ -72,11 +83,13 @@ public class StreamTest {
 				}
 			}
 			queue.add(item);
-		});
+		});*/
+		ConcurrentMap<Long, List<StockSkuDTO>> skuGroup = stockSkuDTOList.parallelStream().collect(Collectors.groupingByConcurrent(StockSkuDTO::getSkuId));
+		
 		// 并行遍历分组
-		Collection<ConcurrentLinkedQueue<StockSkuDTO>> groupQueueList = group.values();
+		Collection<List<StockSkuDTO>> groupQueueList = skuGroup.values();
 		groupQueueList.parallelStream().forEach(groupQueue->{
-			StockSkuDTO head = groupQueue.peek();
+			StockSkuDTO head = groupQueue.get(0);
 			log.info("skuId={}", head.getSkuId());
 			groupQueue.forEach(sku->{
 				log.info("sku={}", sku);
@@ -104,6 +117,26 @@ public class StreamTest {
 		private Long buyNum;
 		/** 操作时间 */
 		private Date time;
+		
+		@Override
+		public int hashCode() {
+			return Long.hashCode(stockDeduceInfoId);
+		}
+
+		@Override
+		public boolean equals(Object obj) {
+			if ((this == null && obj != null) || (this != null && obj == null)) {
+				return false;
+			}
+			if (this == obj) {
+				return true;
+			}
+			if (getClass() != obj.getClass()) {
+				return false;
+			}
+			StockSkuDTO other = (StockSkuDTO) obj;
+			return Objects.equals(stockDeduceInfoId, other.stockDeduceInfoId);
+		}
 
 	}
 	
