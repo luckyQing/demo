@@ -30,7 +30,6 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java>1.8</java>
 		<fastjson>1.2.47</fastjson>
-		<springfox-swagger2>2.7.0</springfox-swagger2>
 	</properties>
 
 	<dependencies>
@@ -65,18 +64,6 @@
 		<dependency>
 			<groupId>com.fasterxml.jackson.dataformat</groupId>
 			<artifactId>jackson-dataformat-xml</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger2</artifactId>
-			<version>${springfox-swagger2}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>io.springfox</groupId>
-			<artifactId>springfox-swagger-ui</artifactId>
-			<version>${springfox-swagger2}</version>
 		</dependency>
 
 		<dependency>

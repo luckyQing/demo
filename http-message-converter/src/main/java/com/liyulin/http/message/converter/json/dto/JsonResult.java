@@ -2,25 +2,25 @@ package com.liyulin.http.message.converter.json.dto;
 
 import com.liyulin.http.message.converter.enums.ReturnCodeEnum;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * json格式返回参数
+ *
+ * @author liyulin
+ * @date 2018年11月3日下午12:21:35
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(description = "返回参数")
 public class JsonResult<T> {
 
-	@ApiModelProperty("返回状态码")
 	private int code;
 
-	@ApiModelProperty("返回消息")
 	private String msg;
 
-	@ApiModelProperty("返回数据")
 	private T data;
 
 	public JsonResult(ReturnCodeEnum returnCodeEnum) {

@@ -13,4 +13,3 @@ Jackson提供的四个注解：
 @JacksonXmlRootElement：指定生成xml根标签的名字。
 @JacksonXmlText：指定当前这个值，没有xml标签包裹。 
 @JsonPropertyOrder：指定序列化为json串时的各字段顺序。
-## 3. protobuf ##

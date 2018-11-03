@@ -1,24 +1,24 @@
 package com.liyulin.http.message.converter.json.dto;
 
-import io.swagger.annotations.ApiModel;
-import io.swagger.annotations.ApiModelProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * 商品 json格式入参
+ *
+ * @author liyulin
+ * @date 2018年11月3日下午12:22:02
+ */
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-@ApiModel(description = "商品 json格式入参")
 public class JsonProductDto {
 
-	@ApiModelProperty("商品id")
 	private long id;
 
-	@ApiModelProperty("商品名称")
 	private String name;
 
-	@ApiModelProperty("商品价格")
 	private long price;
 
 }
