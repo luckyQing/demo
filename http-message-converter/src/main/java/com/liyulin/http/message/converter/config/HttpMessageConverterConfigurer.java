@@ -3,7 +3,6 @@ package com.liyulin.http.message.converter.config;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -13,13 +12,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.alibaba.fastjson.support.config.FastJsonConfig;
 import com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter;
-import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 @Configuration
 public class HttpMessageConverterConfigurer implements WebMvcConfigurer {
-
-	@Autowired
-	private XmlMapper xmlMapper;
 	
 	@Override
 	public void configureMessageConverters(List<HttpMessageConverter<?>> converters) {
@@ -48,7 +43,7 @@ public class HttpMessageConverterConfigurer implements WebMvcConfigurer {
 	}
 	
 	private MappingJackson2XmlHttpMessageConverter buildXmlHttpMessageConverter() {
-		return new MappingJackson2XmlHttpMessageConverter(xmlMapper);
+		return new MappingJackson2XmlHttpMessageConverter(XmlMapperSingleton.getInstance());
 	}
 
 }

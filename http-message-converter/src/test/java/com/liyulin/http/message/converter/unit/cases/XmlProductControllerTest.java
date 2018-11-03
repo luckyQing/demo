@@ -3,7 +3,7 @@ package com.liyulin.http.message.converter.unit.cases;
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 
-import com.alibaba.fastjson.TypeReference;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.liyulin.http.message.converter.enums.ReturnCodeEnum;
 import com.liyulin.http.message.converter.unit.base.BaseUnitTest;
 import com.liyulin.http.message.converter.xml.dto.XmlProductDto;
@@ -18,11 +18,15 @@ public class XmlProductControllerTest extends BaseUnitTest {
 		xmlProductDto.setName("手机");
 		xmlProductDto.setPrice(288800);
 
-		XmlResult<XmlProductDto> result = super.postJson("/json", xmlProductDto, new TypeReference<XmlResult<XmlProductDto>>() {});
+		XmlResult<XmlProductDto> result = super.postXml("/xml", xmlProductDto, new TypeReference<XmlResult<XmlProductDto>>() {});
 
 		Assertions.assertThat(result).isNotNull();
 		Assertions.assertThat(result.getCode()).isEqualTo(ReturnCodeEnum.SUCCESS.getCode());
-		Assertions.assertThat(result.getData().toString()).isEqualTo(xmlProductDto.toString());
+		
+		XmlProductDto resultXmlProductDto = result.getData();
+		Assertions.assertThat(resultXmlProductDto.getId()).isEqualTo(xmlProductDto.getId());
+		Assertions.assertThat(resultXmlProductDto.getName()).isEqualTo(xmlProductDto.getName());
+		Assertions.assertThat(resultXmlProductDto.getPrice()).isEqualTo(xmlProductDto.getPrice());
 	}
 	
 }
