@@ -6,7 +6,7 @@
 <Configuration status="WARN" monitorInterval="600">
 	<!-- 变量配置 -->
 	<Properties>
-		<Property name="project">httpxml</Property>
+		<Property name="project">http-message-converter</Property>
 		<Property name="log_path">E:/logs/${project}</Property>
 		<!-- 
 			%level 输出优先级，即DEBUG，INFO，WARN，ERROR，FATAL 
