@@ -10,7 +10,7 @@ demo下所有项目皆为学习示例项目。
 >| [excel](https://github.com/luckyQing/demo#bf57c906fa7d2bb66d07372e41585d96-63859748ac89aff47bd0c44c70f626064810e752) | excel读写实例 | 
 >| [hibernate-validator](https://github.com/luckyQing/demo#b7cf3ac66a305ead7159053ddba34327-5099bec85e5dbce97aa12da197981838fd13c5ac) | 参数校验 | 
 >| [html2pdf](https://github.com/luckyQing/demo#893cea39bf5d717d55f869739d40e91f-f074a18f81b7d37c4fb5e54aec8ee99534e2f9cf) | html模板生成pdf | 
->| [httpxml](https://github.com/luckyQing/demo#6875acb83d07bffa3f27aa31aeed5fdd-4511ab9f9ebdbf286b6fbbb2cc851d57b37bf1c3) | xml、json格式请求、响应 | 
+>| [http-message-converter](https://github.com/luckyQing/demo#6875acb83d07bffa3f27aa31aeed5fdd-4511ab9f9ebdbf286b6fbbb2cc851d57b37bf1c3) | xml、json、protobuf等格式消息转化 | 
 >| [redis](https://github.com/luckyQing/demo#86a1b907d54bf7010394bf316e183e67-e5eb989cc488b422fc2e8b5efd6ad137d9c0a129) | redis操作 | 
 >| [skills](https://github.com/luckyQing/demo#a658279f9b983958149f31e4d8487673-60d6a7c34ecde303828f7d968a7bf12d66f9b684) | java基础知识 | 
 
