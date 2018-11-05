@@ -32,7 +32,7 @@ import javax.crypto.Cipher;
  * @date 2012-4-26
  * @version 1.0
  */
-public class RSAUtils {
+public final class RSAUtils {
 
 	/**
 	 * 加密算法RSA
