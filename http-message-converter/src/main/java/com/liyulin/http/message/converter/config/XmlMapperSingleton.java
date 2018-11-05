@@ -8,11 +8,11 @@ import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 
 public class XmlMapperSingleton {
 	private static volatile XmlMapper xmlMapper = null;
-	private static final Object LOCK = new Object();
+	private static final Object MUTEX = new Object();
 
 	public static XmlMapper getInstance() {
 		if (null == xmlMapper) {
-			synchronized (LOCK) {
+			synchronized (MUTEX) {
 				if (null == xmlMapper) {
 					xmlMapper = buildXmlMapper();
 				}
