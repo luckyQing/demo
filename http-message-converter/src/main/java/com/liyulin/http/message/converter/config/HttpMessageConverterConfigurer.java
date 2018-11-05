@@ -1,6 +1,7 @@
 package com.liyulin.http.message.converter.config;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.springframework.context.annotation.Configuration;
@@ -23,20 +24,15 @@ public class HttpMessageConverterConfigurer implements WebMvcConfigurer {
 	}
 
 	private FastJsonHttpMessageConverter buildJsonHttpMessageConverter() {
-		// 创建FastJson信息转换对象
-		FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
-
-		// 创建Fastjosn对象并设定序列化规则
 		FastJsonConfig fastJsonConfig = new FastJsonConfig();
-		fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteDateUseDateFormat,
-				SerializerFeature.WriteNullNumberAsZero, SerializerFeature.WriteBigDecimalAsPlain);
+		fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteNullNumberAsZero,
+				SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty,
+				SerializerFeature.WriteNullStringAsEmpty, 
+				SerializerFeature.WriteDateUseDateFormat,
+				SerializerFeature.WriteBigDecimalAsPlain);
 
-		// 中文乱码解决方案
-		List<MediaType> mediaTypes = new ArrayList<>();
-		mediaTypes.add(MediaType.APPLICATION_JSON_UTF8);// 设定json格式且编码为UTF-8
-		fastJsonHttpMessageConverter.setSupportedMediaTypes(mediaTypes);
-
-		// 规则赋予转换对象
+		FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
+		fastJsonHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
 		fastJsonHttpMessageConverter.setFastJsonConfig(fastJsonConfig);
 		return fastJsonHttpMessageConverter;
 	}
