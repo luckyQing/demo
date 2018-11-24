@@ -1,4 +1,4 @@
-package com.liyulin.webservice.dto;
+package com.liyulin.webservice.common;
 
 import com.liyulin.webservice.enums.ReturnCodeEnum;
 
