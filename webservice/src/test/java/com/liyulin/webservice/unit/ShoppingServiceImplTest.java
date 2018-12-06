@@ -56,7 +56,6 @@ public class ShoppingServiceImplTest {
             productReqBody.setName("橘子");
             productReqBody.setBuyCount(3);
             productReqBody.setPrice(20L);
-            // FIXME
 			Object[] objects1 = client.invokeWrapped("buy", productReqBody);
 			log.info("返回数据：{}", JSON.toJSONString(objects1));
 		} catch (java.lang.Exception e) {
