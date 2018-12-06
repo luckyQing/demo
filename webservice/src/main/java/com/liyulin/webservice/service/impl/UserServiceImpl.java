@@ -4,7 +4,7 @@ import javax.jws.WebService;
 
 import org.springframework.stereotype.Service;
 
-import com.liyulin.webservice.response.UserDto;
+import com.liyulin.webservice.response.UserRespBody;
 import com.liyulin.webservice.service.IUserService;
 
 @WebService(
@@ -18,8 +18,8 @@ import com.liyulin.webservice.service.IUserService;
 public class UserServiceImpl implements IUserService {
 
 	@Override
-	public UserDto getUser(String userId) {
-		UserDto user = new UserDto();
+	public UserRespBody getUser(String userId) {
+		UserRespBody user = new UserRespBody();
 		user.setUserId(userId);
 		user.setUserName("张三");
 		user.setEmail("zhangsan@qq.com");

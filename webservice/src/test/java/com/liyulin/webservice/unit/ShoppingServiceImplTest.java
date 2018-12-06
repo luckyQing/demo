@@ -7,7 +7,7 @@ import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
 import com.liyulin.webservice.request.ProductReqBody;
-import com.liyulin.webservice.response.OrderDto;
+import com.liyulin.webservice.response.OrderRespBody;
 import com.liyulin.webservice.service.IShoppingService;
 
 import lombok.extern.slf4j.Slf4j;
@@ -35,7 +35,7 @@ public class ShoppingServiceImplTest {
             productReqBody.setName("橘子");
             productReqBody.setBuyCount(3);
             productReqBody.setPrice(20L);
-            OrderDto result = shoppingService.buy(productReqBody);
+            OrderRespBody result = shoppingService.buy(productReqBody);
 			log.info("返回结果：{}", result);
         } catch (Exception e) {
 			log.error(e.getMessage(), e);
@@ -56,6 +56,7 @@ public class ShoppingServiceImplTest {
             productReqBody.setName("橘子");
             productReqBody.setBuyCount(3);
             productReqBody.setPrice(20L);
+            // FIXME
 			Object[] objects1 = client.invokeWrapped("buy", productReqBody);
 			log.info("返回数据：{}", JSON.toJSONString(objects1));
 		} catch (java.lang.Exception e) {

@@ -5,7 +5,7 @@ import javax.jws.WebService;
 import org.springframework.stereotype.Service;
 
 import com.liyulin.webservice.request.ProductReqBody;
-import com.liyulin.webservice.response.OrderDto;
+import com.liyulin.webservice.response.OrderRespBody;
 import com.liyulin.webservice.service.IShoppingService;
 
 @WebService(
@@ -19,8 +19,8 @@ import com.liyulin.webservice.service.IShoppingService;
 public class ShoppingServiceImpl implements IShoppingService {
 
 	@Override
-	public OrderDto buy(ProductReqBody productReqBody) {
-		OrderDto orderDto = new OrderDto();
+	public OrderRespBody buy(ProductReqBody productReqBody) {
+		OrderRespBody orderDto = new OrderRespBody();
 		orderDto.setName(productReqBody.getName());
 		orderDto.setPrice(productReqBody.getPrice());
 		orderDto.setBuyCount(productReqBody.getBuyCount());
