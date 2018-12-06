@@ -1,41 +1,46 @@
 package com.liyulin.webservice.config;
 
+import javax.xml.ws.Endpoint;
 
+import org.apache.cxf.Bus;
+import org.apache.cxf.jaxws.EndpointImpl;
+import org.apache.cxf.transport.servlet.CXFServlet;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.servlet.ServletRegistrationBean;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.core.io.ClassPathResource;
-import org.springframework.ws.config.annotation.EnableWs;
-import org.springframework.ws.config.annotation.WsConfigurerAdapter;
-import org.springframework.ws.transport.http.MessageDispatcherServlet;
-import org.springframework.ws.wsdl.wsdl11.DefaultWsdl11Definition;
-import org.springframework.xml.xsd.SimpleXsdSchema;
-import org.springframework.xml.xsd.XsdSchema;
 
-@EnableWs
+import com.liyulin.webservice.service.IShoppingService;
+import com.liyulin.webservice.service.IUserService;
+
 @Configuration
-public class WebServiceConfig extends WsConfigurerAdapter {
-	@Bean
-	public ServletRegistrationBean<MessageDispatcherServlet> messageDispatcherServlet(ApplicationContext applicationContext) {
-		MessageDispatcherServlet servlet = new MessageDispatcherServlet();
-		servlet.setApplicationContext(applicationContext);
-		servlet.setTransformWsdlLocations(true);
-		return new ServletRegistrationBean<>(servlet, "/ws/*");
-	}
+public class WebServiceConfig {
 
-	@Bean(name = "countries")
-	public DefaultWsdl11Definition defaultWsdl11Definition(XsdSchema countriesSchema) {
-		DefaultWsdl11Definition wsdl11Definition = new DefaultWsdl11Definition();
-		wsdl11Definition.setPortTypeName("CountriesPort");
-		wsdl11Definition.setLocationUri("/ws");
-		wsdl11Definition.setTargetNamespace("http://www.liyulin.com/webservice");
-		wsdl11Definition.setSchema(countriesSchema);
-		return wsdl11Definition;
+	@Autowired
+	private Bus bus;
+
+	@Autowired
+	private IUserService userService;
+	@Autowired
+	private IShoppingService shoppingService;
+
+	@Bean
+	public ServletRegistrationBean<CXFServlet> dispatcherServlet() {
+		return new ServletRegistrationBean<>(new CXFServlet(), "/*");
 	}
 
 	@Bean
-	public XsdSchema countriesSchema() {
-		return new SimpleXsdSchema(new ClassPathResource("xsd/countries.xsd"));
+	public Endpoint userEndpoint() {
+		EndpointImpl endpoint = new EndpointImpl(bus, userService);
+		endpoint.publish("/user");
+		return endpoint;
 	}
+	
+	@Bean
+	public Endpoint shoppingEndpoint() {
+		EndpointImpl endpoint = new EndpointImpl(bus, shoppingService);
+		endpoint.publish("/shopping");
+		return endpoint;
+	}
+
 }
