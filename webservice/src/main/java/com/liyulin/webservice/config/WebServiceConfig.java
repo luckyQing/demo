@@ -18,7 +18,6 @@ public class WebServiceConfig {
 
 	@Autowired
 	private Bus bus;
-
 	@Autowired
 	private IUserService userService;
 	@Autowired

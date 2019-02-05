@@ -24,11 +24,19 @@ public class HttpMessageConverterConfigurer implements WebMvcConfigurer {
 
 	private FastJsonHttpMessageConverter buildJsonHttpMessageConverter() {
 		FastJsonConfig fastJsonConfig = new FastJsonConfig();
-		fastJsonConfig.setSerializerFeatures(SerializerFeature.WriteNullNumberAsZero,
-				SerializerFeature.WriteMapNullValue, SerializerFeature.WriteNullListAsEmpty,
+		fastJsonConfig.setSerializerFeatures(
+				SerializerFeature.WriteNullNumberAsZero,
+				SerializerFeature.WriteMapNullValue, 
+				SerializerFeature.WriteNullListAsEmpty,
 				SerializerFeature.WriteNullStringAsEmpty, 
+				SerializerFeature.WriteNullBooleanAsFalse,
 				SerializerFeature.WriteDateUseDateFormat,
-				SerializerFeature.WriteBigDecimalAsPlain);
+				SerializerFeature.WriteBigDecimalAsPlain,
+				SerializerFeature.WriteEnumUsingToString,
+				// 禁用“循环引用检测”
+				SerializerFeature.DisableCircularReferenceDetect,
+				// 结果格式化
+				SerializerFeature.PrettyFormat);
 
 		FastJsonHttpMessageConverter fastJsonHttpMessageConverter = new FastJsonHttpMessageConverter();
 		fastJsonHttpMessageConverter.setSupportedMediaTypes(Arrays.asList(MediaType.APPLICATION_JSON_UTF8));
