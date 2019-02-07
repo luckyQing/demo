@@ -3,6 +3,7 @@ package com.liyulin.webservice.service.impl;
 import javax.jws.WebService;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.liyulin.webservice.request.ProductReqBody;
 import com.liyulin.webservice.response.OrderRespBody;
@@ -19,7 +20,7 @@ import com.liyulin.webservice.service.IShoppingService;
 public class ShoppingServiceImpl implements IShoppingService {
 
 	@Override
-	public OrderRespBody buy(ProductReqBody productReqBody) {
+	public OrderRespBody buy(@RequestBody ProductReqBody productReqBody) {
 		OrderRespBody orderDto = new OrderRespBody();
 		orderDto.setName(productReqBody.getName());
 		orderDto.setPrice(productReqBody.getPrice());

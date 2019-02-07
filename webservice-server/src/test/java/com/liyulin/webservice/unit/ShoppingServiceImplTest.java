@@ -1,11 +1,8 @@
 package com.liyulin.webservice.unit;
 
-import org.apache.cxf.endpoint.Client;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
-import org.apache.cxf.jaxws.endpoint.dynamic.JaxWsDynamicClientFactory;
 import org.junit.Test;
 
-import com.alibaba.fastjson.JSON;
 import com.liyulin.webservice.request.ProductReqBody;
 import com.liyulin.webservice.response.OrderRespBody;
 import com.liyulin.webservice.service.IShoppingService;
@@ -42,25 +39,23 @@ public class ShoppingServiceImplTest {
         }
 	}
 
-	@Test
-	public void testDynamicClient() {
-		// 创建动态客户端
-		JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
-		Client client = dcf.createClient(address);
-		// 需要密码的情况需要加上用户名和密码
-		// client.getOutInterceptors().add(new ClientLoginInterceptor(USER_NAME,
-		// PASS_WORD));
-		try {
-			// invoke("方法名",参数1,参数2,参数3....);
-			ProductReqBody productReqBody = new ProductReqBody();
-            productReqBody.setName("橘子");
-            productReqBody.setBuyCount(3);
-            productReqBody.setPrice(20L);
-			Object[] objects1 = client.invokeWrapped("buy", productReqBody);
-			log.info("返回数据：{}", JSON.toJSONString(objects1));
-		} catch (java.lang.Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
+//	@Test
+//	public void testDynamicClient() {
+//		// 创建动态客户端
+//		JaxWsDynamicClientFactory dcf = JaxWsDynamicClientFactory.newInstance();
+//		Client client = dcf.createClient(address);
+//		// 需要密码的情况需要加上用户名和密码
+//		// client.getOutInterceptors().add(new ClientLoginInterceptor(USER_NAME, PASS_WORD));
+//		try {
+//			ProductReqBody productReqBody = new ProductReqBody();
+//            productReqBody.setName("橘子");
+//            productReqBody.setBuyCount(3);
+//            productReqBody.setPrice(20L);
+//			Object[] objects1 = client.invoke("buy", productReqBody);
+//			log.info("返回数据：{}", JSON.toJSONString(objects1));
+//		} catch (java.lang.Exception e) {
+//			log.error(e.getMessage(), e);
+//		}
+//	}
 
 }
