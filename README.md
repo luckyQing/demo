@@ -14,4 +14,4 @@ demo下所有项目皆为学习示例项目。
 >| [redis](https://github.com/luckyQing/demo#86a1b907d54bf7010394bf316e183e67-e5eb989cc488b422fc2e8b5efd6ad137d9c0a129) | redis操作 | 
 >| [skills](https://github.com/luckyQing/demo#a658279f9b983958149f31e4d8487673-60d6a7c34ecde303828f7d968a7bf12d66f9b684) | java基础知识 | 
 >| [webservice-server](https://github.com/luckyQing/demo#cd9ca27568db2b3577e5d868bfe9f915-cba0937ef1fcfe0da9a9188eddba9b3e439465c3) | webservice服务端 | 
->| [webservice-client](https://github.com/luckyQing/demo#cd9ca27568db2b3577e5d868bfe9f915-cba0937ef1fcfe0da9a9188eddba9b3e439465c3) | webservice客户端 | 
+>| [webservice-client](https://github.com/luckyQing/demo#48aec61bc33ed72189e17f2c2b408b1f-c044eb6c57377e119f0712bf095e5a67fd181a95) | webservice客户端 | 
