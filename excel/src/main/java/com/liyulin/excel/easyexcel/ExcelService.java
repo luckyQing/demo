@@ -9,12 +9,11 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.EasyExcelFactory;
 import com.alibaba.excel.ExcelWriter;
 import com.alibaba.excel.context.AnalysisContext;
 import com.alibaba.excel.event.AnalysisEventListener;
 import com.alibaba.excel.metadata.Sheet;
-import com.alibaba.excel.support.ExcelTypeEnum;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -27,15 +26,6 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExcelService {
 
-	private List<OrderDto> init() {
-		int count = 100;
-		List<OrderDto> data = new ArrayList<>(count);
-		for (int i = 0; i < count; i++) {
-			data.add(new OrderDto(i, "商品" + i, i));
-		}
-		return data;
-	}
-
 	/**
 	 * 导出excel
 	 * 
@@ -44,18 +34,25 @@ public class ExcelService {
 	public void exportExcel() throws FileNotFoundException {
 		String path = getClass().getResource("/").getPath();
 		log.info("path={}", path);
-		List<OrderDto> data = init();
 		try (OutputStream out = new FileOutputStream(path + "商品导出test.xlsx");) {
-			ExcelWriter writer = new ExcelWriter(out, ExcelTypeEnum.XLSX);
+			ExcelWriter writer = EasyExcelFactory.getWriter(out);
 			Sheet sheet1 = new Sheet(1, 1, OrderDto.class);
-			writer.write(data, sheet1);
+
+			int totalCount = 100;
+			int pageSize = 256;
+			for (int i = 0; i < totalCount; i++) {
+				List<OrderDto> data = new ArrayList<>(totalCount);
+				for (int page = 0; page < pageSize; page++) {
+					data.add(new OrderDto(i, "商品" + pageSize, i));
+				}
+				writer.write(data, sheet1);
+			}
 			writer.finish();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 	}
 
-	// FIXME:buyNum转化异常
 	public void importExcel() {
 		String path = ExcelService.class.getResource("/").getPath();
 		log.info("path={}", path);
@@ -64,8 +61,8 @@ public class ExcelService {
 			AnalysisEventListener<OrderDto> listener = new AnalysisEventListener<OrderDto>() {
 
 				@Override
-				public void invoke(OrderDto productDto, AnalysisContext context) {
-					log.info("{}", productDto);
+				public void invoke(OrderDto orderDto, AnalysisContext context) {
+					log.info("{}", orderDto);
 				}
 
 				@Override
@@ -75,9 +72,7 @@ public class ExcelService {
 
 			};
 
-			ExcelReader excelReader = new ExcelReader(inputStream, null, listener);
-
-			excelReader.read(new Sheet(1, 1, OrderDto.class));
+			EasyExcelFactory.readBySax(inputStream, new Sheet(1, 1, OrderDto.class), listener);
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}

@@ -16,13 +16,13 @@ import lombok.ToString;
 @AllArgsConstructor
 public class OrderDto extends BaseRowModel {
 
-	@ExcelProperty(value = "订单id")
+	@ExcelProperty(value = "订单id", index = 0)
 	private long id;
 
-	@ExcelProperty(value = "商品名称")
+	@ExcelProperty(value = "商品名称", index = 1)
 	private String name;
 
-	@ExcelProperty(value = "购买数量", format="int")
+	@ExcelProperty(value = "购买数量", index = 2)
 	private double buyNum;
 
 }
