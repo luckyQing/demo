@@ -1,4 +1,4 @@
-package com.liyulin.webservice;
+package com.liyulin.webservice.cfx;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

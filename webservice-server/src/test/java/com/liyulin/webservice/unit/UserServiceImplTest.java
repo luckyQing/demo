@@ -9,7 +9,7 @@ import org.apache.cxf.transports.http.configuration.HTTPClientPolicy;
 import org.junit.Test;
 
 import com.alibaba.fastjson.JSON;
-import com.liyulin.webservice.service.IUserService;
+import com.liyulin.webservice.cfx.service.IUserService;
 
 import lombok.extern.slf4j.Slf4j;
 

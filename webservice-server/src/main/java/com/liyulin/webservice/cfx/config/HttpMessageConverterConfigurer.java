@@ -1,4 +1,4 @@
-package com.liyulin.webservice.config;
+package com.liyulin.webservice.cfx.config;
 
 import java.util.Arrays;
 import java.util.List;

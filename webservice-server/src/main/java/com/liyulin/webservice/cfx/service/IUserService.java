@@ -1,8 +1,8 @@
-package com.liyulin.webservice.service;
+package com.liyulin.webservice.cfx.service;
 
 import javax.jws.WebService;
 
-import com.liyulin.webservice.response.UserRespBody;
+import com.liyulin.webservice.cfx.response.UserRespBody;
 
 // targetNamespace，一般是接口的包名倒序
 @WebService

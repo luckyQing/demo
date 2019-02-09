@@ -1,4 +1,4 @@
-package com.liyulin.webservice.enums;
+package com.liyulin.webservice.cfx.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

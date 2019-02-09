@@ -1,6 +1,6 @@
-package com.liyulin.webservice.common;
+package com.liyulin.webservice.cfx.common;
 
-import com.liyulin.webservice.enums.ReturnCodeEnum;
+import com.liyulin.webservice.cfx.enums.ReturnCodeEnum;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

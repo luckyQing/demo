@@ -1,4 +1,4 @@
-package com.liyulin.webservice.config;
+package com.liyulin.webservice.cfx.config;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.databind.SerializationFeature;

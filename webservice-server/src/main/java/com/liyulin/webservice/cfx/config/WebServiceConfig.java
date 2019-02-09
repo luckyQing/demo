@@ -1,4 +1,4 @@
-package com.liyulin.webservice.config;
+package com.liyulin.webservice.cfx.config;
 
 import javax.xml.ws.Endpoint;
 
@@ -10,8 +10,8 @@ import org.springframework.boot.web.servlet.ServletRegistrationBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import com.liyulin.webservice.service.IShoppingService;
-import com.liyulin.webservice.service.IUserService;
+import com.liyulin.webservice.cfx.service.IShoppingService;
+import com.liyulin.webservice.cfx.service.IUserService;
 
 @Configuration
 public class WebServiceConfig {

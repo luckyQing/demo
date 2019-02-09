@@ -1,4 +1,4 @@
-package com.liyulin.webservice.request;
+package com.liyulin.webservice.cfx.response;
 
 import java.io.Serializable;
 
@@ -9,11 +9,12 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class ProductReqBody implements Serializable {
+public class UserRespBody implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	private String name;
-	private long price;
-	private int buyCount;
+
+	private String userId;
+	private String userName;
+	private String email;
 
 }

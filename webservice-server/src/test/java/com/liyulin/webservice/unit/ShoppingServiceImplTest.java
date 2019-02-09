@@ -3,9 +3,9 @@ package com.liyulin.webservice.unit;
 import org.apache.cxf.jaxws.JaxWsProxyFactoryBean;
 import org.junit.Test;
 
-import com.liyulin.webservice.request.ProductReqBody;
-import com.liyulin.webservice.response.OrderRespBody;
-import com.liyulin.webservice.service.IShoppingService;
+import com.liyulin.webservice.cfx.request.ProductReqBody;
+import com.liyulin.webservice.cfx.response.OrderRespBody;
+import com.liyulin.webservice.cfx.service.IShoppingService;
 
 import lombok.extern.slf4j.Slf4j;
 
