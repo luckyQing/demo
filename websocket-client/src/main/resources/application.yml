@@ -1,0 +1,9 @@
+logging:
+  config: classpath:log4j2.xml
+
+server:
+  tomcat:
+    uri-encoding: utf-8
+  port: 9010
+  servlet:
+    context-path: /
