@@ -18,5 +18,5 @@ demo下所有项目皆为学习示例项目。
 >| [skills](https://github.com/luckyQing/demo#a658279f9b983958149f31e4d8487673-90181fb68b09d1fb96c30753c3085182448704ed) | java基础知识 | 
 >| [webservice-client](https://github.com/luckyQing/demo#48aec61bc33ed72189e17f2c2b408b1f-c044eb6c57377e119f0712bf095e5a67fd181a95) | webservice客户端 | 
 >| [webservice-server](https://github.com/luckyQing/demo#cd9ca27568db2b3577e5d868bfe9f915-4fdadac3498529b3c741bbfdd91ff858a41f7dde) | webservice服务端 | 
->| [websocket-client](https://github.com/luckyQing/demo#cd9ca27568db2b3577e5d868bfe9f915-4fdadac3498529b3c741bbfdd91ff858a41f7dde) | websocket服务端 | 
->| [websocket-server](https://github.com/luckyQing/demo#cd9ca27568db2b3577e5d868bfe9f915-4fdadac3498529b3c741bbfdd91ff858a41f7dde) | websocket服务端 | 
+>| [websocket-client](https://github.com/luckyQing/demo#b458b1c253f71e4952b8a7398b697d5b-7899a90dedb68edf85ebae59941996f0d0334332) | websocket服务端 | 
+>| [websocket-server](https://github.com/luckyQing/demo#392516a6b709d6132fe372df894693d7-e29c4db64c166976af548a08a8f86e32042c93a5) | websocket服务端 | 
