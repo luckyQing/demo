@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.elasticsearch.index.query.QueryBuilders;
+import org.elasticsearch.search.sort.SortBuilders;
+import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -85,8 +87,12 @@ public class ProductService {
 	 */
 	public void query() {
 		SearchQuery searchQuery = new NativeSearchQueryBuilder()
+				// 查询条件
 				.withQuery(QueryBuilders.matchQuery(ProductEntity.Column.NAME, "手机"))
+				// 分页
 				.withPageable(PageRequest.of(1, 10))
+				// 倒序
+				.withSort(SortBuilders.fieldSort(ProductEntity.Column.ID).order(SortOrder.DESC))
 				.build();
 		Page<ProductEntity> productEntityPage = productRepository.search(searchQuery);
 		int total = productEntityPage.getTotalPages();
