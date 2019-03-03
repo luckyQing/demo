@@ -1,5 +1,7 @@
 # java基础知识
+- com.liyulin.skills.annotation：注解
 - com.liyulin.skills.awt：awt图像界面
+- com.liyulin.skills.data.mongodb：mongodb实例
 - com.liyulin.skills.file：文件
 - com.liyulin.skills.grammar：基础语法
 - com.liyulin.skills.java8.lambda：lambda表达式
