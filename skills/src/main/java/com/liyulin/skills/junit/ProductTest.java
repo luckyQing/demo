@@ -10,6 +10,7 @@ import org.junit.Test;
 public class ProductTest {
 
 	@Test
+	// 每个测试方法要以test开头
 	public void testBuy() {
 		int number=1;
 		Assertions.assertThat(number).isGreaterThan(0);
