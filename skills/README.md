@@ -6,6 +6,7 @@
 - com.liyulin.skills.grammar：基础语法
 - com.liyulin.skills.java8.lambda：lambda表达式
 - com.liyulin.skills.jdbc：jdbc实例
+- com.liyulin.skills.junit：单元测试
 - com.liyulin.skills.lang：lang包实例
 - com.liyulin.skills.net：网络操作实例（tcp、udp）
 - com.liyulin.skills.other.question：题
