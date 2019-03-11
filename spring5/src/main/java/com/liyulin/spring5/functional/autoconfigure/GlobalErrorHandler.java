@@ -9,6 +9,10 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.reactive.function.server.RouterFunction;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
+import com.alibaba.fastjson.JSON;
+
+import lombok.extern.slf4j.Slf4j;
+
 /**
  * 全局错误处理
  *
@@ -16,6 +20,7 @@ import org.springframework.web.reactive.function.server.ServerResponse;
  * @date 2019年3月10日下午2:30:50
  */
 @Component
+@Slf4j
 public class GlobalErrorHandler extends DefaultErrorWebExceptionHandler {
 
 	public GlobalErrorHandler(ErrorAttributes errorAttributes, ResourceProperties resourceProperties,
@@ -27,6 +32,8 @@ public class GlobalErrorHandler extends DefaultErrorWebExceptionHandler {
 	protected RouterFunction<ServerResponse> getRoutingFunction(ErrorAttributes errorAttributes) {
 		RouterFunction<ServerResponse> routerFunction = super.getRoutingFunction(errorAttributes);
 		// TODO:处理逻辑
+		log.info("errorAttributes==>{}", JSON.toJSONString(errorAttributes));
+		
 		return routerFunction;
 	}
 

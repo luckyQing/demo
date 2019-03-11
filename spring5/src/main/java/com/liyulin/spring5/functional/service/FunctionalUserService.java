@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentMap;
 import java.util.concurrent.atomic.AtomicLong;
 
 import org.springframework.stereotype.Service;
+import org.springframework.web.reactive.function.server.ServerRequest;
 import org.springframework.web.reactive.function.server.ServerResponse;
 
 import com.liyulin.spring5.dto.req.UserReqBody;
@@ -19,7 +20,8 @@ public class FunctionalUserService {
 	private static final ConcurrentMap<Long, UserRespBody> DATA = new ConcurrentHashMap<>();
 	private static final AtomicLong ID_GENERATOR = new AtomicLong(0);
 
-	public Mono<ServerResponse> user(long id) {
+	public Mono<ServerResponse> user(ServerRequest request) {
+		long id = Long.valueOf(request.pathVariable("id"));
 		return ServerResponse.ok().syncBody(DATA.get(id));
 	}
 
@@ -42,4 +44,5 @@ public class FunctionalUserService {
 
 		return ServerResponse.ok().syncBody(true);
 	}
+	
 }

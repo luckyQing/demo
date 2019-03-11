@@ -26,7 +26,7 @@ public class FunctionalRouter {
 	
 	@Bean
 	public RouterFunction<?> routerFunction() {
-		return RouterFunctions.route(GET("/fun/user").and(accept(MediaType.APPLICATION_JSON)), userService::users);
+		return RouterFunctions.route(GET("/fun/user/{id}").and(accept(MediaType.APPLICATION_JSON)), userService::user);
 //		return route(
 //				GET("/api/city").and(Accept(MediaType.APPLICATION_JSON)), cityService::findAllCity).and(
 //						route(
