@@ -28,19 +28,19 @@ public class MvcAnnotationController {
 	@Autowired
 	private MvcAnnotationUserService userService;
 
-	@GetMapping("{id}")
-	public Mono<UserRespBody> user(@PathVariable long id) {
-		return userService.user(id);
+	@PostMapping
+	public Mono<Boolean> create(@RequestBody UserReqBody reqBody) {
+		return userService.create(reqBody);
 	}
 
 	@GetMapping
 	public Flux<UserRespBody> users() {
 		return userService.users();
 	}
-
-	@PostMapping
-	public Mono<Boolean> create(@RequestBody UserReqBody reqBody) {
-		return userService.create(reqBody);
+	
+	@GetMapping("{id}")
+	public Mono<UserRespBody> user(@PathVariable long id) {
+		return userService.user(id);
 	}
-
+	
 }

@@ -19,7 +19,7 @@ import lombok.extern.slf4j.Slf4j;
  * @author liyulin
  * @date 2019年3月10日下午2:30:50
  */
-@Component
+//@Component
 @Slf4j
 public class GlobalErrorHandler extends DefaultErrorWebExceptionHandler {
 

@@ -15,7 +15,7 @@ import reactor.core.publisher.Mono;
 @Service
 public class MvcAnnotationUserService {
 
-	private static final ConcurrentMap<Long, UserRespBody> DATA = new ConcurrentHashMap<>();
+	public static final ConcurrentMap<Long, UserRespBody> DATA = new ConcurrentHashMap<>();
 	private static final AtomicLong ID_GENERATOR = new AtomicLong(0);
 	
 	public Mono<UserRespBody> user(long id) {
@@ -36,8 +36,12 @@ public class MvcAnnotationUserService {
 
 	public Mono<Boolean> create(UserReqBody reqBody) {
 		return Mono.create(sink -> {
-			UserRespBody userRespBody = UserRespBody.builder().id(ID_GENERATOR.addAndGet(1)).name(reqBody.getName())
-					.age(reqBody.getAge()).address(reqBody.getAddress()).build();
+			UserRespBody userRespBody = UserRespBody.builder()
+					.id(ID_GENERATOR.addAndGet(1))
+					.name(reqBody.getName())
+					.age(reqBody.getAge())
+					.address(reqBody.getAddress())
+					.build();
 
 			DATA.put(userRespBody.getId(), userRespBody);
 

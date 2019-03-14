@@ -1,6 +1,7 @@
 package com.liyulin.spring5.functional.router;
 
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
+import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,18 +24,12 @@ public class FunctionalRouter {
 
 	@Autowired
 	private FunctionalUserService userService;
-	
+
 	@Bean
 	public RouterFunction<?> routerFunction() {
-		return RouterFunctions.route(GET("/fun/user/{id}").and(accept(MediaType.APPLICATION_JSON)), userService::user);
-//		return route(
-//				GET("/api/city").and(Accept(MediaType.APPLICATION_JSON)), cityService::findAllCity).and(
-//						route(
-//
-//								GET("/api/user/{id}").and(accept(MediaType.APPLICATION_JSON)),
-//								cityService::findCityById)
-//
-//		);
+		return RouterFunctions.route(GET("/fun/user/{id}").and(accept(MediaType.APPLICATION_JSON)), userService::user)
+				.and(RouterFunctions.route(GET("/fun/user").and(accept(MediaType.APPLICATION_JSON)), userService::users))
+				.and(RouterFunctions.route(POST("/fun/user").and(accept(MediaType.APPLICATION_JSON)), userService::create));
 	}
 
 }
