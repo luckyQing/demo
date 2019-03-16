@@ -25,8 +25,9 @@ public class FunctionalUserService {
 
 	public Mono<ServerResponse> create(ServerRequest request) {
 		Mono<UserReqBody> userReqBodyMono = request.bodyToMono(UserReqBody.class);
-		log.info("userReqBody=>{}", userReqBodyMono.block());
-		userReqBodyMono.subscribe(userReqBody->{
+		
+		return ServerResponse.ok().body(userReqBodyMono.map(userReqBody->{
+			log.info("receive userReqBody====>{}", userReqBody);
 			UserRespBody userRespBody = UserRespBody.builder()
 					.id(ID_GENERATOR.addAndGet(1))
 					.name(userReqBody.getName())
@@ -34,8 +35,8 @@ public class FunctionalUserService {
 					.address(userReqBody.getAddress())
 					.build();
 			DATA.put(userRespBody.getId(), userRespBody);
-		});
-		return ServerResponse.ok().syncBody(true);
+			return true;
+		}), Boolean.class);
 	}
 
 	public Mono<ServerResponse> users(ServerRequest request) {

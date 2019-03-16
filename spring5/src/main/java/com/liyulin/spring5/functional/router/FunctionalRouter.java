@@ -3,13 +3,15 @@ package com.liyulin.spring5.functional.router;
 import static org.springframework.web.reactive.function.server.RequestPredicates.GET;
 import static org.springframework.web.reactive.function.server.RequestPredicates.POST;
 import static org.springframework.web.reactive.function.server.RequestPredicates.accept;
+import static org.springframework.web.reactive.function.server.RequestPredicates.path;
+import static org.springframework.web.reactive.function.server.RouterFunctions.nest;
+import static org.springframework.web.reactive.function.server.RouterFunctions.route;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.server.RouterFunction;
-import org.springframework.web.reactive.function.server.RouterFunctions;
 
 import com.liyulin.spring5.functional.service.FunctionalUserService;
 
@@ -25,11 +27,20 @@ public class FunctionalRouter {
 	@Autowired
 	private FunctionalUserService userService;
 
+//	@Bean
+//	public RouterFunction<?> routerFunction() {
+//		return nest(path("/fun/user").and(accept(MediaType.APPLICATION_JSON)), 
+//				route(GET("/{id}"), userService::user)
+//				.and(route(GET(""), userService::users))
+//				.and(route(POST(""), userService::create)));
+//	}
+	
 	@Bean
 	public RouterFunction<?> routerFunction() {
-		return RouterFunctions.route(GET("/fun/user/{id}").and(accept(MediaType.APPLICATION_JSON)), userService::user)
-				.and(RouterFunctions.route(GET("/fun/user").and(accept(MediaType.APPLICATION_JSON)), userService::users))
-				.and(RouterFunctions.route(POST("/fun/user").and(accept(MediaType.APPLICATION_JSON)), userService::create));
+		return nest(accept(MediaType.APPLICATION_JSON), 
+				route(GET("/fun/user/{id}"), userService::user)
+				.and(route(GET("/fun/user"), userService::users))
+				.and(route(POST("/fun/user"), userService::create)));
 	}
 
 }
