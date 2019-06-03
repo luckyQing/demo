@@ -2,6 +2,7 @@ package com.liyulin.shading.jdbc.demo;
 
 import java.util.Date;
 
+import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,10 +20,15 @@ public class AppTest {
 	@Autowired
 	private ProductInfoBaseMapper productInfoBaseMapper;
 	
+	@Before
+	public void setBefore() {
+		productInfoBaseMapper.deleteByExample(null);
+	}
+	
 	@Test
 	public void testInsert() {
 		ProductInfoEntity entity = new ProductInfoEntity();
-		entity.setId(1000L);
+		entity.setId(2000L);
 		entity.setName("iphone");
 		entity.setSellPrice(1000L);
 		entity.setStock(2000L);
