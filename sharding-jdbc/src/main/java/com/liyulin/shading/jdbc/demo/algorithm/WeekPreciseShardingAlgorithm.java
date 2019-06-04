@@ -3,10 +3,9 @@ package com.liyulin.shading.jdbc.demo.algorithm;
 import java.util.Collection;
 import java.util.Date;
 
+import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
+import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
 import org.joda.time.DateTime;
-
-import io.shardingsphere.api.algorithm.sharding.PreciseShardingValue;
-import io.shardingsphere.api.algorithm.sharding.standard.PreciseShardingAlgorithm;
 
 /**
  * 按周分片
