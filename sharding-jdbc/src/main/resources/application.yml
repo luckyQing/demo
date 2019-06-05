@@ -24,4 +24,4 @@ spring:  shardingsphere:    datasource:      names: product
               standard: 
                 sharding-column: f_sys_add_time
                 precise-algorithm-class-name: com.liyulin.shading.jdbc.demo.algorithm.WeekPreciseShardingAlgorithm
-                rangeShardingAlgorithm: com.liyulin.shading.jdbc.demo.algorithm.WeekRangeShardingAlgorithm
+                range-algorithm-class-name: com.liyulin.shading.jdbc.demo.algorithm.WeekRangeShardingAlgorithm

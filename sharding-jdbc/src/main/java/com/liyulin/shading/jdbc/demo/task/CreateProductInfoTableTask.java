@@ -2,8 +2,8 @@ package com.liyulin.shading.jdbc.demo.task;
 
 import javax.annotation.PostConstruct;
 
+import org.apache.ibatis.session.SqlSessionFactory;
 import org.joda.time.DateTime;
-import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
@@ -22,14 +22,14 @@ import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
 public class CreateProductInfoTableTask {
 
 	@Autowired
-	private SqlSessionFactoryBean sqlSessionFactoryBean;
+	private SqlSessionFactory sqlSessionFactory;
 
 	/**
 	 * 创建当前周的表
 	 */
 	@PostConstruct
 	public void creatCurrentWeekTable() {
-		createNextWeekTableSchedule(DateTime.now());
+		createWeekTableSchedule(DateTime.now());
 	}
 
 	/**
@@ -38,7 +38,7 @@ public class CreateProductInfoTableTask {
 	@Scheduled(cron = "* * * 1/1 * *")
 	public void createNextWeekTableSchedule() {
 		DateTime nextWeek = DateTime.now().plusWeeks(1);
-		createNextWeekTableSchedule(nextWeek);
+		createWeekTableSchedule(nextWeek);
 	}
 
 	/**
@@ -46,10 +46,10 @@ public class CreateProductInfoTableTask {
 	 * 
 	 * @param dateTime
 	 */
-	private void createNextWeekTableSchedule(DateTime dateTime) {
+	private void createWeekTableSchedule(DateTime dateTime) {
 		String logicTableName = WeekShardingUtil.getLogicTableName(ApiLogEntity.class);
 		String actualTableName = WeekShardingUtil.getActualTableName(dateTime, logicTableName);
-		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName, sqlSessionFactoryBean);
+		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName, sqlSessionFactory);
 	}
 
 }

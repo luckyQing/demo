@@ -61,7 +61,7 @@ public class ApiLogEntity extends BaseEntity {
 
 	/** 请求处理时间（毫秒） */
 	@Column(name = "f_req_deal_time")
-	private int reqDealTime;
+	private Integer reqDealTime;
 
 	/** 请求的参数信息 */
 	@Column(name = "f_req_params")

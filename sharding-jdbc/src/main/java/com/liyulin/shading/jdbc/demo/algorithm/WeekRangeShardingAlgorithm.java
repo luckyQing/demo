@@ -2,7 +2,6 @@ package com.liyulin.shading.jdbc.demo.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Date;
 
 import org.apache.shardingsphere.api.sharding.standard.RangeShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
@@ -11,20 +10,18 @@ import org.joda.time.DateTime;
 import com.google.common.collect.Range;
 import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
 
-public class WeekRangeShardingAlgorithm implements RangeShardingAlgorithm<Date> {
+public class WeekRangeShardingAlgorithm implements RangeShardingAlgorithm<String> {
 
 	@Override
 	public Collection<String> doSharding(Collection<String> availableTargetNames,
-			RangeShardingValue<Date> shardingValue) {
-		Range<Date> range = shardingValue.getValueRange();
-		Date start = range.lowerEndpoint();
-		Date end = range.upperEndpoint();
+			RangeShardingValue<String> shardingValue) {
+		Range<String> range = shardingValue.getValueRange();
 
-		DateTime startDateTime = new DateTime(start.getTime());
+		DateTime startDateTime = WeekShardingUtil.parse(range.lowerEndpoint());
 		int startDateTimeYear = startDateTime.getYear();
 		int startDateTimeWeek = startDateTime.getWeekOfWeekyear();
 
-		DateTime endDateTime = new DateTime(end.getTime());
+		DateTime endDateTime = WeekShardingUtil.parse(range.upperEndpoint());
 		int endDateTimeYear = endDateTime.getYear();
 		int endDateTimeWeek = endDateTime.getWeekOfWeekyear();
 

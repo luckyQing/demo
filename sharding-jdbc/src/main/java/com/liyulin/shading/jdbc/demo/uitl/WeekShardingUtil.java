@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import javax.persistence.Table;
 
 import org.joda.time.DateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.util.Assert;
 import org.springframework.util.StringUtils;
@@ -86,7 +88,7 @@ public class WeekShardingUtil {
 
 		return table.name();
 	}
-
+	
 	/**
 	 * 获取逻辑表名
 	 * 
@@ -108,6 +110,11 @@ public class WeekShardingUtil {
 		}
 
 		return getLogicTableName(entityClass);
+	}
+	
+	public static DateTime parse(String datetime) {
+		DateTimeFormatter dateTimeFormatter = DateTimeFormat.forPattern("yyyy-MM-dd HH:mm:ss");
+        return dateTimeFormatter.parseDateTime(datetime);
 	}
 
 }
