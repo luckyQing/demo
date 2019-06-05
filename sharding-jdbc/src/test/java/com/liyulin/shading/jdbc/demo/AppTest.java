@@ -14,24 +14,24 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import com.liyulin.shading.jdbc.demo.base.BaseEntity;
 import com.liyulin.shading.jdbc.demo.entity.ApiLogEntity;
 import com.liyulin.shading.jdbc.demo.enums.DelStateEnum;
-import com.liyulin.shading.jdbc.demo.mapper.ProductInfoBaseMapper;
+import com.liyulin.shading.jdbc.demo.mapper.ApiLogBaseMapper;
 
 import tk.mybatis.mapper.entity.Example;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class AppTest {
-	
+
 	@Autowired
-	private ProductInfoBaseMapper productInfoBaseMapper;
-	
+	private ApiLogBaseMapper apiLogBaseMapper;
+
 	@Before
 	public void setBefore() {
-//		Example example = new Example(ProductInfoEntity.class);
+//		Example example = new Example(ApiLogEntity.class);
 //		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), "2019-06-03 00:00:00", "2019-06-05 00:00:00");
-//		productInfoBaseMapper.deleteByExample(example);
+//		apiLogBaseMapper.deleteByExample(example);
 	}
-	
+
 	@Test
 	public void testInsert() {
 		ApiLogEntity entity = new ApiLogEntity();
@@ -40,17 +40,17 @@ public class AppTest {
 		entity.setHttpMethod("POST");
 		entity.setAddTime(new Date());
 		entity.setDelState(DelStateEnum.NORMAL.getDelState());
-		int count = productInfoBaseMapper.insertSelective(entity);
-		
+		int count = apiLogBaseMapper.insertSelective(entity);
+
 		Assertions.assertThat(count).isEqualTo(1);
 	}
-	
+
 	@Test
 	public void testSelect() {
 		Example example = new Example(ApiLogEntity.class);
 		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), "2019-06-03 00:00:00",
 				"2019-06-05 00:00:00");
-		List<ApiLogEntity> list = productInfoBaseMapper.selectByExample(null);
+		List<ApiLogEntity> list = apiLogBaseMapper.selectByExample(null);
 	}
-	
+
 }
