@@ -12,14 +12,14 @@ spring:  shardingsphere:    datasource:      names: product
       product:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
-        jdbcUrl: jdbc:mysql://127.0.0.1:3306/demo_product?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+        jdbcUrl: jdbc:mysql://127.0.0.1:3306/demo_log?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
         username: root
         password: 123456
     props:
       sql.show: true
     sharding:      default-data-source-name: ${sharding.jdbc.datasource.names}
       tables:
-        t_product_info: 
+        t_api_log: 
             table-strategy:
               standard: 
                 sharding-column: f_sys_add_time

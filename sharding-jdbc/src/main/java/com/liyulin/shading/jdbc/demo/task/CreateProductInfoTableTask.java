@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.liyulin.shading.jdbc.demo.entity.ProductInfoEntity;
+import com.liyulin.shading.jdbc.demo.entity.ApiLogEntity;
 import com.liyulin.shading.jdbc.demo.uitl.DbTableUtil;
 import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
 
@@ -28,7 +28,7 @@ public class CreateProductInfoTableTask {
 	@Scheduled(cron = "* * * 1/1 * *")
 	@PostConstruct
 	public void createTableSchedule() {
-		String logicTableName = WeekShardingUtil.getLogicTableName(ProductInfoEntity.class);
+		String logicTableName = WeekShardingUtil.getLogicTableName(ApiLogEntity.class);
 		String actualTableName = WeekShardingUtil.getActualTableName(new Date(), logicTableName);
 		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName, sqlSessionFactoryBean);
 	}

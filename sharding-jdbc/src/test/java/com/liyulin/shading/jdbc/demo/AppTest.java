@@ -12,7 +12,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.liyulin.shading.jdbc.demo.base.BaseEntity;
-import com.liyulin.shading.jdbc.demo.entity.ProductInfoEntity;
+import com.liyulin.shading.jdbc.demo.entity.ApiLogEntity;
 import com.liyulin.shading.jdbc.demo.enums.DelStateEnum;
 import com.liyulin.shading.jdbc.demo.mapper.ProductInfoBaseMapper;
 
@@ -34,11 +34,10 @@ public class AppTest {
 	
 	@Test
 	public void testInsert() {
-		ProductInfoEntity entity = new ProductInfoEntity();
+		ApiLogEntity entity = new ApiLogEntity();
 		entity.setId(2000L);
-		entity.setName("iphone");
-		entity.setSellPrice(1000L);
-		entity.setStock(2000L);
+		entity.setUrl("https://www.baidu.com");
+		entity.setHttpMethod("POST");
 		entity.setAddTime(new Date());
 		entity.setDelState(DelStateEnum.NORMAL.getDelState());
 		int count = productInfoBaseMapper.insertSelective(entity);
@@ -48,10 +47,10 @@ public class AppTest {
 	
 	@Test
 	public void testSelect() {
-		Example example = new Example(ProductInfoEntity.class);
+		Example example = new Example(ApiLogEntity.class);
 		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), "2019-06-03 00:00:00",
 				"2019-06-05 00:00:00");
-		List<ProductInfoEntity> list = productInfoBaseMapper.selectByExample(null);
+		List<ApiLogEntity> list = productInfoBaseMapper.selectByExample(null);
 	}
 	
 }
