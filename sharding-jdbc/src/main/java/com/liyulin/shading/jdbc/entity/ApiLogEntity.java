@@ -1,11 +1,11 @@
-package com.liyulin.shading.jdbc.demo.entity;
+package com.liyulin.shading.jdbc.entity;
 
 import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Table;
 
-import com.liyulin.shading.jdbc.demo.base.BaseEntity;
+import com.liyulin.shading.jdbc.base.BaseEntity;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

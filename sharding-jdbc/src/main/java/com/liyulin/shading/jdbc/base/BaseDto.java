@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.base;
+package com.liyulin.shading.jdbc.base;
 
 import java.io.Serializable;
 

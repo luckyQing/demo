@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.plugin;
+package com.liyulin.shading.jdbc.plugin;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;

@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.enums;
+package com.liyulin.shading.jdbc.enums;
 
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;

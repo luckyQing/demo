@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.task;
+package com.liyulin.shading.jdbc.task;
 
 import javax.annotation.PostConstruct;
 
@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 
-import com.liyulin.shading.jdbc.demo.entity.ApiLogEntity;
-import com.liyulin.shading.jdbc.demo.uitl.DbTableUtil;
-import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
+import com.liyulin.shading.jdbc.entity.ApiLogEntity;
+import com.liyulin.shading.jdbc.uitl.DbTableUtil;
+import com.liyulin.shading.jdbc.uitl.WeekShardingUtil;
 
 /**
  * 创建表定时任务
@@ -27,7 +27,7 @@ public class CreateProductInfoTableTask {
 	/**
 	 * 创建当前周的表
 	 */
-	@PostConstruct
+//	@PostConstruct
 	public void creatCurrentWeekTable() {
 		createWeekTableSchedule(DateTime.now());
 	}

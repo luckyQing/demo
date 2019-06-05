@@ -1,6 +1,6 @@
-package com.liyulin.shading.jdbc.demo.mapper;
+package com.liyulin.shading.jdbc.mapper;
 
-import com.liyulin.shading.jdbc.demo.entity.ApiLogEntity;
+import com.liyulin.shading.jdbc.entity.ApiLogEntity;
 
 import tk.mybatis.mapper.additional.idlist.IdListMapper;
 import tk.mybatis.mapper.additional.insert.InsertListMapper;

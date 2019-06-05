@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.algorithm;
+package com.liyulin.shading.jdbc.algorithm;
 
 import java.util.Collection;
 import java.util.Date;
@@ -6,7 +6,7 @@ import java.util.Date;
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
 
-import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
+import com.liyulin.shading.jdbc.uitl.WeekShardingUtil;
 
 /**
  * 按周分片

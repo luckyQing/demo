@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.algorithm;
+package com.liyulin.shading.jdbc.algorithm;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -8,7 +8,7 @@ import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
 import org.joda.time.DateTime;
 
 import com.google.common.collect.Range;
-import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
+import com.liyulin.shading.jdbc.uitl.WeekShardingUtil;
 
 public class WeekRangeShardingAlgorithm implements RangeShardingAlgorithm<String> {
 

@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.uitl;
+package com.liyulin.shading.jdbc.uitl;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;

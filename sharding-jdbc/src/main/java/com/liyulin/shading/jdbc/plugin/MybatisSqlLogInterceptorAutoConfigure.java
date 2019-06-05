@@ -1,4 +1,4 @@
-package com.liyulin.shading.jdbc.demo.plugin;
+package com.liyulin.shading.jdbc.plugin;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
