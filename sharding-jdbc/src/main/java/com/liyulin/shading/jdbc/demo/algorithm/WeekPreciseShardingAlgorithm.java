@@ -5,7 +5,8 @@ import java.util.Date;
 
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingAlgorithm;
 import org.apache.shardingsphere.api.sharding.standard.PreciseShardingValue;
-import org.joda.time.DateTime;
+
+import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
 
 /**
  * 按周分片
@@ -17,17 +18,7 @@ public class WeekPreciseShardingAlgorithm implements PreciseShardingAlgorithm<Da
 
 	@Override
 	public String doSharding(Collection<String> availableTargetNames, PreciseShardingValue<Date> shardingValue) {
-		DateTime dateTime = new DateTime(shardingValue.getValue().getTime());
-		int year = dateTime.getYear();
-		int week = dateTime.getWeekOfWeekyear();
-		// t_product_info_2019_23
-		StringBuilder tableName = new StringBuilder(32);
-		tableName.append(shardingValue.getLogicTableName())
-				 .append("_")
-				 .append(year)
-				 .append("_")
-				 .append(week);
-		return tableName.toString();
+		return WeekShardingUtil.getActualTableName(shardingValue.getValue(), shardingValue.getLogicTableName());
 	}
 
 }

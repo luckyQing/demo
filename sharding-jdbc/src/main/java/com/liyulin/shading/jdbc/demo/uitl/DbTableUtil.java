@@ -8,6 +8,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 
 import lombok.experimental.UtilityClass;
+import lombok.extern.slf4j.Slf4j;
 
 /**
  * 数据库表工具类
@@ -16,10 +17,11 @@ import lombok.experimental.UtilityClass;
  * @date 2019年6月4日 下午10:07:34
  */
 @UtilityClass
+@Slf4j
 public class DbTableUtil {
 
 	/** copy表结构sql */
-	private static final String COPY_TABLE_SCHEMA_SQL = "CREATE TABLE ${targetTableName} LIKE ${sourceTableName}";
+	private static final String COPY_TABLE_SQL = "CREATE TABLE ${targetTableName} LIKE ${sourceTableName}";
 	/** 判断表是否存在sql */
 	private static final String EXIST_TABLE_SQL = "SELECT count(*) FROM information_schema.TABLES WHERE TABLE_NAME = #{tableName}";
 
@@ -40,7 +42,26 @@ public class DbTableUtil {
 			sqlParams.put("sourceTableName", sourceTableName);
 
 			SqlMapper sqlMapper = new SqlMapper(sqlSession);
-			sqlMapper.selectOne(COPY_TABLE_SCHEMA_SQL, sqlParams);
+			sqlMapper.selectOne(COPY_TABLE_SQL, sqlParams);
+		}
+	}
+
+	/**
+	 * 创建表（如果不存在）
+	 * 
+	 * @param sourceTableName
+	 * @param targetTableName
+	 * @param sqlSessionFactoryBean
+	 */
+	public static void createTableIfAbsent(String sourceTableName, String targetTableName,
+			SqlSessionFactoryBean sqlSessionFactoryBean) {
+		try {
+			boolean exist = existTable(targetTableName, sqlSessionFactoryBean);
+			if (!exist) {
+				copyTableSchema(sourceTableName, targetTableName, sqlSessionFactoryBean);
+			}
+		} catch (Exception e) {
+			log.error(e.getMessage(), e);
 		}
 	}
 

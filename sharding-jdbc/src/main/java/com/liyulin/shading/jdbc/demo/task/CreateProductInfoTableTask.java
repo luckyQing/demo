@@ -1,7 +1,17 @@
 package com.liyulin.shading.jdbc.demo.task;
 
+import java.util.Date;
+
+import javax.annotation.PostConstruct;
+
+import org.mybatis.spring.SqlSessionFactoryBean;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
+
+import com.liyulin.shading.jdbc.demo.entity.ProductInfoEntity;
+import com.liyulin.shading.jdbc.demo.uitl.DbTableUtil;
+import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
 
 /**
  * 创建表定时任务
@@ -12,9 +22,15 @@ import org.springframework.stereotype.Service;
 @Service
 public class CreateProductInfoTableTask {
 
-//	@Scheduled
-//	public void createTableSchedule() {
-//		
-//	}
-	
+	@Autowired
+	private SqlSessionFactoryBean sqlSessionFactoryBean;
+
+	@Scheduled(cron = "* * * 1/1 * *")
+	@PostConstruct
+	public void createTableSchedule() {
+		String logicTableName = WeekShardingUtil.getLogicTableName(ProductInfoEntity.class);
+		String actualTableName = WeekShardingUtil.getActualTableName(new Date(), logicTableName);
+		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName, sqlSessionFactoryBean);
+	}
+
 }

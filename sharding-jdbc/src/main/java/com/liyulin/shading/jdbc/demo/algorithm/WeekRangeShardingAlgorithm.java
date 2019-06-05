@@ -9,6 +9,7 @@ import org.apache.shardingsphere.api.sharding.standard.RangeShardingValue;
 import org.joda.time.DateTime;
 
 import com.google.common.collect.Range;
+import com.liyulin.shading.jdbc.demo.uitl.WeekShardingUtil;
 
 public class WeekRangeShardingAlgorithm implements RangeShardingAlgorithm<Date> {
 
@@ -36,13 +37,8 @@ public class WeekRangeShardingAlgorithm implements RangeShardingAlgorithm<Date> 
 					startWeek = startDateTimeWeek;
 				}
 				for (int week = startWeek; week <= maxWeek; week++) {
-					StringBuilder tableName = new StringBuilder(32);
-					tableName.append(shardingValue.getLogicTableName())
-							.append("_")
-							.append(year)
-							.append("_")
-							.append(week);
-					tables.add(tableName.toString());
+					String tableName = WeekShardingUtil.getActualTableName(shardingValue.getLogicTableName(), year, week);
+					tables.add(tableName);
 				}
 			} else {
 				int startWeek = 1;
@@ -50,18 +46,13 @@ public class WeekRangeShardingAlgorithm implements RangeShardingAlgorithm<Date> 
 					startWeek = startDateTimeWeek;
 				}
 				for (int week = startWeek; week <= endDateTimeWeek; week++) {
-					StringBuilder tableName = new StringBuilder(32);
-					tableName.append(shardingValue.getLogicTableName())
-							.append("_")
-							.append(year)
-							.append("_")
-							.append(week);
-					tables.add(tableName.toString());
+					String tableName = WeekShardingUtil.getActualTableName(shardingValue.getLogicTableName(), year, week);
+					tables.add(tableName);
 				}
 			}
 		}
 		
 		return tables;
 	}
-
+	
 }
