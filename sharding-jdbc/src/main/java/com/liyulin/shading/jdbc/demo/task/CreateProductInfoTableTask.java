@@ -1,9 +1,8 @@
 package com.liyulin.shading.jdbc.demo.task;
 
-import java.util.Date;
-
 import javax.annotation.PostConstruct;
 
+import org.joda.time.DateTime;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
@@ -25,11 +24,31 @@ public class CreateProductInfoTableTask {
 	@Autowired
 	private SqlSessionFactoryBean sqlSessionFactoryBean;
 
-	@Scheduled(cron = "* * * 1/1 * *")
+	/**
+	 * 创建当前周的表
+	 */
 	@PostConstruct
-	public void createTableSchedule() {
+	public void creatCurrentWeekTable() {
+		createNextWeekTableSchedule(DateTime.now());
+	}
+
+	/**
+	 * 创建下周的表
+	 */
+	@Scheduled(cron = "* * * 1/1 * *")
+	public void createNextWeekTableSchedule() {
+		DateTime nextWeek = DateTime.now().plusWeeks(1);
+		createNextWeekTableSchedule(nextWeek);
+	}
+
+	/**
+	 * 创建表
+	 * 
+	 * @param dateTime
+	 */
+	private void createNextWeekTableSchedule(DateTime dateTime) {
 		String logicTableName = WeekShardingUtil.getLogicTableName(ApiLogEntity.class);
-		String actualTableName = WeekShardingUtil.getActualTableName(new Date(), logicTableName);
+		String actualTableName = WeekShardingUtil.getActualTableName(dateTime, logicTableName);
 		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName, sqlSessionFactoryBean);
 	}
 

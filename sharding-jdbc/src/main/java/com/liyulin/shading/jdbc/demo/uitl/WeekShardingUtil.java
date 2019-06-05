@@ -33,7 +33,7 @@ public class WeekShardingUtil {
 			.maximumSize(1024)
 			// 使用弱引用
 			.weakValues().build();
-	
+
 	/**
 	 * 获取真实表名
 	 * 
@@ -42,13 +42,23 @@ public class WeekShardingUtil {
 	 * @return
 	 */
 	public static String getActualTableName(Date date, String logicTableName) {
-		DateTime dateTime = new DateTime(date);
+		return getActualTableName(new DateTime(date), logicTableName);
+	}
+
+	/**
+	 * 获取真实表名
+	 * 
+	 * @param dateTime
+	 * @param logicTableName
+	 * @return
+	 */
+	public static String getActualTableName(DateTime dateTime, String logicTableName) {
 		int year = dateTime.getYear();
 		int week = dateTime.getWeekOfWeekyear();
 		// t_product_info_2019_23
 		return getActualTableName(logicTableName, year, week);
 	}
-	
+
 	/**
 	 * 获取真实的表名
 	 * 
@@ -59,15 +69,11 @@ public class WeekShardingUtil {
 	 */
 	public static String getActualTableName(String logicTableName, int year, int week) {
 		StringBuilder tableName = new StringBuilder(32);
-		tableName.append(logicTableName)
-				.append("_")
-				.append(year)
-				.append("_")
-				.append(week);
-		
+		tableName.append(logicTableName).append("_").append(year).append("_").append(week);
+
 		return tableName.toString();
 	}
-	
+
 	/**
 	 * 获取逻辑表名
 	 * 
@@ -80,7 +86,7 @@ public class WeekShardingUtil {
 
 		return table.name();
 	}
-	
+
 	/**
 	 * 获取逻辑表名
 	 * 
