@@ -36,8 +36,7 @@ public class DbTableUtil {
 	 * 
 	 * @param sourceTableName       被复制的表名
 	 * @param targetTableName       复制后的表名
-	 * @param sqlSessionFactoryBean
-	 * @throws Exception
+	 * @param sqlSessionFactory
 	 */
 	public static void copyTableSchema(String sourceTableName, String targetTableName,
 			SqlSessionFactory sqlSessionFactory) {
@@ -57,7 +56,7 @@ public class DbTableUtil {
 	 * 
 	 * @param sourceTableName       源表
 	 * @param targetTableName       待创建的表
-	 * @param sqlSessionFactoryBean
+	 * @param sqlSessionFactory
 	 */
 	public static void createTableIfAbsent(String sourceTableName, String targetTableName,
 			SqlSessionFactory sqlSessionFactory) {
@@ -75,7 +74,7 @@ public class DbTableUtil {
 	 * （在当前库）判断表是否已存在
 	 * 
 	 * @param tableName             表名
-	 * @param sqlSessionFactoryBean
+	 * @param sqlSessionFactory
 	 * @return
 	 * @throws Exception
 	 */
