@@ -54,20 +54,23 @@ public class AppLogTest {
 	}
 
 	@Test
-	public void testSelect() {
+	public void testPage() {
 		// 插入数据
-		appLogData.insert(startTime);
-		appLogData.insert(endTime);
+		appLogData.batchInsert(startTime, 8);
+		appLogData.batchInsert(endTime, 8);
 
 		Example example = new Example(ApiLogEntity.class);
 		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), startTime, endTime)
 				.andEqualTo(BaseEntity.Columns.DEL_STATE.getProperty(), DelStateEnum.NORMAL.getDelState());
 		// 分页查询
-		List<ApiLogEntity> list = apiLogBaseMapper.selectByExampleAndRowBounds(example, new RowBounds(1, 10));
-//		List<ApiLogEntity> list = apiLogBaseMapper.selectByExample(example);
+		int pageIndex = 1;
+		int pageSize = 10;
+		int start = (pageIndex - 1) * pageSize;
+		int end = pageSize;
+		List<ApiLogEntity> list = apiLogBaseMapper.selectByExampleAndRowBounds(example, new RowBounds(start, end));
 
 		Assertions.assertThat(list).isNotNull();
-		Assertions.assertThat(list.size()).isEqualTo(2);
+		Assertions.assertThat(list.size()).isEqualTo(pageSize);
 	}
 
 }
