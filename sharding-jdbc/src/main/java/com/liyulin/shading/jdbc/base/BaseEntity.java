@@ -50,7 +50,7 @@ public class BaseEntity extends BaseDto {
 
 	/** 删除状态=={'1':'正常','2':'已删除'} */
 	@Column(name = "f_sys_del_state")
-	private Integer delState;
+	private Byte delState;
 
 	@Getter
 	@AllArgsConstructor(access = AccessLevel.PRIVATE)

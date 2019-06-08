@@ -15,11 +15,11 @@ import lombok.Getter;
 public enum DelStateEnum {
 
 	/** 正常 */
-	NORMAL(1),
+	NORMAL((byte)1),
 	/** 已删除 */
-	DELETED(2);
+	DELETED((byte)2);
 
 	/** 记录状态 */
-	private Integer delState;
+	private Byte delState;
 
 }

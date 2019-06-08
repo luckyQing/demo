@@ -63,8 +63,8 @@ public class AppLogTest {
 		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), startTime, endTime)
 				.andEqualTo(BaseEntity.Columns.DEL_STATE.getProperty(), DelStateEnum.NORMAL.getDelState());
 		// 分页查询
-//		List<ApiLogEntity> list = apiLogBaseMapper.selectByExampleAndRowBounds(example, new RowBounds(1, 10));
-		List<ApiLogEntity> list = apiLogBaseMapper.selectByExample(example);
+		List<ApiLogEntity> list = apiLogBaseMapper.selectByExampleAndRowBounds(example, new RowBounds(1, 10));
+//		List<ApiLogEntity> list = apiLogBaseMapper.selectByExample(example);
 
 		Assertions.assertThat(list).isNotNull();
 		Assertions.assertThat(list.size()).isEqualTo(2);
