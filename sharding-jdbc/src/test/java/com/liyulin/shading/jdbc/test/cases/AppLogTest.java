@@ -63,8 +63,8 @@ public class AppLogTest {
 		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), startTime, endTime)
 				.andEqualTo(BaseEntity.Columns.DEL_STATE.getProperty(), DelStateEnum.NORMAL.getDelState());
 		// 分页查询
-		int pageIndex = 1;
-		int pageSize = 10;
+		int pageIndex = 2;
+		int pageSize = 5;
 		int start = (pageIndex - 1) * pageSize;
 		int end = pageSize;
 		List<ApiLogEntity> list = apiLogBaseMapper.selectByExampleAndRowBounds(example, new RowBounds(start, end));
