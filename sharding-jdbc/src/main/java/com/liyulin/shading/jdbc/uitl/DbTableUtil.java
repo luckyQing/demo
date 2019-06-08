@@ -13,6 +13,8 @@ import java.util.stream.Collectors;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 
+import com.alibaba.fastjson.JSON;
+
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
@@ -50,6 +52,8 @@ public class DbTableUtil {
 			SqlMapper sqlMapper = new SqlMapper(sqlSession);
 			// 此处不能用“selectOne”，否则sharding-jdbc会报错
 			sqlMapper.update(COPY_TABLE_SQL, sqlParams);
+		} finally {
+			log.info(COPY_TABLE_SQL + "==>targetTableName=" + targetTableName + "; sourceTableName=" + sourceTableName);
 		}
 	}
 
@@ -118,6 +122,8 @@ public class DbTableUtil {
 			}
 		} catch (SQLException e) {
 			log.error(e.getMessage(), e);
+		} finally {
+			log.info("查询相关表tableName={}; result={}", tableName, JSON.toJSONString(tablesWithPrefix));
 		}
 		return tablesWithPrefix;
 	}
@@ -135,6 +141,8 @@ public class DbTableUtil {
 
 			SqlMapper sqlMapper = new SqlMapper(sqlSession);
 			sqlMapper.delete(DELETE_TABLE_SQL, sqlParams);
+		} finally {
+			log.info("删除表[{}]（tableName={}）数据", DELETE_TABLE_SQL, tableName);
 		}
 	}
 
@@ -172,6 +180,8 @@ public class DbTableUtil {
 
 				sqlParams.clear();
 			}
+		} finally {
+			log.info("{}；tableName={}", DROP_TABLE_SQL, JSON.toJSONString(tableNames));
 		}
 	}
 
