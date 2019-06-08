@@ -27,7 +27,7 @@ public class CreateProductInfoTableTask {
 	/**
 	 * 创建当前周的表
 	 */
-//	@PostConstruct
+	@PostConstruct
 	public void creatCurrentWeekTable() {
 		createWeekTableSchedule(DateTime.now());
 	}

@@ -1,5 +1,10 @@
 package com.liyulin.shading.jdbc.uitl;
 
+import java.sql.Connection;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -7,7 +12,6 @@ import java.util.stream.Collectors;
 
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
-import org.springframework.util.StringUtils;
 
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
@@ -24,8 +28,6 @@ public class DbTableUtil {
 
 	/** copy表结构sql */
 	private static final String COPY_TABLE_SQL = "CREATE TABLE ${targetTableName} LIKE ${sourceTableName}";
-	/** 查询表名称sql */
-	private static final String QUERY_TABLE_SQL = "SHOW TABLES LIKE #{tableName}";
 	/** 删除表sql */
 	private static final String DROP_TABLE_SQL = "DROP TABLE ${tableName}";
 	/** 删除表数据sql */
@@ -34,8 +36,8 @@ public class DbTableUtil {
 	/**
 	 * （在当前库）复制表结构
 	 * 
-	 * @param sourceTableName       被复制的表名
-	 * @param targetTableName       复制后的表名
+	 * @param sourceTableName   被复制的表名
+	 * @param targetTableName   复制后的表名
 	 * @param sqlSessionFactory
 	 */
 	public static void copyTableSchema(String sourceTableName, String targetTableName,
@@ -54,8 +56,8 @@ public class DbTableUtil {
 	/**
 	 * （在当前库）创建表（如果不存在）
 	 * 
-	 * @param sourceTableName       源表
-	 * @param targetTableName       待创建的表
+	 * @param sourceTableName   源表
+	 * @param targetTableName   待创建的表
 	 * @param sqlSessionFactory
 	 */
 	public static void createTableIfAbsent(String sourceTableName, String targetTableName,
@@ -73,20 +75,14 @@ public class DbTableUtil {
 	/**
 	 * （在当前库）判断表是否已存在
 	 * 
-	 * @param tableName             表名
+	 * @param tableName         表名
 	 * @param sqlSessionFactory
 	 * @return
 	 * @throws Exception
 	 */
 	public static boolean existTable(String tableName, SqlSessionFactory sqlSessionFactory) {
-		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
-			Map<String, String> sqlParams = new HashMap<>();
-			sqlParams.put("tableName", tableName);
-
-			SqlMapper sqlMapper = new SqlMapper(sqlSession);
-			String result = sqlMapper.selectOne(QUERY_TABLE_SQL, sqlParams, String.class);
-			return !StringUtils.isEmpty(result);
-		}
+		List<String> tables = queryTables(tableName, false, sqlSessionFactory);
+		return tables != null && tables.size() == 1 && tables.get(0).equals(tableName);
 	}
 
 	/**
@@ -97,13 +93,33 @@ public class DbTableUtil {
 	 * @return
 	 */
 	public static List<String> queryTablesByPrefix(String tableNamePrefix, SqlSessionFactory sqlSessionFactory) {
-		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
-			Map<String, String> sqlParams = new HashMap<>();
-			sqlParams.put("tableName", tableNamePrefix + "%");
+		return queryTables(tableNamePrefix, true, sqlSessionFactory);
+	}
 
-			SqlMapper sqlMapper = new SqlMapper(sqlSession);
-			return sqlMapper.selectList(QUERY_TABLE_SQL, sqlParams, String.class);
+	/**
+	 * 根据表名查询满足条件的表
+	 * 
+	 * @param tableName         表名
+	 * @param prefix            是否表名前缀匹配
+	 * @param sqlSessionFactory
+	 * @return
+	 */
+	private static List<String> queryTables(String tableName, Boolean prefix, SqlSessionFactory sqlSessionFactory) {
+		if (prefix) {
+			tableName += "%";
 		}
+		List<String> tablesWithPrefix = new ArrayList<>();
+		try (SqlSession sqlSession = sqlSessionFactory.openSession();) {
+			Connection connection = sqlSession.getConnection();
+			DatabaseMetaData databaseMetaData = connection.getMetaData();
+			ResultSet resultSet = databaseMetaData.getTables(null, null, tableName, null);
+			while (resultSet.next()) {
+				tablesWithPrefix.add(resultSet.getString(3));
+			}
+		} catch (SQLException e) {
+			log.error(e.getMessage(), e);
+		}
+		return tablesWithPrefix;
 	}
 
 	/**
