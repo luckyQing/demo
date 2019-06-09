@@ -2,7 +2,6 @@ package com.liyulin.shading.jdbc.test.cases;
 
 import java.util.List;
 
-import org.apache.ibatis.session.RowBounds;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.assertj.core.api.Assertions;
 import org.junit.Before;
@@ -12,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.github.pagehelper.PageHelper;
 import com.liyulin.shading.jdbc.base.BaseEntity;
 import com.liyulin.shading.jdbc.entity.ApiLogEntity;
 import com.liyulin.shading.jdbc.enums.DelStateEnum;
@@ -65,10 +65,9 @@ public class AppLogTest {
 		// 分页查询
 		int pageIndex = 2;
 		int pageSize = 5;
-		int start = (pageIndex - 1) * pageSize;
-		int end = pageSize;
-		List<ApiLogEntity> list = apiLogBaseMapper.selectByExampleAndRowBounds(example, new RowBounds(start, end));
 
+		PageHelper.startPage(pageIndex, pageSize, true);
+		List<ApiLogEntity> list = apiLogBaseMapper.selectByExample(example);
 		Assertions.assertThat(list).isNotNull();
 		Assertions.assertThat(list.size()).isEqualTo(pageSize);
 	}
