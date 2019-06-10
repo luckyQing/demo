@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: mock
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: Dell
+Implementation-Vendor-Id: com.liyulin
+Build-Jdk: 1.8.0_101
+Implementation-URL: https://projects.spring.io/spring-boot/#/spring-bo
+ ot-starter-parent/mock
+Created-By: Maven Integration for Eclipse
+

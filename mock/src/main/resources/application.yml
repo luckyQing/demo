@@ -1,0 +1,16 @@
+logging:
+  config: classpath:log4j2.xml
+
+mybatis:
+  type-aliases-package: com.liyulin.mock.entity
+  mapper-locations: classpath:mapper/*.xml
+
+mapper:
+  not-empty: true
+  identity: MYSQL
+  
+spring:  datasource:
+    type: com.zaxxer.hikari.HikariDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver    url: jdbc:mysql://127.0.0.1:3306/demo_log?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456

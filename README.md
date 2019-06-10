@@ -17,6 +17,7 @@ demo下所有项目皆为学习示例项目。
 >| [mongodb](https://github.com/luckyQing/demo#685a5f7cc75b4796f6c6e00ccd384f01-1d34581b71db8e13f36afa079ec723db821456a0) | mongodb实例 | 
 >| [rabbitmq](https://github.com/luckyQing/demo#aedb75dfc563674e1263316b01879722-8884be55333e228f9b3d83db403e5066fcf74954) | 消息队列rabbitmq | 
 >| [redis](https://github.com/luckyQing/demo#86a1b907d54bf7010394bf316e183e67-1fa208fe8cb5e520c58f7a21494aca9851255112) | redis操作 | 
+>| [sharding-jdbc](https://github.com/luckyQing/demo#43f0b52f408cba37278fcc6eda7e4229-68bc663ff9dc558d40c47bbe373ef0a77e68c0ae) | sharding jdbc分表 | 
 >| [skills](https://github.com/luckyQing/demo#a658279f9b983958149f31e4d8487673-90181fb68b09d1fb96c30753c3085182448704ed) | java基础知识 | 
 >| [spring5](https://github.com/luckyQing/demo#1cf589e0476e94e51ca2eea2c6c08d81-9b94a4a76fbe84a1c17e3f88098e989302bac9dc) | spring5 响应式编程 | 
 >| [webservice-client](https://github.com/luckyQing/demo#48aec61bc33ed72189e17f2c2b408b1f-c044eb6c57377e119f0712bf095e5a67fd181a95) | webservice客户端 | 
