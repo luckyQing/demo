@@ -1,15 +1,8 @@
 package com.liyulin.mocktest;
 
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
 import org.junit.Test;
-import org.mockito.InjectMocks;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import org.mockito.MockitoAnnotations;
-import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.alibaba.fastjson.TypeReference;
 import com.liyulin.mocktest.biz.AppLogBiz;
@@ -19,43 +12,35 @@ import com.liyulin.mocktest.service.AppLogService;
 import com.liyulin.mocktest.util.MockUtil;
 
 public class ApiLogControllerTest extends AbstractUnitTest {
-
-	@Mock
-	private ApiLogBaseMapper apiLogBaseMapper;
-	@InjectMocks
-	@Autowired
-	@Spy
-	private AppLogBiz appLogBiz;
-//	@InjectMocks
-//	@Autowired
-//	private AppLogService appLogService;
 	
-	@Before
-	public void initMock() {
-		MockitoAnnotations.initMocks(this);
-	}
-
 	@Test
-	public void testQueryAaaByIdWithMockMapper() throws Exception {
-//		ApiLogBaseMapper apiLogBaseMapper = Mockito.mock(ApiLogBaseMapper.class);
-//		AppLogBiz appLogBiz = applicationContext.getBean(AppLogBiz.class);
+	public void testQueryByIdWithMockMapper() throws Exception {
+		ApiLogBaseMapper apiLogBaseMapper = Mockito.mock(ApiLogBaseMapper.class);
+		AppLogBiz appLogBiz = applicationContext.getBean(AppLogBiz.class);
+		initMocks(appLogBiz, apiLogBaseMapper);
 		
 		ApiLogEntity apiLogEntity = mockEntity();
 		Mockito.when(apiLogBaseMapper.selectByPrimaryKey(Mockito.any())).thenReturn(apiLogEntity);
-		ApiLogEntity resp = postJson("/aaa/queryAaaById", 1, new TypeReference<ApiLogEntity>() {
+		ApiLogEntity resp = postJson("/appLog/queryById", 1, new TypeReference<ApiLogEntity>() {
 		});
-		Assertions.assertThat(resp).isEqualTo(apiLogEntity);
+		Assertions.assertThat(resp).isEqualToComparingFieldByField(apiLogEntity);
+//		initMocks(appLogBiz, applicationContext.getBean(ApiLogBaseMapper.class));
 	}
 	
 	@Test
-	public void testQueryAaaByIdWithMockBiz() throws Exception {
+	public void testQueryByIdWithMockBiz() throws Exception {
+		AppLogBiz appLogBiz = Mockito.mock(AppLogBiz.class);
+		AppLogService appLogService = applicationContext.getBean(AppLogService.class);
+		initMocks(appLogService, appLogBiz);
+		
 		ApiLogEntity apiLogEntity = mockEntity();
 		Mockito.when(appLogBiz.queryById(Mockito.any())).thenReturn(apiLogEntity);
-		ApiLogEntity resp = postJson("/aaa/queryAaaById", 1, new TypeReference<ApiLogEntity>() {
+		ApiLogEntity resp = postJson("/appLog/queryById", 1, new TypeReference<ApiLogEntity>() {
 		});
-		Assertions.assertThat(resp).isEqualTo(apiLogEntity);
+		Assertions.assertThat(resp).isEqualToComparingFieldByField(apiLogEntity);
+//		initMocks(appLogService, applicationContext.getBean(AppLogBiz.class));
 	}
-
+	
 	private ApiLogEntity mockEntity() {
 		return MockUtil.mock(ApiLogEntity.class);
 	}

@@ -14,7 +14,7 @@ import com.liyulin.mocktest.service.AppLogService;
 
 @RestController
 @Validated
-@RequestMapping("aaa")
+@RequestMapping("appLog")
 public class AppLogController {
 
 	@Autowired
