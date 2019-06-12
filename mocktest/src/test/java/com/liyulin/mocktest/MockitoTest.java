@@ -11,7 +11,7 @@ import com.liyulin.mocktest.mapper.ApiLogBaseMapper;
 import com.liyulin.mocktest.service.AppLogService;
 import com.liyulin.mocktest.util.MockUtil;
 
-public class ApiLogControllerTest extends AbstractUnitTest {
+public class MockitoTest extends AbstractUnitTest {
 	
 	@Test
 	public void testQueryByIdWithMockMapper() throws Exception {
