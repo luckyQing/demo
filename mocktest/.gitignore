@@ -10,3 +10,4 @@ build
 *.jar
 .recommenders
 .project
+target
