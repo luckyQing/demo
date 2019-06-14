@@ -86,7 +86,7 @@ public class DbTableUtil {
 	 */
 	public static boolean existTable(String tableName, SqlSessionFactory sqlSessionFactory) {
 		List<String> tables = queryTables(tableName, false, sqlSessionFactory);
-		return tables != null && tables.size() == 1 && tables.get(0).equals(tableName);
+		return tables.size() == 1 && tables.get(0).equals(tableName);
 	}
 
 	/**
@@ -154,7 +154,7 @@ public class DbTableUtil {
 	 */
 	public static void dropAllLogicTables(String logicTableName, SqlSessionFactory sqlSessionFactory) {
 		List<String> tableNames = queryTablesByPrefix(logicTableName, sqlSessionFactory);
-		if (tableNames == null || tableNames.isEmpty()) {
+		if (tableNames.isEmpty()) {
 			return;
 		}
 		tableNames = tableNames.stream().filter(item -> !item.equals(logicTableName)).collect(Collectors.toList());
