@@ -17,7 +17,7 @@ public class MockitoTest extends AbstractUnitTest {
 	public void testQueryByIdWithMockMapper() throws Exception {
 		ApiLogBaseMapper apiLogBaseMapper = Mockito.mock(ApiLogBaseMapper.class);
 		AppLogBiz appLogBiz = applicationContext.getBean(AppLogBiz.class);
-		initMocks(appLogBiz, apiLogBaseMapper);
+		setMockAttribute(appLogBiz, apiLogBaseMapper);
 		
 		ApiLogEntity apiLogEntity = mockEntity();
 		Mockito.when(apiLogBaseMapper.selectByPrimaryKey(Mockito.any())).thenReturn(apiLogEntity);
@@ -30,7 +30,7 @@ public class MockitoTest extends AbstractUnitTest {
 	public void testQueryByIdWithMockBiz() throws Exception {
 		AppLogBiz appLogBiz = Mockito.mock(AppLogBiz.class);
 		AppLogService appLogService = applicationContext.getBean(AppLogService.class);
-		initMocks(appLogService, appLogBiz);
+		setMockAttribute(appLogService, appLogBiz);
 		
 		ApiLogEntity apiLogEntity = mockEntity();
 		Mockito.when(appLogBiz.queryById(Mockito.any())).thenReturn(apiLogEntity);

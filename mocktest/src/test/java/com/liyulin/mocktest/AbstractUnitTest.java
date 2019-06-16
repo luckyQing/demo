@@ -16,7 +16,6 @@ import org.springframework.web.context.WebApplicationContext;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
 import com.liyulin.mocktest.util.MockitoUtil;
-import com.liyulin.mocktest.util.MockitoUtil.MockDto;
 
 import lombok.extern.slf4j.Slf4j;
 
@@ -44,14 +43,10 @@ public abstract class AbstractUnitTest {
 
 	@After
 	public void after() {
-		MockDto mockDto = null;
-		while ((mockDto = MockitoUtil.getMockCache().poll()) != null) {
-			MockitoUtil.setMockAttribute(mockDto.getTargetObject(), applicationContext.getBean(mockDto.getMockClass()),
-					MockitoUtil.MockTypeEnum.MOCK_AFTER);
-		}
+		MockitoUtil.bacKMockAttribute(applicationContext);
 	}
 
-	protected static void initMocks(Object targetObject, Object mockObject) {
+	protected static void setMockAttribute(Object targetObject, Object mockObject) {
 		MockitoUtil.setMockAttribute(targetObject, mockObject, MockitoUtil.MockTypeEnum.MOCK_BEFORE);
 	}
 	

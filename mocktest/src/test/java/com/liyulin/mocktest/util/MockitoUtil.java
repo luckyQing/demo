@@ -5,6 +5,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.mockito.internal.util.MockUtil;
 import org.mockito.mock.MockCreationSettings;
+import org.springframework.aop.framework.Advised;
+import org.springframework.context.ApplicationContext;
 import org.springframework.test.util.AopTestUtils;
 import org.springframework.test.util.ReflectionTestUtils;
 import org.springframework.util.ClassUtils;
@@ -20,11 +22,18 @@ import lombok.extern.slf4j.Slf4j;
 @UtilityClass
 public class MockitoUtil {
 
-	private static final boolean springAopPresent = ClassUtils.isPresent("org.springframework.aop.framework.Advised",
+	private static final boolean springAopPresent = ClassUtils.isPresent(Advised.class.getTypeName(),
 			ReflectionTestUtils.class.getClassLoader());
 	@Getter
 	private static ConcurrentLinkedQueue<MockDto> mockCache = new ConcurrentLinkedQueue<>();
 
+	/**
+	 * 设置mock属性
+	 * 
+	 * @param targetObject
+	 * @param mockObject
+	 * @param mockTypeEnum
+	 */
 	public static void setMockAttribute(Object targetObject, Object mockObject, MockTypeEnum mockTypeEnum) {
 		if (targetObject != null && springAopPresent) {
 			targetObject = AopTestUtils.getUltimateTargetObject(targetObject);
@@ -47,6 +56,19 @@ public class MockitoUtil {
 			}
 		} catch (IllegalArgumentException | IllegalAccessException e) {
 			log.error(e.getMessage(), e);
+		}
+	}
+
+	/**
+	 * 归还mock属性
+	 * 
+	 * @param applicationContext
+	 */
+	public static void bacKMockAttribute(ApplicationContext applicationContext) {
+		MockDto mockDto = null;
+		while ((mockDto = MockitoUtil.getMockCache().poll()) != null) {
+			MockitoUtil.setMockAttribute(mockDto.getTargetObject(), applicationContext.getBean(mockDto.getMockClass()),
+					MockitoUtil.MockTypeEnum.MOCK_AFTER);
 		}
 	}
 
