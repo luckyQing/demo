@@ -6,7 +6,8 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.runner.RunWith;
-import org.mockito.Mockito;
+import org.mockito.internal.util.MockUtil;
+import org.mockito.mock.MockCreationSettings;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
@@ -107,11 +108,9 @@ public abstract class AbstractUnitTest {
 			return;
 		}
 		if (mockTypeEnum == MockTypeEnum.MOCK_BEFORE) {
-			Class<?> mockClass = mockObject.getClass().getSuperclass();
-			if (mockClass == Object.class) {
-				mockClass = mockObject.getClass();
-			}
-			mockCache.add(new MockDto(targetObject, mockClass));
+			MockCreationSettings<?> mockCreationSettings = MockUtil.getMockSettings(mockObject);
+			Class<?> typeToMock = mockCreationSettings.getTypeToMock();
+			mockCache.add(new MockDto(targetObject, typeToMock));
 		}
 		try {
 			for (Field field : fields) {

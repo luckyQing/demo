@@ -24,7 +24,6 @@ public class MockitoTest extends AbstractUnitTest {
 		ApiLogEntity resp = postJson("/appLog/queryById", 1, new TypeReference<ApiLogEntity>() {
 		});
 		Assertions.assertThat(resp).isEqualToComparingFieldByField(apiLogEntity);
-//		initMocks(appLogBiz, applicationContext.getBean(ApiLogBaseMapper.class));
 	}
 	
 	@Test
@@ -38,7 +37,6 @@ public class MockitoTest extends AbstractUnitTest {
 		ApiLogEntity resp = postJson("/appLog/queryById", 1, new TypeReference<ApiLogEntity>() {
 		});
 		Assertions.assertThat(resp).isEqualToComparingFieldByField(apiLogEntity);
-//		initMocks(appLogService, applicationContext.getBean(AppLogBiz.class));
 	}
 	
 	private ApiLogEntity mockEntity() {
