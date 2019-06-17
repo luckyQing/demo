@@ -33,6 +33,7 @@
 		<pagehelper>5.1.8</pagehelper>
 		<sharding-jdbc>4.0.0-RC1</sharding-jdbc>
 		<fastjson>1.2.47</fastjson>
+		<jasypt>2.1.1</jasypt>
 	</properties>
 
 	<dependencies>
@@ -91,6 +92,12 @@
 		<dependency>
 			<groupId>joda-time</groupId>
 			<artifactId>joda-time</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>com.github.ulisesbocchio</groupId>
+			<artifactId>jasypt-spring-boot-starter</artifactId>
+			<version>${jasypt}</version>
 		</dependency>
 
 		<dependency>

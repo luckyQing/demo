@@ -18,11 +18,17 @@ import lombok.Setter;
 import lombok.experimental.UtilityClass;
 import lombok.extern.slf4j.Slf4j;
 
+/**
+ * mockito工具类
+ * 
+ * @author liyulin
+ * @date 2019年6月17日上午12:15:38
+ */
 @Slf4j
 @UtilityClass
 public class MockitoUtil {
 
-	private static final boolean springAopPresent = ClassUtils.isPresent(Advised.class.getTypeName(),
+	private static final boolean SPRING_AOP_PRESENT = ClassUtils.isPresent(Advised.class.getTypeName(),
 			ReflectionTestUtils.class.getClassLoader());
 	@Getter
 	private static ConcurrentLinkedQueue<MockDto> mockCache = new ConcurrentLinkedQueue<>();
@@ -35,14 +41,14 @@ public class MockitoUtil {
 	 * @param mockTypeEnum
 	 */
 	public static void setMockAttribute(Object targetObject, Object mockObject, MockTypeEnum mockTypeEnum) {
-		if (targetObject != null && springAopPresent) {
+		if (targetObject != null && SPRING_AOP_PRESENT) {
 			targetObject = AopTestUtils.getUltimateTargetObject(targetObject);
 		}
 		Field[] fields = targetObject.getClass().getDeclaredFields();
 		if (fields == null) {
 			return;
 		}
-		if (mockTypeEnum == MockTypeEnum.MOCK_BEFORE) {
+		if (mockTypeEnum == MockTypeEnum.MOCK_BORROW) {
 			MockCreationSettings<?> mockCreationSettings = MockUtil.getMockSettings(mockObject);
 			Class<?> typeToMock = mockCreationSettings.getTypeToMock();
 			mockCache.add(new MockDto(targetObject, typeToMock));
@@ -64,11 +70,11 @@ public class MockitoUtil {
 	 * 
 	 * @param applicationContext
 	 */
-	public static void bacKMockAttribute(ApplicationContext applicationContext) {
+	public static void revertMockAttribute(ApplicationContext applicationContext) {
 		MockDto mockDto = null;
 		while ((mockDto = MockitoUtil.getMockCache().poll()) != null) {
 			MockitoUtil.setMockAttribute(mockDto.getTargetObject(), applicationContext.getBean(mockDto.getMockClass()),
-					MockitoUtil.MockTypeEnum.MOCK_AFTER);
+					MockitoUtil.MockTypeEnum.MOCK_REVERT);
 		}
 	}
 
@@ -83,7 +89,10 @@ public class MockitoUtil {
 	@Getter
 	@AllArgsConstructor(access = AccessLevel.PRIVATE)
 	public enum MockTypeEnum {
-		MOCK_BEFORE(1), MOCK_AFTER(2);
+		/** 借 */
+		MOCK_BORROW(1),
+		/** 重置 */
+		MOCK_REVERT(2);
 		private int type;
 	}
 
