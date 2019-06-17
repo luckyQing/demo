@@ -20,8 +20,8 @@ spring:  shardingsphere:    datasource:      names: product
     sharding:      default-data-source-name: ${sharding.jdbc.datasource.names}
       tables:
         t_api_log: 
-            table-strategy:
-              standard: 
-                sharding-column: f_sys_add_time
-                precise-algorithm-class-name: com.liyulin.shading.jdbc.algorithm.WeekPreciseShardingAlgorithm
-                range-algorithm-class-name: com.liyulin.shading.jdbc.algorithm.WeekRangeShardingAlgorithm
+          table-strategy:
+            standard: 
+              sharding-column: f_sys_add_time
+              precise-algorithm-class-name: com.liyulin.shading.jdbc.algorithm.WeekPreciseShardingAlgorithm
+              range-algorithm-class-name: com.liyulin.shading.jdbc.algorithm.WeekRangeShardingAlgorithm
