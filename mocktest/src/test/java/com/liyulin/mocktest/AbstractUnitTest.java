@@ -34,26 +34,47 @@ public abstract class AbstractUnitTest {
 	protected WebApplicationContext applicationContext;
 	protected static MockMvc mockMvc = null;
 	
+	static {
+		// 单元测试环境下，关闭eureka
+		System.setProperty("eureka.client.enabled", "false");
+	}
+	
 	@Before
 	public void initMock() {
 		if (mockMvc == null) {
 			mockMvc = MockMvcBuilders.webAppContextSetup(applicationContext).build();
 		}
 	}
-
+	
 	@After
 	public void after() {
-		MockitoUtil.bacKMockAttribute(applicationContext);
+		MockitoUtil.revertMockAttribute(applicationContext);
 	}
 
+	/**
+	 * 设置对象属性为mock对象
+	 * 
+	 * @param targetObject
+	 * @param mockObject
+	 */
 	protected static void setMockAttribute(Object targetObject, Object mockObject) {
-		MockitoUtil.setMockAttribute(targetObject, mockObject, MockitoUtil.MockTypeEnum.MOCK_BEFORE);
+		MockitoUtil.setMockAttribute(targetObject, mockObject, MockitoUtil.MockTypeEnum.MOCK_BORROW);
 	}
-	
+
+	/**
+	 * 归还mock对象为真实对象
+	 * 
+	 * @param targetObject
+	 * @param realObject
+	 */
+	protected static void revertMockAttribute(Object targetObject, Object realObject) {
+		MockitoUtil.setMockAttribute(targetObject, realObject, MockitoUtil.MockTypeEnum.MOCK_REVERT);
+	}
 	
 	protected <T> T postJson(String url, Object req, TypeReference<T> typeReference) throws Exception {
 		String requestBody = JSON.toJSONString(req);
 		log.info("test.requestBody={}", requestBody);
+
 		MvcResult result = mockMvc.perform(
 				MockMvcRequestBuilders.post(url)
 					.contentType(MediaType.APPLICATION_JSON_UTF8)
@@ -66,5 +87,5 @@ public abstract class AbstractUnitTest {
 
 		return JSON.parseObject(content, typeReference);
 	}
-	
+
 }
