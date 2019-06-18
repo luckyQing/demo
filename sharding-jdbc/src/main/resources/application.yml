@@ -12,8 +12,8 @@ jasypt:
 mapper:
   not-empty: true
   identity: MYSQL
-spring:  shardingsphere:    datasource:      names: product
-      product:
+spring:  shardingsphere:    datasource:      names: log
+      log:
         type: com.zaxxer.hikari.HikariDataSource
         driverClassName: com.mysql.cj.jdbc.Driver
         jdbcUrl: jdbc:mysql://127.0.0.1:3306/demo_log?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
@@ -21,7 +21,7 @@ spring:  shardingsphere:    datasource:      names: product
         password: ENC(Aq90bjkofJr0svNO4mtFfw==)
     props:
       sql.show: true
-    sharding:      default-data-source-name: ${sharding.jdbc.datasource.names}
+    sharding:      default-data-source-name: log
       tables:
         t_api_log: 
           table-strategy:
