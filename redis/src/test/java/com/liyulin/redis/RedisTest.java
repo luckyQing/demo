@@ -41,5 +41,11 @@ public class RedisTest {
 		boolean result = redisWrapper.batchSetString(keys, values, 1000L);
 		Assertions.assertThat(result).isEqualTo(true);
 	}
+
+	@Test
+	public void testSetNx() {
+		boolean success = redisWrapper.setNx("333", "222", 2000000);
+		Assertions.assertThat(success).isEqualTo(true);
+	}
 	
 }
