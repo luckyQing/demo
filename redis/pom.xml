@@ -11,7 +11,7 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.1.2.RELEASE</version>
+		<version>2.1.5.RELEASE</version>
 	</parent>
 
 	<!-- <dependencyManagement> <dependencies> <dependency> <groupId>org.springframework.cloud</groupId> 
@@ -20,8 +20,11 @@
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<!-- 2.1.5.RELEASE 升级后，IDE插件不兼容 -->
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<java>1.8</java>
-		<redisson>3.8.2</redisson>
+		<!-- version>=3.10.0时，NX返回null -->
+		<redisson>3.9.1</redisson>
 		<fastjson>1.2.47</fastjson>
 	</properties>
 

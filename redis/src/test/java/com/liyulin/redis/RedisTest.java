@@ -10,21 +10,21 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.liyulin.redis.service.RedisWrapper;
+import com.liyulin.redis.service.RedisComponent;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class RedisTest {
 
 	@Autowired
-	private RedisWrapper redisWrapper;
+	private RedisComponent redisComponent;
 	
 	@Test
 	public void testRedis() {
 		String key = "test";
 		String value1 = "444";
-		redisWrapper.setString(key, value1, 1000*1000L);
-		String value2 = redisWrapper.getString(key);
+		redisComponent.setString(key, value1, 1000*1000L);
+		String value2 = redisComponent.getString(key);
 
 		Assertions.assertThat(value2).isEqualTo(value1);
 	}
@@ -38,13 +38,13 @@ public class RedisTest {
 			values.add("valuex"+i);
 		}
 		
-		boolean result = redisWrapper.batchSetString(keys, values, 1000L);
+		boolean result = redisComponent.batchSetString(keys, values, 1000L);
 		Assertions.assertThat(result).isEqualTo(true);
 	}
 
 	@Test
 	public void testSetNx() {
-		boolean success = redisWrapper.setNx("333", "222", 2000000);
+		boolean success = redisComponent.setNx("333", "222", 2000000);
 		Assertions.assertThat(success).isEqualTo(true);
 	}
 	

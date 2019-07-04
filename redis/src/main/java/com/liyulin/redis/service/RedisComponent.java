@@ -4,16 +4,18 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfigureAfter;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisStringCommands.SetOption;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.StringRedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
-import org.springframework.stereotype.Service;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.TypeReference;
+import com.liyulin.redis.config.RedisConfig;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,9 +28,10 @@ import lombok.extern.slf4j.Slf4j;
  * @author liyulin
  * @date 2018年10月17日下午11:14:06
  */
-@Service
+@Configuration
+@AutoConfigureAfter({RedisConfig.class})
 @Slf4j
-public class RedisWrapper {
+public class RedisComponent {
 
 	@Autowired
 	private StringRedisTemplate stringRedisTemplate;
@@ -133,14 +136,13 @@ public class RedisWrapper {
 	 * @return {@code true}表示成功；{@code false}表示失败
 	 */
 	public boolean setNx(String key, String value, long expireMillis) {
-		Boolean bool = stringRedisTemplate.execute(new RedisCallback<Boolean>() {
+		return stringRedisTemplate.execute(new RedisCallback<Boolean>() {
 			@Override
 			public Boolean doInRedis(RedisConnection connection) throws DataAccessException {
 				return connection.set(key.getBytes(), value.getBytes(), Expiration.milliseconds(expireMillis),
 						SetOption.SET_IF_ABSENT);
 			}
 		}, true);
-		return (null == bool) ? false : bool;
 	}
 
 	@Getter

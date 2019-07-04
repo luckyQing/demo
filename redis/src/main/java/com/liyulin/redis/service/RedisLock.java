@@ -1,11 +1,14 @@
 package com.liyulin.redis.service;
 
+import java.io.Serializable;
 import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.redis.connection.RedisConnection;
 import org.springframework.data.redis.connection.RedisStringCommands.SetOption;
@@ -13,7 +16,6 @@ import org.springframework.data.redis.connection.ReturnType;
 import org.springframework.data.redis.core.RedisCallback;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.core.types.Expiration;
-import org.springframework.stereotype.Service;
 
 import com.liyulin.redis.constants.RedisKeysPrefix;
 
@@ -51,11 +53,12 @@ import lombok.extern.slf4j.Slf4j;
  * @date 2018年10月17日下午10:45:46
  */
 @Slf4j
-@Service
+@ConditionalOnBean(RedisTemplate.class)
+@Configuration
 public class RedisLock {
 
 	@Autowired
-	private RedisTemplate<String, Object> redisTemplate;
+	private RedisTemplate<Serializable, Serializable> redisTemplate;
 	/** 释放锁lua脚本 */
 	private static final String UNLOCK_LUA = "if redis.call('get', KEYS[1]) == ARGV[1] then return redis.call('del', KEYS[1]) else return 0 end";
 	private static final byte[] UNLOCK_LUA_BYTE = UNLOCK_LUA.getBytes();
