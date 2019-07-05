@@ -16,4 +16,12 @@ public class AppLogService {
 		return appLogBiz.queryById(id);
 	}
 	
+	public boolean recharge() {
+		return doRemote();
+	}
+	
+	public boolean doRemote() {
+		return false;
+	}
+	
 }

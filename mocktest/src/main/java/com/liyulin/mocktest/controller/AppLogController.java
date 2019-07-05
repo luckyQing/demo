@@ -24,5 +24,10 @@ public class AppLogController {
 	public ApiLogEntity queryById(@RequestBody @NotNull Long id) {
 		return appLogService.queryById(id);
 	}
+
+	@PostMapping("recharge")
+	public boolean recharge() {
+		return appLogService.recharge();
+	}
 	
 }
