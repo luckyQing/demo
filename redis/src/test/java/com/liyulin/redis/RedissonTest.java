@@ -65,4 +65,16 @@ public class RedissonTest {
 		}
 	}
 	
+	@Test
+	public void testTryLock1() throws InterruptedException {
+		RLock lock = redisson.getLock("anyLock");
+		try {
+			// 通过“看门狗”不断刷新线程有效期，避免锁的时间小于业务执行时间
+			lock.tryLock();
+			TimeUnit.SECONDS.sleep(60);
+		} finally {
+			lock.unlock();
+		}
+	}
+	
 }
