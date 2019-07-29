@@ -1,0 +1,8 @@
+import "Student.proto"; // 引入消息
+
+option java_package="com.liyulin.protobuf.proto";
+option java_outer_classname="GradeDTO";
+
+message Grade{
+	repeated Student student=1;
+}

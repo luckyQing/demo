@@ -1,0 +1,8 @@
+option java_package="com.liyulin.protobuf.proto";
+option java_outer_classname="StudentDTO";
+
+message Student{
+	required string name=1;
+	optional string sex=2;
+	optional int32 age=3;
+}
