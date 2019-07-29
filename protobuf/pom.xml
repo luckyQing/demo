@@ -16,10 +16,8 @@
 		<java>1.8</java>
 		<grpc>1.22.1</grpc>
 		<protobuf>3.9.0</protobuf>
-		<slf4j>1.7.26</slf4j>
 		<lombok>1.18.8</lombok>
 		<junit>4.12</junit>
-		<assertj>3.11.1</assertj>
 	</properties>
 
 	<dependencies>
@@ -27,12 +25,6 @@
 			<groupId>com.google.protobuf</groupId>
 			<artifactId>protobuf-java-util</artifactId>
 			<version>${protobuf}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-			<version>${slf4j}</version>
 		</dependency>
 
 		<dependency>
@@ -46,13 +38,6 @@
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
 			<version>${junit}</version>
-			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.assertj</groupId>
-			<artifactId>assertj-core</artifactId>
-			<version>${assertj}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
