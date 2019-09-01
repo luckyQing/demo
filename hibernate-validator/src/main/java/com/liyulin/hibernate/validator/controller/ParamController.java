@@ -17,10 +17,10 @@ import io.swagger.annotations.ApiOperation;
 
 @Validated
 @RestController
-@Api(tags = "参数校验接口")
+@Api(tags = "普通参数校验接口")
 public class ParamController {
 
-	@ApiOperation("参数校验")
+	@ApiOperation("普通参数校验")
 	@GetMapping("validated")
 	public Result test2(@NotBlank(message = "姓名不能为空") 
 						@Length(max = 10, message = "姓名最大长度为10") 
