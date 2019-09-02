@@ -10,6 +10,7 @@ demo下所有项目皆为学习示例项目。
 >| [elasticsearch](https://github.com/luckyQing/demo#18897dcfce6a4e7ae63a3baeed443c48-c51ce110fb7d48874a0900f504ca996692310ce3) | es实例 | 
 >| [encryption](https://github.com/luckyQing/demo#5bdf74912a51c34815f11e9a3d20b609-36292ef4d179c57c2b142579b70e7ebc89933429) | 加密 | 
 >| [excel](https://github.com/luckyQing/demo#bf57c906fa7d2bb66d07372e41585d96-d9aec1fb5e2018ce47fe74b628563ee4d24dcc13) | excel读写实例 | 
+>| [flyway](https://github.com/luckyQing/demo#38288c94180dea0b79d1be658ee293c8-cc7a33e967c1c26d52d25cfcee1387a5171a65e8) | flyway实例 | 
 >| [hibernate-validator](https://github.com/luckyQing/demo#b7cf3ac66a305ead7159053ddba34327-295dcad441b840ef21bb69185a3ef61f32a00ce3) | 参数校验 |
 >| [html2pdf](https://github.com/luckyQing/demo#893cea39bf5d717d55f869739d40e91f-f074a18f81b7d37c4fb5e54aec8ee99534e2f9cf) | html模板生成pdf |
 >| [http-message-converter](https://github.com/luckyQing/demo#5d6be723b87ca69a7878e643c83e7eee-747cfbcbe2100a6eae700f88b7b0a1da88b24907) | xml、json、protobuf等格式消息转化 | 
