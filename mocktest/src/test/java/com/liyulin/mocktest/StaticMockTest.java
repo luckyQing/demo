@@ -13,9 +13,6 @@ import org.powermock.modules.junit4.rule.PowerMockRule;
 import com.alibaba.fastjson.TypeReference;
 
 @PrepareForTest(StringUtils.class)
-
-//@PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
-//@PowerMockIgnore({"javax.management.*", "javax.script.*"})
 public class StaticMockTest extends AbstractUnitTest{
 	@Rule
 	public PowerMockRule rule = new PowerMockRule();
