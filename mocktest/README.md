@@ -1,0 +1,1 @@
+如果有静态方法mock时，需要设置VM arguments：**-noverify**
