@@ -2,36 +2,39 @@ package com.liyulin.mocktest;
 
 import org.apache.commons.lang3.StringUtils;
 import org.assertj.core.api.Assertions;
+import org.junit.Before;
+import org.junit.Rule;
 import org.junit.Test;
-import org.junit.runner.RunWith;
 import org.mockito.Mockito;
 import org.powermock.api.mockito.PowerMockito;
 import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
+import org.powermock.modules.agent.PowerMockAgent;
+import org.powermock.modules.junit4.rule.PowerMockRule;
 
-/**
- * 此种方式不推荐（IDE覆盖率统计失效）
- *
- * @author liyulin
- * @date 2019-09-08
- */
-@RunWith(PowerMockRunner.class)
+import com.alibaba.fastjson.TypeReference;
+
 @PrepareForTest(StringUtils.class)
-//@RunWith(PowerMockRunner.class)
-//@PowerMockRunnerDelegate(SpringJUnit4ClassRunner.class)
-//@PowerMockIgnore({"javax.management.*", "javax.script.*"})
-//@SpringBootTest
-public class PowermockTest {
+public class StaticMockTest extends AbstractUnitTest {
+	@Rule
+	public PowerMockRule rule = new PowerMockRule();
 
-	@Test
-	public void testStaticMethod() {
-		PowerMockito.mockStatic(StringUtils.class);
-		PowerMockito.when(StringUtils.isBlank(Mockito.any())).thenReturn(true);
-		Assertions.assertThat(StringUtils.isBlank("123456")).isTrue();
+	@Before
+	public void setup() {
+		PowerMockAgent.initializeIfNeeded();
 	}
 
 	@Test
-	public void testStaticMethod2() {
+	public void testStaticMethod() throws Exception {
+		PowerMockito.mockStatic(StringUtils.class);
+		PowerMockito.when(StringUtils.isBlank(Mockito.any())).thenReturn(true);
+
+		Boolean result = postJson("/static/isBlank", "123456", new TypeReference<Boolean>() {
+		});
+		Assertions.assertThat(result).isTrue();
+	}
+
+	@Test
+	public void testStaticMethod1() {
 		PowerMockito.mockStatic(StringUtils.class);
 		PowerMockito.when(StringUtils.isBlank(Mockito.any())).thenReturn(true);
 		Assertions.assertThat(StringUtils.isBlank("123456")).isTrue();
