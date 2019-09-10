@@ -1,0 +1,1 @@
+[版本依赖管理文档](https://docs.spring.io/dependency-management-plugin/docs/current-SNAPSHOT/reference/html/)

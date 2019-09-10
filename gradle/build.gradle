@@ -1,0 +1,45 @@
+plugins {
+	id "java"
+	id "io.spring.dependency-management" version "1.0.8.RELEASE"
+	id "org.springframework.boot" version "2.1.5.RELEASE"
+}
+
+group = "com.liyulin"
+version = "0.0.1-SNAPSHOT"
+sourceCompatibility = "1.8"
+targetCompatibility = "1.8"
+
+repositories {
+    maven { url "http://maven.aliyun.com/nexus/content/groups/public" }
+	mavenCentral()
+}
+
+ext {
+	springbootVersion = "2.1.5.RELEASE"
+}
+
+dependencyManagement {
+	imports {
+        mavenBom "org.springframework.boot:spring-boot-dependencies:${springbootVersion}"
+    }
+	dependencies {
+        dependency "com.alibaba:fastjson:1.2.60"
+        dependency("org.springframework.boot:spring-boot-starter-web:${springbootVersion}") {
+            exclude "org.springframework.boot:spring-boot-starter-logging"
+            exclude "org.springframework.boot:spring-boot-starter-tomcat"
+        }
+        dependency("org.springframework.boot:spring-boot-starter-test:${springbootVersion}") {
+            exclude "org.springframework.boot:spring-boot-starter-logging"
+        }
+    }
+}
+
+dependencies {
+	implementation "org.springframework.boot:spring-boot-starter-web"
+	implementation "org.springframework.boot:spring-boot-starter-undertow"
+	implementation "org.springframework.boot:spring-boot-starter-log4j2"
+	implementation "com.alibaba:fastjson"
+	compileOnly "org.projectlombok:lombok"
+	annotationProcessor "org.projectlombok:lombok"
+	testImplementation "org.springframework.boot:spring-boot-starter-test"
+}

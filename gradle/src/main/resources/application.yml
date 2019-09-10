@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: gradle
+server:
+  port: 10001
