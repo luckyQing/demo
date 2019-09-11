@@ -1,0 +1,5 @@
+spring:
+  application:
+    name: rate-limiter
+server:
+  port: 10001
