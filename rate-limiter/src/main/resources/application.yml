@@ -1,6 +1,12 @@
 spring:
   application:
     name: rate-limiter
-  cloud:    sentinel:      transport:        dashboard: localhost:10002        
+  cloud:
+    sentinel:
+      # 取消Sentinel控制台懒加载
+      eager: true
+      transport:
+        dashboard: localhost:10002       log:
+        dir: c:/logs/${spring.application.name}        switch-pid: true
 server:
   port: 10001
