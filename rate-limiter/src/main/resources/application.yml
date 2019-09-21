@@ -7,6 +7,6 @@ spring:
       eager: true
       transport:
         dashboard: localhost:10002       log:
-        dir: c:/logs/${spring.application.name}        switch-pid: true
+        dir: c:/logs/csp/${spring.application.name}        switch-pid: true
 server:
   port: 10001
