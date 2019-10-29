@@ -19,10 +19,10 @@ public class MqProducerService {
 
 	@Autowired
 	private AmqpTemplate amqpTemplate;
-	@Autowired
-	private BatchingRabbitTemplate batchingRabbitTemplate;
-	@Autowired
-	private AsyncAmqpTemplate asyncAmqpTemplate;
+//	@Autowired
+//	private BatchingRabbitTemplate batchingRabbitTemplate;
+//	@Autowired
+//	private AsyncAmqpTemplate asyncAmqpTemplate;
 
 	/**
 	 * 发送普通消息
@@ -41,14 +41,14 @@ public class MqProducerService {
 	 * @throws ExecutionException
 	 * @throws InterruptedException
 	 */
-	public String asyncSend(String message) throws InterruptedException, ExecutionException {
-		ListenableFuture<String> listenableFuture = asyncAmqpTemplate.convertSendAndReceive(
-				MqConstants.AsyncAmqp.DirectExchange.TEST, MqConstants.AsyncAmqp.RoutingKey.TEST, message);
-		
-		String result = listenableFuture.get();
-		log.info("result={}", result);
-		return result;
-	}
+//	public String asyncSend(String message) throws InterruptedException, ExecutionException {
+//		ListenableFuture<String> listenableFuture = asyncAmqpTemplate.convertSendAndReceive(
+//				MqConstants.AsyncAmqp.DirectExchange.TEST, MqConstants.AsyncAmqp.RoutingKey.TEST, message);
+//		
+//		String result = listenableFuture.get();
+//		log.info("result={}", result);
+//		return result;
+//	}
 
 	/**
 	 * 批量发送
@@ -56,12 +56,12 @@ public class MqProducerService {
 	 * @param message
 	 * @return
 	 */
-	public Object batchSend(String message) {
-		Object result = batchingRabbitTemplate.convertSendAndReceive(MqConstants.BatchAmqp.DirectExchange.TEST,
-				MqConstants.BatchAmqp.RoutingKey.TEST, message);
-		
-		log.info("result={}", result);
-		return result;
-	}
+//	public Object batchSend(String message) {
+//		Object result = batchingRabbitTemplate.convertSendAndReceive(MqConstants.BatchAmqp.DirectExchange.TEST,
+//				MqConstants.BatchAmqp.RoutingKey.TEST, message);
+//		
+//		log.info("result={}", result);
+//		return result;
+//	}
 
 }

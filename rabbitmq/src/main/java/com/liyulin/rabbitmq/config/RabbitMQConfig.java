@@ -33,8 +33,7 @@ public class RabbitMQConfig {
 		rabbitConnectionFactory.setPassword(rabbitProperties.getPassword());
 		rabbitConnectionFactory.setVirtualHost(rabbitProperties.getVirtualHost());
 
-		ConnectionFactory connectionFactory = new CachingConnectionFactory(rabbitConnectionFactory);
-		return connectionFactory;
+		return new CachingConnectionFactory(rabbitConnectionFactory);
 	}
 
 	@Bean
