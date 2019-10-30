@@ -21,8 +21,6 @@ public class MqProducerService {
 	private AmqpTemplate amqpTemplate;
 //	@Autowired
 //	private BatchingRabbitTemplate batchingRabbitTemplate;
-//	@Autowired
-//	private AsyncAmqpTemplate asyncAmqpTemplate;
 
 	/**
 	 * 发送普通消息

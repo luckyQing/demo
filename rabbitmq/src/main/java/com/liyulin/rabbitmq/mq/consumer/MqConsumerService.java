@@ -16,12 +16,12 @@ public class MqConsumerService {
 		log.info("receiver msg:" + msg);
 	}
 
-	@RabbitListener(queues = MqConstants.AsyncAmqp.RoutingKey.TEST)
+//	@RabbitListener(queues = MqConstants.AsyncAmqp.RoutingKey.TEST)
 	public void consumerAsyncAmqp(String msg) {
 		log.info("receiver msg:" + msg);
 	}
 
-	@RabbitListener(queues = MqConstants.BatchAmqp.RoutingKey.TEST)
+//	@RabbitListener(queues = MqConstants.BatchAmqp.RoutingKey.TEST)
 	public void consumerBatchAmqp(String msg) {
 		log.info("receiver msg:" + msg);
 	}

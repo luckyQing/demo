@@ -1,5 +1,7 @@
 package com.liyulin.rabbitmq;
 
+import java.util.concurrent.TimeUnit;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,13 +18,15 @@ public class MqTest {
 	private MqProducerService mqProducerService;
 	
 	@Test
-	public void testSend() {
+	public void testSend() throws InterruptedException {
 		mqProducerService.send("hi");
+		TimeUnit.SECONDS.sleep(1);
 	}
 	
 	@Test
-	public void testBatchSend() {
+	public void testBatchSend() throws InterruptedException {
 		mqProducerService.send("hi");
+		TimeUnit.SECONDS.sleep(1);
 	}
 	
 }

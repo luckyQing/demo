@@ -17,3 +17,7 @@ spring:
     virtual-host: /
     username: guest
     password: guest
+    listener:      simple:        concurrency: 16
+        max-concurrency: 32
+        prefetch: 16
+        retry:          enabled: true

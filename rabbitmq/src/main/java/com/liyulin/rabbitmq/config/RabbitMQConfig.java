@@ -4,6 +4,7 @@ import org.springframework.amqp.core.Binding;
 import org.springframework.amqp.core.BindingBuilder;
 import org.springframework.amqp.core.DirectExchange;
 import org.springframework.amqp.core.Queue;
+import org.springframework.amqp.rabbit.connection.AbstractConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
@@ -26,14 +27,14 @@ public class RabbitMQConfig {
 
 	@Bean
 	public ConnectionFactory cachingConnectionFactory() {
-		com.rabbitmq.client.ConnectionFactory rabbitConnectionFactory = new com.rabbitmq.client.ConnectionFactory();
-		rabbitConnectionFactory.setHost(rabbitProperties.getHost());
-		rabbitConnectionFactory.setPort(rabbitProperties.getPort());
-		rabbitConnectionFactory.setUsername(rabbitProperties.getUsername());
-		rabbitConnectionFactory.setPassword(rabbitProperties.getPassword());
-		rabbitConnectionFactory.setVirtualHost(rabbitProperties.getVirtualHost());
+		AbstractConnectionFactory connectionFactory = new CachingConnectionFactory();
+		connectionFactory.setHost(rabbitProperties.getHost());
+		connectionFactory.setPort(rabbitProperties.getPort());
+		connectionFactory.setUsername(rabbitProperties.getUsername());
+		connectionFactory.setPassword(rabbitProperties.getPassword());
+		connectionFactory.setVirtualHost(rabbitProperties.getVirtualHost());
 
-		return new CachingConnectionFactory(rabbitConnectionFactory);
+		return connectionFactory;
 	}
 
 	@Bean
@@ -70,19 +71,22 @@ public class RabbitMQConfig {
 		rabbitTemplate.setReceiveTimeout(5000);
 		return rabbitTemplate;
 	}
-	
-	/*@Bean
-	public BatchingRabbitTemplate batchingRabbitTemplate() {
-		SimpleBatchingStrategy  batchingStrategy = new SimpleBatchingStrategy(128, 128, 10000) ;
-		
-		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
-		threadPoolTaskScheduler.setPoolSize(Runtime.getRuntime().availableProcessors()<<1);
-		
-		BatchingRabbitTemplate rabbitTemplate = new BatchingRabbitTemplate(batchingStrategy, threadPoolTaskScheduler);
-		
-		rabbitTemplate.setConnectionFactory(cachingConnectionFactory());
-		rabbitTemplate.setRetryTemplate(retryTemplate());
-		rabbitTemplate.setReceiveTimeout(5000);
-		return rabbitTemplate;
-	}*/
+
+	/*
+	 * @Bean public BatchingRabbitTemplate batchingRabbitTemplate() {
+	 * SimpleBatchingStrategy batchingStrategy = new SimpleBatchingStrategy(128,
+	 * 128, 10000) ;
+	 * 
+	 * ThreadPoolTaskScheduler threadPoolTaskScheduler = new
+	 * ThreadPoolTaskScheduler();
+	 * threadPoolTaskScheduler.setPoolSize(Runtime.getRuntime().availableProcessors(
+	 * )<<1);
+	 * 
+	 * BatchingRabbitTemplate rabbitTemplate = new
+	 * BatchingRabbitTemplate(batchingStrategy, threadPoolTaskScheduler);
+	 * 
+	 * rabbitTemplate.setConnectionFactory(cachingConnectionFactory());
+	 * rabbitTemplate.setRetryTemplate(retryTemplate());
+	 * rabbitTemplate.setReceiveTimeout(5000); return rabbitTemplate; }
+	 */
 }
