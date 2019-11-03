@@ -1,9 +1,5 @@
 package com.liyulin.rabbitmq.config;
 
-import org.springframework.amqp.core.Binding;
-import org.springframework.amqp.core.BindingBuilder;
-import org.springframework.amqp.core.DirectExchange;
-import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.rabbit.connection.AbstractConnectionFactory;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
@@ -16,11 +12,15 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.support.RetryTemplate;
 
-import com.liyulin.rabbitmq.consts.MqConstants;
-
+/**
+ * rabbitmq通用配置
+ *
+ * @author liyulin
+ * @date 2019-11-02
+ */
 @Configuration
 @EnableConfigurationProperties(RabbitProperties.class)
-public class RabbitMQConfig {
+public class RabbitMQCommonAutoConfiguration {
 
 	@Autowired
 	private RabbitProperties rabbitProperties;
@@ -38,20 +38,6 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
-	public Queue amqpQueue() {
-		return new Queue(MqConstants.Amqp.RoutingKey.TEST, true);
-	}
-
-	@Bean
-	public DirectExchange directExchange() {
-		return new DirectExchange(MqConstants.Amqp.DirectExchange.TEST);
-	}
-
-	@Bean
-	public Binding bindingDerect() {
-		return BindingBuilder.bind(amqpQueue()).to(directExchange()).with(MqConstants.Amqp.RoutingKey.TEST);
-	}
-
 	public RetryTemplate retryTemplate() {
 		// 设置connect失败之后的策略
 		ExponentialBackOffPolicy backOffPolicy = new ExponentialBackOffPolicy();
@@ -64,29 +50,12 @@ public class RabbitMQConfig {
 	}
 
 	@Bean
-	public RabbitTemplate rabbitTemplate() {
+	public RabbitTemplate rabbitTemplate(final ConnectionFactory connectionFactory, final RetryTemplate retryTemplate) {
 		RabbitTemplate rabbitTemplate = new RabbitTemplate();
-		rabbitTemplate.setConnectionFactory(cachingConnectionFactory());
-		rabbitTemplate.setRetryTemplate(retryTemplate());
+		rabbitTemplate.setConnectionFactory(connectionFactory);
+		rabbitTemplate.setRetryTemplate(retryTemplate);
 		rabbitTemplate.setReceiveTimeout(5000);
 		return rabbitTemplate;
 	}
 
-	/*
-	 * @Bean public BatchingRabbitTemplate batchingRabbitTemplate() {
-	 * SimpleBatchingStrategy batchingStrategy = new SimpleBatchingStrategy(128,
-	 * 128, 10000) ;
-	 * 
-	 * ThreadPoolTaskScheduler threadPoolTaskScheduler = new
-	 * ThreadPoolTaskScheduler();
-	 * threadPoolTaskScheduler.setPoolSize(Runtime.getRuntime().availableProcessors(
-	 * )<<1);
-	 * 
-	 * BatchingRabbitTemplate rabbitTemplate = new
-	 * BatchingRabbitTemplate(batchingStrategy, threadPoolTaskScheduler);
-	 * 
-	 * rabbitTemplate.setConnectionFactory(cachingConnectionFactory());
-	 * rabbitTemplate.setRetryTemplate(retryTemplate());
-	 * rabbitTemplate.setReceiveTimeout(5000); return rabbitTemplate; }
-	 */
 }

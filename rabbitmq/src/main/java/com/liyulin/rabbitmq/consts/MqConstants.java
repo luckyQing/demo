@@ -3,45 +3,19 @@ package com.liyulin.rabbitmq.consts;
 public final class MqConstants {
 
 	/** 普通消息 */
-	public static final class Amqp {
-		private static final String PREFIX = "Amqp_";
-
-		public static final class RoutingKey {
-			public static final String TEST = PREFIX + "test_routingKey";
-		}
-
-		public static final class DirectExchange {
-			public static final String TEST = PREFIX + "test_exchange";
-		}
-
-	}
-
-	/** 异步消息 */
-	public static final class AsyncAmqp {
-		private static final String PREFIX = "AsyncAmqp_";
-
-		public static final class RoutingKey {
-			public static final String TEST = PREFIX + "test_routingKey";
-		}
-
-		public static final class DirectExchange {
-			public static final String TEST = PREFIX + "test_exchange";
-		}
-
-	}
-
-	/**批量发送消息*/
-	public static final class BatchAmqp {
-		private static final String PREFIX = "Batch_";
-
-		public static final class RoutingKey {
-			public static final String TEST = PREFIX + "test_routingKey";
-		}
-
-		public static final class DirectExchange {
-			public static final String TEST = PREFIX + "test_exchange";
-		}
-
+	public static final class Standard {
+		public static final String PREFIX = "standard_";
+		public static final String QUEUE = PREFIX + "_mq";
+		public static final String EXCHANGE = PREFIX + "exchange";
+		public static final String ROUTING = PREFIX + "routingKey";
 	}
 	
+	/** 延迟消息 */
+	public static final class Delay {
+		public static final String PREFIX = "delay_";
+		public static final String QUEUE = PREFIX + "_mq";
+		public static final String EXCHANGE = PREFIX + "exchange";
+		public static final String ROUTING = PREFIX + "routingKey";
+	}
+
 }
