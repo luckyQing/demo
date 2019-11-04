@@ -12,7 +12,7 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class DelayMQProducerService {
+public class DeadLetterMQProducerService {
 
 	@Autowired
 	private AmqpTemplate amqpTemplate;
@@ -24,7 +24,7 @@ public class DelayMQProducerService {
 	 */
 	public void send(String message) {
 		log.info("send delay msg:" + message);
-		amqpTemplate.convertAndSend(MqConstants.Delay.EXCHANGE, MqConstants.Delay.ROUTING, message,
+		amqpTemplate.convertAndSend(MqConstants.DeadLetter.EXCHANGE, MqConstants.DeadLetter.ROUTING, message,
 				messagePostProcessor -> {
 					messagePostProcessor.getMessageProperties()
 							.setExpiration(String.valueOf(TimeUnit.SECONDS.toMillis(5)));

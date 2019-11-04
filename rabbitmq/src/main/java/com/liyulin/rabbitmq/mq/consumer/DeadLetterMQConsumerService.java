@@ -9,9 +9,9 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Slf4j
-public class DelayMQConsumerService {
+public class DeadLetterMQConsumerService {
 
-	@RabbitListener(queues = MqConstants.Delay.QUEUE)
+	@RabbitListener(queues = MqConstants.DeadLetter.REDIRECT_QUEUE)
 	public void consumerAmqp(String msg) {
 		log.info("receiver delay msg:" + msg);
 	}
