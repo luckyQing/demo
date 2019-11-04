@@ -6,7 +6,6 @@ import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
-import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
@@ -19,7 +18,6 @@ import org.springframework.retry.support.RetryTemplate;
  * @date 2019-11-02
  */
 @Configuration
-@EnableConfigurationProperties(RabbitProperties.class)
 public class RabbitMQCommonAutoConfiguration {
 
 	@Autowired
