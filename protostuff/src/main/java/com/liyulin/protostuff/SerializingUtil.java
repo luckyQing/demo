@@ -2,10 +2,11 @@ package com.liyulin.protostuff;
 
 import io.protostuff.LinkedBuffer;
 import io.protostuff.ProtostuffIOUtil;
+import io.protostuff.Schema;
 import io.protostuff.runtime.RuntimeSchema;
 
 public class SerializingUtil {
-	
+
 	/**
 	 * 将目标类序列化为byte数组
 	 *
@@ -13,21 +14,18 @@ public class SerializingUtil {
 	 * @param <T>
 	 * @return
 	 */
+	@SuppressWarnings("unchecked")
 	public static <T> byte[] serialize(T source) {
-		RuntimeSchema<T> schema;
-		LinkedBuffer buffer = null;
-		byte[] result;
+		Schema<T> schema = RuntimeSchema.getSchema((Class<T>) source.getClass());
+		LinkedBuffer linkedBuffer = null;
 		try {
-			schema = RuntimeSchema.createFrom((Class<T>) source.getClass());
-			buffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
-			result = ProtostuffIOUtil.toByteArray(source, schema, buffer);
+			linkedBuffer = LinkedBuffer.allocate(LinkedBuffer.DEFAULT_BUFFER_SIZE);
+			return ProtostuffIOUtil.toByteArray(source, schema, linkedBuffer);
 		} finally {
-			if (buffer != null) {
-				buffer.clear();
+			if (linkedBuffer != null) {
+				linkedBuffer.clear();
 			}
 		}
-
-		return result;
 	}
 
 	/**
@@ -40,13 +38,12 @@ public class SerializingUtil {
 	 * @throws IllegalAccessException
 	 * @throws InstantiationException
 	 */
-	public static <T> T deserialize(byte[] source, Class<T> typeClass)
-			throws InstantiationException, IllegalAccessException {
-		RuntimeSchema<T> schema = RuntimeSchema.createFrom(typeClass);
-		T newInstance = typeClass.newInstance();
+	public static <T> T deserialize(byte[] source, Class<T> typeClass) {
+		Schema<T> schema = RuntimeSchema.getSchema(typeClass);
+		T newInstance = schema.newMessage();
 		ProtostuffIOUtil.mergeFrom(source, newInstance, schema);
 
 		return newInstance;
 	}
-	
+
 }
