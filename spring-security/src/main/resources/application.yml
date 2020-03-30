@@ -1,0 +1,18 @@
+logging:
+  config: classpath:log4j2.xml
+
+server:
+  tomcat:
+    uri-encoding: utf-8
+  port: 80
+  servlet:
+    context-path: /
+    
+spring:
+  application:
+    name: spring-security
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+    mode: HTML5
