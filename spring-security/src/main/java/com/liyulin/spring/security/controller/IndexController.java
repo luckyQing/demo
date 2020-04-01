@@ -1,16 +1,16 @@
 package com.liyulin.spring.security.controller;
 
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @RequestMapping("index")
 public class IndexController {
-	
+
 	@GetMapping
-	public String pageIndex() {
-		return "index";
+	public String home() {
+		return "home";
 	}
 	
 }
