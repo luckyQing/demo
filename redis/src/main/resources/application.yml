@@ -2,6 +2,8 @@
 #多线程环境下非线程安全，除非使用连接池，为每个Jedis实例增加物理连接。Lettuce基于Netty的连接实例
 #（StatefulRedisConnection），可以在多个线程间并发访问，且线程安全，满足多线程环境下的并发访问，
 #同时它是可伸缩的设计，一个连接实例不够的情况也可以按需增加连接实例。
+
+# 单机配置
 spring:
   redis:
     host: localhost
@@ -15,3 +17,22 @@ spring:
         min-idle: 0
         max-idle: 100
         max-wait: 10000ms
+
+# 集群配置      
+#spring:
+#  redis:
+#    timeout: 2000
+#    lettuce:
+#      pool:
+#        max-active: 1000
+#        min-idle: 0
+#        max-idle: 100
+#        max-wait: 10000ms
+#    cluster:
+#      nodes:
+#      - 127.0.0.1:6380
+#      - 127.0.0.1:6381
+#      - 127.0.0.1:6382
+#      - 127.0.0.1:6383
+#      - 127.0.0.1:6384
+#      - 127.0.0.1:6385

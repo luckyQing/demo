@@ -31,6 +31,7 @@
 		<module>redis</module>
 		<module>sharding-jdbc</module>
 		<module>skills</module>
+		<module>spring-security</module>
 		<module>spring5</module>
 		<module>webservice-client</module>
 		<module>webservice-server</module>
