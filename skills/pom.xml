@@ -14,7 +14,7 @@
 		<lombok>1.18.2</lombok>
 		<mysql>6.0.6</mysql>
 		<jdom>2.0.2</jdom>
-		<dom4j>2.1.1</dom4j>
+		<dom4j>2.1.3</dom4j>
 		<mongo-java-driver>3.10.1</mongo-java-driver>
 		<slf4j>1.7.25</slf4j>
 		<log4j2>2.11.1</log4j2>
