@@ -1,15 +1,15 @@
 package com.liyulin.rabbitmq.config;
 
-import org.springframework.amqp.rabbit.connection.AbstractConnectionFactory;
-import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
+import org.springframework.amqp.rabbit.batch.SimpleBatchingStrategy;
+import org.springframework.amqp.rabbit.config.SimpleRabbitListenerContainerFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
+import org.springframework.amqp.rabbit.core.BatchingRabbitTemplate;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.retry.backoff.ExponentialBackOffPolicy;
 import org.springframework.retry.support.RetryTemplate;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
  * rabbitmq通用配置
@@ -19,21 +19,6 @@ import org.springframework.retry.support.RetryTemplate;
  */
 @Configuration
 public class RabbitMQCommonAutoConfiguration {
-
-	@Autowired
-	private RabbitProperties rabbitProperties;
-
-	@Bean
-	public ConnectionFactory cachingConnectionFactory() {
-		AbstractConnectionFactory connectionFactory = new CachingConnectionFactory();
-		connectionFactory.setHost(rabbitProperties.getHost());
-		connectionFactory.setPort(rabbitProperties.getPort());
-		connectionFactory.setUsername(rabbitProperties.getUsername());
-		connectionFactory.setPassword(rabbitProperties.getPassword());
-		connectionFactory.setVirtualHost(rabbitProperties.getVirtualHost());
-
-		return connectionFactory;
-	}
 
 	@Bean
 	public RetryTemplate retryTemplate() {
@@ -54,6 +39,35 @@ public class RabbitMQCommonAutoConfiguration {
 		rabbitTemplate.setRetryTemplate(retryTemplate);
 		rabbitTemplate.setReceiveTimeout(5000);
 		return rabbitTemplate;
+	}
+
+	@Bean
+	public BatchingRabbitTemplate batchingRabbitTemplate(final ConnectionFactory connectionFactory,
+			final RetryTemplate retryTemplate) {
+		SimpleBatchingStrategy batchingStrategy = new SimpleBatchingStrategy(128, 128, 64);
+
+		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+		threadPoolTaskScheduler.setPoolSize(Runtime.getRuntime().availableProcessors() << 1);
+		threadPoolTaskScheduler.initialize();
+
+		BatchingRabbitTemplate rabbitTemplate = new BatchingRabbitTemplate(connectionFactory, batchingStrategy,
+				threadPoolTaskScheduler);
+		rabbitTemplate.setRetryTemplate(retryTemplate);
+		rabbitTemplate.setReceiveTimeout(5000);
+		return rabbitTemplate;
+	}
+
+	@Bean
+	public SimpleRabbitListenerContainerFactory simpleRabbitListenerContainerFactory(
+			final ConnectionFactory connectionFactory) {
+		SimpleRabbitListenerContainerFactory factory = new SimpleRabbitListenerContainerFactory();
+		factory.setConnectionFactory(connectionFactory);
+		// 设置批量
+		factory.setBatchListener(true);
+		factory.setConsumerBatchEnabled(true);
+		factory.setBatchSize(16);
+
+		return factory;
 	}
 
 }

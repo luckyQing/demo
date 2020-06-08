@@ -9,7 +9,6 @@ import org.springframework.amqp.core.Exchange;
 import org.springframework.amqp.core.ExchangeBuilder;
 import org.springframework.amqp.core.Queue;
 import org.springframework.amqp.core.QueueBuilder;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnBean;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -22,7 +21,6 @@ import com.liyulin.rabbitmq.consts.MqConstants;
  * @date 2019-11-02
  */
 @Configuration
-@ConditionalOnBean(RabbitMQCommonAutoConfiguration.class)
 public class DeadLetterMQAutoConfiguration {
 
 	@Bean

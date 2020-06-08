@@ -22,6 +22,14 @@ public final class MqConstants {
 		public static final String REDIRECT_QUEUE = REDIRECT_PREFIX + "mq";
 		public static final String REDIRECT_EXCHANGE = EXCHANGE;
 		public static final String REDIRECT_ROUTING = REDIRECT_PREFIX + "routingKey";
+	}	
+	
+	/** 批量消息 */
+	public static final class Batch {
+		private static final String PREFIX = "batch_";
+		public static final String QUEUE = PREFIX + "mq";
+		public static final String EXCHANGE = PREFIX + "exchange";
+		public static final String ROUTING = PREFIX + "routingKey";
 	}
 
 }

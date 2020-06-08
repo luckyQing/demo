@@ -2,7 +2,7 @@ package com.liyulin.rabbitmq.mq.producer;
 
 import java.util.concurrent.TimeUnit;
 
-import org.springframework.amqp.core.AmqpTemplate;
+import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,7 +15,7 @@ import lombok.extern.slf4j.Slf4j;
 public class DeadLetterMQProducerService {
 
 	@Autowired
-	private AmqpTemplate amqpTemplate;
+	private RabbitTemplate rabbitTemplate;
 
 	/**
 	 * 发送延迟消息
@@ -24,7 +24,7 @@ public class DeadLetterMQProducerService {
 	 */
 	public void send(String message) {
 		log.info("send delay msg:" + message);
-		amqpTemplate.convertAndSend(MqConstants.DeadLetter.EXCHANGE, MqConstants.DeadLetter.ROUTING, message,
+		rabbitTemplate.convertAndSend(MqConstants.DeadLetter.EXCHANGE, MqConstants.DeadLetter.ROUTING, message,
 				messagePostProcessor -> {
 					messagePostProcessor.getMessageProperties()
 							.setExpiration(String.valueOf(TimeUnit.SECONDS.toMillis(5)));

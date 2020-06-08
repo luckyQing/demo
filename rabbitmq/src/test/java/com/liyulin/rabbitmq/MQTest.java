@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import com.liyulin.rabbitmq.mq.producer.BatchMQProducerService;
 import com.liyulin.rabbitmq.mq.producer.DeadLetterMQProducerService;
 import com.liyulin.rabbitmq.mq.producer.StandardMQProducerService;
 
@@ -19,6 +20,8 @@ public class MQTest {
 	private StandardMQProducerService standardMQProducerService;
 	@Autowired
 	private DeadLetterMQProducerService delayMQProducerService;
+	@Autowired
+	private BatchMQProducerService batchMQProducerService;
 	
 	@Test
 	public void testStandardMQSend() throws InterruptedException {
@@ -30,6 +33,12 @@ public class MQTest {
 	public void testDeadLetterMQSend() throws InterruptedException {
 		delayMQProducerService.send("hi");
 		TimeUnit.SECONDS.sleep(6);
+	}
+	
+	@Test
+	public void testBatchMQ() throws InterruptedException {
+		batchMQProducerService.send("hi");
+		TimeUnit.SECONDS.sleep(5);
 	}
 	
 }
