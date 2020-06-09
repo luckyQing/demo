@@ -4,4 +4,5 @@
 - com.liyulin.design.patterns.prototype：原型模式
 - com.liyulin.design.patterns.proxy：代理模式
 - com.liyulin.design.patterns.singleton：单例模式
+- com.liyulin.design.patterns.strategy：策略模式
 - com.liyulin.design.patterns.template：模板方法模式
