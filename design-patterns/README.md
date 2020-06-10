@@ -1,4 +1,5 @@
 # 设计模式
+- com.liyulin.design.patterns.chain：责任链模式
 - com.liyulin.design.patterns.factory：工厂模式
 - com.liyulin.design.patterns.flyweight：享元模式
 - com.liyulin.design.patterns.prototype：原型模式
