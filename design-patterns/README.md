@@ -1,6 +1,9 @@
 # 设计模式
 - com.liyulin.design.patterns.chain：责任链模式
 - com.liyulin.design.patterns.factory：工厂模式
+  - 简单工厂模式
+  - 工厂方法模式
+  - 抽象工厂模式
 - com.liyulin.design.patterns.flyweight：享元模式
 - com.liyulin.design.patterns.prototype：原型模式
 - com.liyulin.design.patterns.proxy：代理模式
