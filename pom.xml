@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.liyulin</groupId>
 	<artifactId>demo</artifactId>
@@ -32,19 +34,19 @@
 		<module>sharding-jdbc</module>
 		<module>skills</module>
 		<module>spring-security</module>
+		<module>spring-statemachine</module>
 		<module>spring5</module>
 		<module>webservice-client</module>
 		<module>webservice-server</module>
 		<module>websocket-client</module>
 		<module>websocket-server</module>
-    <module>protostuff</module>
-  </modules>
+		<module>protostuff</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>1.8</java.version>
 	</properties>
-
 
 	<build>
 		<plugins>

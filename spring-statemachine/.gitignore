@@ -1,0 +1,13 @@
+.metadata
+RemoteSystemsTempFiles
+Servers
+.metadata
+bin/
+lib/
+build
+.settings
+*.class
+*.jar
+.recommenders
+.project
+!/*.iml
