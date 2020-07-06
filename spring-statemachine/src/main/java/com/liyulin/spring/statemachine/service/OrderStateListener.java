@@ -36,7 +36,7 @@ public class OrderStateListener {
 	public boolean receiveTransition(Message<OrderStatusChangeEvents> message) {
 		OrderVO order = (OrderVO) message.getHeaders().get("order");
 		order.setStatus(OrderStatus.FINISH);
-		log.info("收获 headers={}", message.getHeaders().toString());
+		log.info("收货 headers={}", message.getHeaders().toString());
 		return true;
 	}
 

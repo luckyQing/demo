@@ -14,26 +14,18 @@ import junit.framework.TestCase;
 @SpringBootTest
 public class AppTest extends TestCase {
 
-	@Autowired
-	private OrderServiceImpl orderService;
+    @Autowired
+    private OrderServiceImpl orderService;
 
-	@Test
-	public void testMultThread() {
-		orderService.creat();
-		orderService.creat();
+    @Test
+    public void testMultThread() {
+        orderService.creat();
 
-		orderService.pay(1);
+        orderService.pay(1);
+        orderService.deliver(1);
+        orderService.receive(1);
 
-		new Thread(() -> {
-			orderService.deliver(1);
-			orderService.receive(1);
-		}).start();
-
-		orderService.pay(2);
-		orderService.deliver(2);
-		orderService.receive(2);
-
-		System.out.println(orderService.getOrders());
-	}
+        System.out.println(orderService.getOrders());
+    }
 
 }

@@ -49,7 +49,7 @@ public class OrderServiceImpl {
 		OrderVO order = orders.get(id);
 		System.out.println("threadName=" + Thread.currentThread().getName() + " 尝试发货 id=" + id);
 		if (!sendEvent(MessageBuilder.withPayload(OrderStatusChangeEvents.DELIVERY).setHeader("order", order).build(),
-				orders.get(id))) {
+				order)) {
 			System.out.println("threadName=" + Thread.currentThread().getName() + " 发货失败，状态异常 id=" + id);
 		}
 		return orders.get(id);
@@ -59,7 +59,7 @@ public class OrderServiceImpl {
 		OrderVO order = orders.get(id);
 		System.out.println("threadName=" + Thread.currentThread().getName() + " 尝试收货 id=" + id);
 		if (!sendEvent(MessageBuilder.withPayload(OrderStatusChangeEvents.RECEIVED).setHeader("order", order).build(),
-				orders.get(id))) {
+				order)) {
 			System.out.println("threadName=" + Thread.currentThread().getName() + " 收货失败，状态异常 id=" + id);
 		}
 		return orders.get(id);
