@@ -1,8 +1,7 @@
 package com.liyulin.spring.statemachine.config;
 
-import com.liyulin.spring.statemachine.enums.OrderStatus;
-import com.liyulin.spring.statemachine.enums.OrderStatusChangeEvents;
-import com.liyulin.spring.statemachine.vo.OrderVO;
+import java.util.EnumSet;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.data.redis.core.HashOperations;
@@ -17,9 +16,11 @@ import org.springframework.statemachine.persist.DefaultStateMachinePersister;
 import org.springframework.statemachine.persist.StateMachinePersister;
 import org.springframework.statemachine.service.StateMachineSerialisationService;
 
-import java.util.EnumSet;
+import com.liyulin.spring.statemachine.enums.OrderStatus;
+import com.liyulin.spring.statemachine.enums.OrderStatusChangeEvents;
+import com.liyulin.spring.statemachine.vo.OrderVO;
 
-//@EnableStateMachine
+@EnableStateMachine
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<OrderStatus, OrderStatusChangeEvents> {
 
     @Autowired
@@ -38,10 +39,13 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<OrderS
             throws Exception {
         transitions.withExternal()
                 .source(OrderStatus.WAIT_PAYMENT).target(OrderStatus.WAIT_DELIVER).event(OrderStatusChangeEvents.PAYED)
-                .and()
-                .withExternal().source(OrderStatus.WAIT_DELIVER).target(OrderStatus.WAIT_RECEIVE).event(OrderStatusChangeEvents.DELIVERY)
-                .and()
-                .withExternal().source(OrderStatus.WAIT_RECEIVE).target(OrderStatus.FINISH).event(OrderStatusChangeEvents.RECEIVED);
+                .and() .withExternal().source(OrderStatus.WAIT_DELIVER).target(OrderStatus.WAIT_RECEIVE).event(OrderStatusChangeEvents.DELIVERY)
+                .and().withExternal().source(OrderStatus.WAIT_RECEIVE).target(OrderStatus.FINISH).event(OrderStatusChangeEvents.RECEIVED)
+                
+//                .and().withInternal().source(OrderStatus.WAIT_PAYMENT).event(OrderStatusChangeEvents.RETRY)
+//                .and().withInternal().source(OrderStatus.WAIT_DELIVER).event(OrderStatusChangeEvents.RETRY)
+//                .and().withInternal().source(OrderStatus.WAIT_RECEIVE).event(OrderStatusChangeEvents.RETRY)
+                ;
     }
 
     /**

@@ -18,14 +18,23 @@ public class AppTest extends TestCase {
     private OrderServiceImpl orderService;
 
     @Test
-    public void testMultThread() {
+    public void testMultThread() throws Exception {
         orderService.creat();
 
         orderService.pay(1);
         orderService.deliver(1);
         orderService.receive(1);
-
-        System.out.println(orderService.getOrders());
     }
 
+    @Test
+    public void testRetry() throws Exception {
+        orderService.creat();
+
+        orderService.pay(1);
+//        orderService.retry(1);
+
+        orderService.deliver(1);
+//        orderService.retry(1);
+    }
+    
 }

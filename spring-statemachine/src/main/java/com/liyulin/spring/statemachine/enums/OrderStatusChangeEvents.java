@@ -10,6 +10,8 @@ public enum OrderStatusChangeEvents {
 	/** 发货 */
 	DELIVERY,
 	/** 确认收货 */
-	RECEIVED;
+	RECEIVED,
+	/** 重试 */
+	RETRY;;
 
 }
