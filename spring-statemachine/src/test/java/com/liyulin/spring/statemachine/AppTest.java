@@ -19,22 +19,24 @@ public class AppTest extends TestCase {
 
     @Test
     public void testMultThread() throws Exception {
-        orderService.creat();
+    	int id=1;
+        orderService.creat(id);
 
-        orderService.pay(1);
-        orderService.deliver(1);
-        orderService.receive(1);
+        orderService.pay(id);
+        orderService.deliver(id);
+        orderService.receive(id);
     }
 
     @Test
     public void testRetry() throws Exception {
-        orderService.creat();
+    	int id=2;
+        orderService.creat(id);
 
-        orderService.pay(1);
-//        orderService.retry(1);
+        orderService.pay(id);
+        orderService.retry(id);
 
-        orderService.deliver(1);
-//        orderService.retry(1);
+        orderService.deliver(id);
+        orderService.retry(id);
     }
     
 }
