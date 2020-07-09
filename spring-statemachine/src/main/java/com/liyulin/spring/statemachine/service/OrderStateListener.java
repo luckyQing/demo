@@ -1,17 +1,16 @@
 package com.liyulin.spring.statemachine.service;
 
-import org.springframework.messaging.Message;
-import org.springframework.statemachine.annotation.OnTransition;
-import org.springframework.statemachine.annotation.WithStateMachine;
-import org.springframework.stereotype.Service;
-
 import com.liyulin.spring.statemachine.enums.OrderStatus;
 import com.liyulin.spring.statemachine.enums.OrderStatusChangeEvents;
 import com.liyulin.spring.statemachine.vo.OrderVO;
-
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.messaging.Message;
+import org.springframework.statemachine.annotation.OnTransition;
+import org.springframework.statemachine.annotation.WithStateMachine;
 
-@Service
+/**
+ * 状态转换
+ */
 @WithStateMachine
 @Slf4j
 public class OrderStateListener {

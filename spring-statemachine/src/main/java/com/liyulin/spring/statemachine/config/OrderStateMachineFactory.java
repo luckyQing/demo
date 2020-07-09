@@ -4,11 +4,14 @@ import com.liyulin.spring.statemachine.enums.OrderStatus;
 import com.liyulin.spring.statemachine.enums.OrderStatusChangeEvents;
 import com.liyulin.spring.statemachine.vo.OrderVO;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.config.ConfigurableBeanFactory;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Scope;
 import org.springframework.data.redis.core.HashOperations;
 import org.springframework.statemachine.StateMachineContext;
 import org.springframework.statemachine.StateMachinePersist;
-import org.springframework.statemachine.config.EnableStateMachine;
+import org.springframework.statemachine.config.EnableStateMachineFactory;
 import org.springframework.statemachine.config.EnumStateMachineConfigurerAdapter;
 import org.springframework.statemachine.config.builders.StateMachineStateConfigurer;
 import org.springframework.statemachine.config.builders.StateMachineTransitionConfigurer;
@@ -19,8 +22,10 @@ import org.springframework.statemachine.service.StateMachineSerialisationService
 
 import java.util.EnumSet;
 
-//@EnableStateMachine
-public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<OrderStatus, OrderStatusChangeEvents> {
+@Configuration
+@Scope(ConfigurableBeanFactory.SCOPE_PROTOTYPE)
+@EnableStateMachineFactory
+public class OrderStateMachineFactory extends EnumStateMachineConfigurerAdapter<OrderStatus, OrderStatusChangeEvents> {
 
     @Autowired
     private HashOperations<String, Integer, byte[]> hashOperations;
