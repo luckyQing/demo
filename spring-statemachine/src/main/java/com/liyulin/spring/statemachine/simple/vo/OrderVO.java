@@ -1,6 +1,6 @@
-package com.liyulin.spring.statemachine.vo;
+package com.liyulin.spring.statemachine.simple.vo;
 
-import com.liyulin.spring.statemachine.enums.OrderStatus;
+import com.liyulin.spring.statemachine.simple.enums.OrderStatus;
 
 import lombok.Data;
 

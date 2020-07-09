@@ -1,4 +1,4 @@
-package com.liyulin.spring.statemachine.service;
+package com.liyulin.spring.statemachine.simple.service;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -7,27 +7,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.statemachine.StateMachine;
-import org.springframework.statemachine.config.StateMachineFactory;
 import org.springframework.statemachine.persist.StateMachinePersister;
 import org.springframework.stereotype.Service;
 
-import com.liyulin.spring.statemachine.enums.OrderStatus;
-import com.liyulin.spring.statemachine.enums.OrderStatusChangeEvents;
-import com.liyulin.spring.statemachine.vo.OrderVO;
+import com.liyulin.spring.statemachine.simple.enums.OrderStatus;
+import com.liyulin.spring.statemachine.simple.enums.OrderStatusChangeEvents;
+import com.liyulin.spring.statemachine.simple.vo.OrderVO;
 
 import lombok.extern.slf4j.Slf4j;
 
-@Service
+@Service("simpleOrderService")
 @Slf4j
 public class OrderServiceImpl {
 
     @Autowired
 	private StateMachine<OrderStatus, OrderStatusChangeEvents> orderStateMachine;
-//	@Autowired
-//	StateMachineFactory<OrderStatus, OrderStatusChangeEvents> stateMachineFactory;
 
 	@Autowired
-	private StateMachinePersister<OrderStatus, OrderStatusChangeEvents, OrderVO> persister;
+	private StateMachinePersister<OrderStatus, OrderStatusChangeEvents, OrderVO> stateMachinePersister;
 
 	private static Map<Integer, OrderVO> orders = new HashMap<>();
 
@@ -35,7 +32,7 @@ public class OrderServiceImpl {
 		OrderVO order = new OrderVO();
 		order.setId(id);
 		order.setOrderNo("NO" + order.getId());
-		order.setStatus(OrderStatus.WAIT_PAYMENT);
+		order.setStatus(OrderStatus.SIMPLE_WAIT_PAYMENT);
 		orders.put(order.getId(), order);
 		return order;
 	}
@@ -93,38 +90,14 @@ public class OrderServiceImpl {
 	 * @param order
 	 * @return
 	 */
-/*
-	private boolean sendEvent(Message<OrderStatusChangeEvents> message, OrderVO order) {
-		boolean result = false;
-		StateMachine<OrderStatus, OrderStatusChangeEvents> orderStateMachine = stateMachineFactory.getStateMachine();
-		try {
-			orderStateMachine.start();
-			result = orderStateMachine.sendEvent(message); 
-			// 持久化状态机状态
-			persister.persist(orderStateMachine, order);
-		} catch (Exception e) {
-			log.error("send event exception", e);
-		} finally {
-			orderStateMachine.stop();
-		}
-		return result;
-	}*/
-
-	/**
-	 * 发送订单状态转换事件
-	 *
-	 * @param message
-	 * @param order
-	 * @return
-	 */
 	private boolean sendEvent(Message<OrderStatusChangeEvents> message, OrderVO order) {
 		boolean result = false;
 		try {
 			orderStateMachine.start();
-			persister.restore(orderStateMachine, order);
+			stateMachinePersister.restore(orderStateMachine, order);
 			result = orderStateMachine.sendEvent(message);
 			// 持久化状态机状态
-			persister.persist(orderStateMachine, order);
+			stateMachinePersister.persist(orderStateMachine, order);
 		} catch (Exception e) {
 			log.error("send event exception", e);
 		} finally {
