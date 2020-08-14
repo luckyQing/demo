@@ -5,13 +5,33 @@ package com.liyulin.spring.statemachine.simple.enums;
  */
 public enum OrderStatusChangeEvents {
 
-	/** 支付 */
-	PAYED,
-	/** 发货 */
-	DELIVERY,
-	/** 确认收货 */
-	RECEIVED,
-	/** 重试 */
-	RETRY;;
+    /**
+     * 支付
+     */
+    SIMPLE_PAYED,
+    /**
+     * 发货
+     */
+    SIMPLE_DELIVERY,
+    /**
+     * 确认收货
+     */
+    SIMPLE_RECEIVED,
+    /**
+     * 完成
+     */
+    SIMPLE_FINISH,
+    /**
+     * 重试
+     */
+    RETRY_PAYED,
+    /**
+     * 重试
+     */
+    RETRY_DELIVERY,
+    /**
+     * 重试
+     */
+    RETRY_RECEIVED;
 
 }

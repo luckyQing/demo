@@ -1,7 +1,9 @@
 package com.liyulin.spring.statemachine.simple.config;
 
-import java.util.EnumSet;
-
+import com.liyulin.spring.statemachine.factory.service.OrderStateListener;
+import com.liyulin.spring.statemachine.simple.enums.OrderStatus;
+import com.liyulin.spring.statemachine.simple.enums.OrderStatusChangeEvents;
+import com.liyulin.spring.statemachine.simple.vo.OrderVO;
 import org.springframework.context.annotation.Bean;
 import org.springframework.statemachine.StateMachineContext;
 import org.springframework.statemachine.StateMachinePersist;
@@ -13,29 +15,31 @@ import org.springframework.statemachine.persist.DefaultStateMachinePersister;
 import org.springframework.statemachine.persist.StateMachinePersister;
 import org.springframework.statemachine.support.DefaultStateMachineContext;
 
-import com.liyulin.spring.statemachine.simple.enums.OrderStatus;
-import com.liyulin.spring.statemachine.simple.enums.OrderStatusChangeEvents;
-import com.liyulin.spring.statemachine.simple.vo.OrderVO;
+import java.util.EnumSet;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
 @EnableStateMachine
 public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<OrderStatus, OrderStatusChangeEvents> {
+    private ConcurrentMap<Integer, OrderVO> stateCache = new ConcurrentHashMap<>();
 
     @Override
     public void configure(StateMachineStateConfigurer<OrderStatus, OrderStatusChangeEvents> states) throws Exception {
-        states.withStates().initial(OrderStatus.SIMPLE_WAIT_PAYMENT).states(EnumSet.allOf(OrderStatus.class));
+        states.withStates().initial(OrderStatus.SIMPLE_WAIT_PAYMENT).end(OrderStatus.SIMPLE_FINISH).states(EnumSet.allOf(OrderStatus.class));
     }
 
     @Override
     public void configure(StateMachineTransitionConfigurer<OrderStatus, OrderStatusChangeEvents> transitions)
             throws Exception {
         transitions.withExternal()
-                .source(OrderStatus.SIMPLE_WAIT_PAYMENT).target(OrderStatus.SIMPLE_WAIT_DELIVER).event(OrderStatusChangeEvents.PAYED)
-                .and() .withExternal().source(OrderStatus.SIMPLE_WAIT_DELIVER).target(OrderStatus.SIMPLE_WAIT_RECEIVE).event(OrderStatusChangeEvents.DELIVERY)
-                .and().withExternal().source(OrderStatus.SIMPLE_WAIT_RECEIVE).target(OrderStatus.SIMPLE_FINISH).event(OrderStatusChangeEvents.RECEIVED)
-                
-                .and().withInternal().source(OrderStatus.SIMPLE_WAIT_PAYMENT).event(OrderStatusChangeEvents.RETRY)
-                .and().withInternal().source(OrderStatus.SIMPLE_WAIT_DELIVER).event(OrderStatusChangeEvents.RETRY)
-                .and().withInternal().source(OrderStatus.SIMPLE_WAIT_RECEIVE).event(OrderStatusChangeEvents.RETRY)
+                .source(OrderStatus.SIMPLE_WAIT_PAYMENT).target(OrderStatus.SIMPLE_WAIT_DELIVER).event(OrderStatusChangeEvents.SIMPLE_PAYED)
+                .and().withExternal().source(OrderStatus.SIMPLE_WAIT_DELIVER).target(OrderStatus.SIMPLE_WAIT_RECEIVE).event(OrderStatusChangeEvents.SIMPLE_DELIVERY)
+                .and().withExternal().source(OrderStatus.SIMPLE_WAIT_RECEIVE).target(OrderStatus.SIMPLE_FINISH).event(OrderStatusChangeEvents.SIMPLE_RECEIVED)
+
+                .and().withInternal().source(OrderStatus.SIMPLE_WAIT_PAYMENT).event(OrderStatusChangeEvents.RETRY_PAYED)
+                .and().withInternal().source(OrderStatus.SIMPLE_WAIT_DELIVER).event(OrderStatusChangeEvents.RETRY_DELIVERY)
+                .and().withInternal().source(OrderStatus.SIMPLE_WAIT_RECEIVE).event(OrderStatusChangeEvents.RETRY_RECEIVED)
+                .and().withInternal().source(OrderStatus.SIMPLE_FINISH).event(OrderStatusChangeEvents.SIMPLE_FINISH)
                 .and().withExit();
     }
 
@@ -51,12 +55,15 @@ public class StateMachineConfig extends EnumStateMachineConfigurerAdapter<OrderS
                     @Override
                     public void write(StateMachineContext<OrderStatus, OrderStatusChangeEvents> context, OrderVO order)
                             throws Exception {
+                        stateCache.put(order.getId(), order);
                     }
 
                     @Override
                     public StateMachineContext<OrderStatus, OrderStatusChangeEvents> read(OrderVO order)
                             throws Exception {
-                    	return new DefaultStateMachineContext<>(order.getStatus(), null, null, null);
+                        return stateCache.containsKey(order.getId()) ?
+                                new DefaultStateMachineContext<>(stateCache.get(order.getId()).getStatus(), null, null, null, null, OrderStateListener.STATE_MACHINE_ID) :
+                                new DefaultStateMachineContext<>(OrderStatus.SIMPLE_WAIT_PAYMENT, null, null, null, null, OrderStateListener.STATE_MACHINE_ID);
                     }
                 });
     }
