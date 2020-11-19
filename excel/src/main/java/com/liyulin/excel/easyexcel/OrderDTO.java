@@ -1,20 +1,14 @@
 package com.liyulin.excel.easyexcel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
-import com.alibaba.excel.metadata.BaseRowModel;
-
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @Setter
 @ToString
 @NoArgsConstructor
 @AllArgsConstructor
-public class OrderDto extends BaseRowModel {
+public class OrderDTO {
 
 	@ExcelProperty(value = "订单id", index = 0)
 	private long id;

@@ -1,21 +1,16 @@
 package com.liyulin.excel.easyexcel;
 
-import java.io.BufferedInputStream;
-import java.io.FileInputStream;
+import com.alibaba.excel.EasyExcel;
+import com.alibaba.excel.ExcelReader;
+import com.alibaba.excel.ExcelWriter;
+import com.alibaba.excel.read.metadata.ReadSheet;
+import com.alibaba.excel.write.metadata.WriteSheet;
+import com.liyulin.excel.easyexcel.listener.OrderListener;
+import lombok.extern.slf4j.Slf4j;
+
 import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import com.alibaba.excel.EasyExcelFactory;
-import com.alibaba.excel.ExcelWriter;
-import com.alibaba.excel.context.AnalysisContext;
-import com.alibaba.excel.event.AnalysisEventListener;
-import com.alibaba.excel.metadata.Sheet;
-
-import lombok.extern.slf4j.Slf4j;
 
 /**
  * excel服务
@@ -26,56 +21,56 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class ExcelService {
 
-	/**
-	 * 导出excel
-	 * 
-	 * @throws FileNotFoundException
-	 */
-	public void exportExcel() throws FileNotFoundException {
-		String path = getClass().getResource("/").getPath();
-		log.info("path={}", path);
-		try (OutputStream out = new FileOutputStream(path + "商品导出test.xlsx");) {
-			ExcelWriter writer = EasyExcelFactory.getWriter(out);
-			Sheet sheet1 = new Sheet(1, 1, OrderDto.class);
+    /**
+     * 导出excel
+     *
+     * @throws FileNotFoundException
+     */
+    public void exportExcel() throws FileNotFoundException {
+        String path = getClass().getResource("/").getPath();
+        log.info("path={}", path);
+        ExcelWriter excelWriter = null;
+        try {
+            WriteSheet writeSheet = EasyExcel.writerSheet("表1.商品").build();
+            excelWriter = EasyExcel
+                    .write(path + "商品导出test.xlsx", OrderDTO.class)
+                    .build()
+                    .write(null, writeSheet);
 
-			int totalCount = 100;
-			int pageSize = 256;
-			for (int i = 0; i < totalCount; i++) {
-				List<OrderDto> data = new ArrayList<>(totalCount);
-				for (int page = 0; page < pageSize; page++) {
-					data.add(new OrderDto(i, "商品" + pageSize, i));
-				}
-				writer.write(data, sheet1);
-			}
-			writer.finish();
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
+            int totalCount = 100;
+            int pageSize = 256;
+            for (int i = 0; i < totalCount; i++) {
+                List<OrderDTO> data = new ArrayList<>(totalCount);
+                for (int page = 0; page < pageSize; page++) {
+                    data.add(new OrderDTO(i, "商品" + pageSize, i));
+                }
+                excelWriter.write(data, writeSheet);
+            }
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
+        } finally {
+            if (excelWriter != null) {
+                excelWriter.finish();
+            }
+        }
+    }
 
-	public void importExcel() {
-		String path = ExcelService.class.getResource("/").getPath();
-		log.info("path={}", path);
-
-		try (InputStream inputStream = new BufferedInputStream(new FileInputStream(path + "商品导入测试.xlsx"));) {
-			AnalysisEventListener<OrderDto> listener = new AnalysisEventListener<OrderDto>() {
-
-				@Override
-				public void invoke(OrderDto orderDto, AnalysisContext context) {
-					log.info("{}", orderDto);
-				}
-
-				@Override
-				public void doAfterAllAnalysed(AnalysisContext context) {
-
-				}
-
-			};
-
-			EasyExcelFactory.readBySax(inputStream, new Sheet(1, 1, OrderDto.class), listener);
-		} catch (Exception e) {
-			log.error(e.getMessage(), e);
-		}
-	}
+    public void importExcel() {
+        String path = ExcelService.class.getResource("/").getPath();
+        log.info("path={}", path);
+        ExcelReader excelReader = null;
+        try {
+            excelReader = EasyExcel.read(path + "商品导入测试.xlsx", OrderDTO.class, new OrderListener()).build();
+            ReadSheet readSheet = EasyExcel.readSheet(0)
+                    .autoTrim(true)
+                    .headRowNumber(1)
+                    .build();
+            excelReader.read(readSheet);
+        } finally {
+            if (excelReader != null) {
+                excelReader.finish();
+            }
+        }
+    }
 
 }

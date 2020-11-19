@@ -106,7 +106,7 @@ public class POIUtil {
 	 * @param filename
 	 *            excel2003文件名
 	 */
-	public static void writeExcel(String filename, List<StudentDto> dataSet) {
+	public static void writeExcel(String filename, List<StudentDTO> dataSet) {
 		try (Workbook wb = new HSSFWorkbook(); FileOutputStream fos = new FileOutputStream(filename);) {
 			// 创建表格
 			Sheet sheet = wb.createSheet("学生信息01");
@@ -171,7 +171,7 @@ public class POIUtil {
 			style2.setFont(font2);
 
 			for (int i = 0, size = dataSet.size(); i < size; i++) {
-				StudentDto student = dataSet.get(i);
+				StudentDTO student = dataSet.get(i);
 				// 创建行
 				Row rowBody = sheet.createRow(1 + i);
 				// 设置行高
@@ -203,9 +203,9 @@ public class POIUtil {
 	}
 
 	public static void main(String[] args) throws IOException {
-		List<StudentDto> dataSet = new ArrayList<>();
+		List<StudentDTO> dataSet = new ArrayList<>();
 		for (int i = 0; i < 20; i++) {
-			StudentDto student = new StudentDto("张三" + i, i, "男", "深圳南山区" + i);
+			StudentDTO student = new StudentDTO("张三" + i, i, "男", "深圳南山区" + i);
 			dataSet.add(student);
 		}
 		File file = new File("d:/test/poi1.xlsx");
