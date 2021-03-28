@@ -41,7 +41,8 @@
 		<module>websocket-client</module>
 		<module>websocket-server</module>
 		<module>protostuff</module>
-	</modules>
+        <module>shiro</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
