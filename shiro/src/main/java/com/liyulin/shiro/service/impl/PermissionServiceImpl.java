@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class PermissionServiceImpl implements PermissionService {
@@ -14,7 +15,7 @@ public class PermissionServiceImpl implements PermissionService {
     private PermissionMapper permissionMapper;
 
     @Override
-    public List<String> findByRoleId(List<Integer> roleIds) {
+    public Set<String> findByRoleId(List<Integer> roleIds) {
         return permissionMapper.findByRoleId(roleIds);
     }
 }

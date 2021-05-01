@@ -51,8 +51,7 @@ public class UserRealm extends AuthorizingRealm {
         // 放入角色信息
         authorizationInfo.setRoles(roleSet);
         // 放入权限信息
-        List<String> permissionList = permissionService.findByRoleId(roleIds);
-        authorizationInfo.setStringPermissions(new HashSet<>(permissionList));
+        authorizationInfo.setStringPermissions(permissionService.findByRoleId(roleIds));
 
         return authorizationInfo;
     }

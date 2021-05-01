@@ -7,9 +7,17 @@
     </sql>
 
     <select id="findRoleByUserId" parameterType="Integer" resultType="com.liyulin.shiro.entity.Role">
-        select role.id, role
-        from role, user, user_role ur
-        where role.id = ur.role_id and ur.user_id = user.id and user.id = #{userId}
+        SELECT
+            r.id,
+            r.role
+        FROM
+            role r,
+            `user` u,
+            user_role ur
+        WHERE
+            r.id = ur.role_id
+        AND ur.user_id = u.id
+        AND u.id = #{userId}
     </select>
 
 </mapper>

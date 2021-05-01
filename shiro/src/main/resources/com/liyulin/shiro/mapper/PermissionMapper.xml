@@ -3,9 +3,14 @@
 <mapper namespace="com.liyulin.shiro.mapper.PermissionMapper">
 
     <select id="findByRoleId" parameterType="List" resultType="String">
-        select id, permission, desc
-        from permission, role_permission rp
-        where rp.permission_id = permission.id and rp.role_id in
+        SELECT
+            p.permission
+        FROM
+            permission p,
+            role_permission rp
+        WHERE
+            rp.permission_id = p.id
+        AND rp.role_id IN
         <foreach collection="roleIds" item="id" open="(" close=")" separator=",">
             #{id}
         </foreach>
