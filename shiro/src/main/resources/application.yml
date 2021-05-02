@@ -1,5 +1,5 @@
 server:
-  port: 10000
+  port: 10001
 spring:
   application:
     name: shiro
@@ -13,3 +13,6 @@ mybatis:
   mapper-locations: classpath:com/liyulin/shiro/mapper/*.xml
   configuration:
     map-underscore-to-camel-case: true
+logging:
+  level:
+    com.liyulin: debug
