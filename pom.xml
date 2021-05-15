@@ -41,7 +41,7 @@
 		<module>websocket-client</module>
 		<module>websocket-server</module>
 		<module>protostuff</module>
-        <module>shiro</module>
+        <module>shiro-servlet</module>
     </modules>
 
 	<properties>
