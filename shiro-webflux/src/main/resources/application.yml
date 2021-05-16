@@ -1,0 +1,18 @@
+server:
+  port: 10001
+spring:
+  application:
+    name: shiro
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/demo_shiro?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: 123456
+mybatis:
+  type-aliases-package: com.liyulin.shiro.webflux.entity
+  mapper-locations: classpath:com/liyulin/shiro/webflux/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+logging:
+  level:
+    com.liyulin: debug

@@ -42,7 +42,8 @@
 		<module>websocket-server</module>
 		<module>protostuff</module>
         <module>shiro-servlet</module>
-    </modules>
+		<module>shiro-webflux</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
