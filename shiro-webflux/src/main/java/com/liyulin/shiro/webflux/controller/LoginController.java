@@ -11,7 +11,6 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.authz.annotation.Logical;
 import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.apache.shiro.authz.annotation.RequiresRoles;
-import org.apache.shiro.subject.Subject;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -28,11 +27,10 @@ public class LoginController {
     @PostMapping("/login")
     public ServerResponseVO<String> login(@RequestParam(value = "account") String account,
                                           @RequestParam(value = "password") String password) {
-        Subject userSubject = SecurityUtils.getSubject();
         UsernamePasswordToken token = new UsernamePasswordToken(account, password);
         try {
             // 登录验证
-            userSubject.login(token);
+            SecurityUtils.getSubject().login(token);
             return ServerResponseVO.success(UUID.randomUUID().toString().replaceAll("-", ""));
         } catch (UnknownAccountException e) {
             return ServerResponseVO.error(ServerResponseEnum.ACCOUNT_NOT_EXIST);
