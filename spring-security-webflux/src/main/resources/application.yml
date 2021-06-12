@@ -1,0 +1,25 @@
+logging:
+  config: classpath:log4j2.xml
+  level:
+    com.liyulin: debug
+
+server:
+  tomcat:
+    uri-encoding: utf-8
+  port: 80
+  servlet:
+    context-path: /
+    
+spring:
+  application:
+    name: spring-security-webflux
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/security-?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    username: root
+    password: 123456
+mybatis:
+  type-aliases-package: com.liyulin.shiro.entity
+  mapper-locations: classpath:com/liyulin/security/webflux/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
