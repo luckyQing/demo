@@ -8,6 +8,6 @@ import com.liyulin.security.webflux.entity.User;
  */
 public interface UserService {
 
-    User findByAccount(String account);
+    User find(Long mobile);
 
 }

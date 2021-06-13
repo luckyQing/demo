@@ -16,8 +16,8 @@ public class UserBiz {
     @Autowired
     private UserMapper userMapper;
 
-    public User findByAccount(String account) {
-        return userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getAccount, account));
+    public User find(Long mobile) {
+        return userMapper.selectOne(new LambdaQueryWrapper<User>().eq(User::getMobile, mobile));
     }
 
 }

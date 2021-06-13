@@ -15,9 +15,10 @@ public class User implements Serializable {
 
     private Integer id;
 
-    private String account;
+    private Long mobile;
 
     private String password;
 
-    private String username;
+    private String name;
+
 }

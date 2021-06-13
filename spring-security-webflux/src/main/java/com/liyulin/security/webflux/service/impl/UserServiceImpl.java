@@ -13,8 +13,8 @@ public class UserServiceImpl implements UserService {
     private UserBiz userBiz;
 
     @Override
-    public User findByAccount(String account) {
-        return userBiz.findByAccount(account);
+    public User find(Long mobile) {
+        return userBiz.find(mobile);
     }
 
 }

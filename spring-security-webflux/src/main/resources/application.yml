@@ -4,18 +4,14 @@ logging:
     com.liyulin: debug
 
 server:
-  tomcat:
-    uri-encoding: utf-8
   port: 80
-  servlet:
-    context-path: /
-    
+
 spring:
   application:
     name: spring-security-webflux
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/security-?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
+    url: jdbc:mysql://127.0.0.1:3306/security_webflux?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: 123456
 mybatis:
