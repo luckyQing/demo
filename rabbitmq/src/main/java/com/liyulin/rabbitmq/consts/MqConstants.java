@@ -9,6 +9,14 @@ public final class MqConstants {
 		public static final String EXCHANGE = PREFIX + "exchange";
 		public static final String ROUTING = PREFIX + "routingKey";
 	}
+
+	/** 普通json消息 */
+	public static final class StandardJson {
+		private static final String PREFIX = "standard_json_";
+		public static final String QUEUE = PREFIX + "mq";
+		public static final String EXCHANGE = PREFIX + "exchange";
+		public static final String ROUTING = PREFIX + "routingKey";
+	}
 	
 	/** 延迟消息 */
 	public static final class DeadLetter {

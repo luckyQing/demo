@@ -1,6 +1,11 @@
 package com.liyulin.rabbitmq.dto;
 
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
+import lombok.experimental.Accessors;
+
+import java.io.Serializable;
 
 /**
  * 商品信息dto
@@ -8,11 +13,14 @@ import lombok.Data;
  * @author liyulin
  * @date 2018年11月6日下午3:14:00
  */
-@Data
-public class ProductDto {
+@Setter
+@Getter
+@ToString
+@Accessors(chain = true)
+public class ProductDto implements Serializable {
 
-	private long id;
-	private String name;
-	private long price;
+    private long id;
+    private String name;
+    private long price;
 
 }
