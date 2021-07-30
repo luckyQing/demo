@@ -1,7 +1,10 @@
 package com.liyulin.excel.easyexcel;
 
 import com.alibaba.excel.annotation.ExcelProperty;
+import com.alibaba.excel.annotation.format.DateTimeFormat;
 import lombok.*;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -18,5 +21,8 @@ public class OrderDTO {
 
 	@ExcelProperty(value = "购买数量", index = 2)
 	private double buyNum;
+
+	@ExcelProperty(value = "生效日期", index = 3)
+	private Date date;
 
 }

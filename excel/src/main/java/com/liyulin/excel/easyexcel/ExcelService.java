@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,7 +43,7 @@ public class ExcelService {
             for (int i = 0; i < totalCount; i++) {
                 List<OrderDTO> data = new ArrayList<>(totalCount);
                 for (int page = 0; page < pageSize; page++) {
-                    data.add(new OrderDTO(i, "商品" + pageSize, i));
+                    data.add(new OrderDTO(i, "商品" + pageSize, i, new Date()));
                 }
                 excelWriter.write(data, writeSheet);
             }
