@@ -23,6 +23,7 @@
 		<module>html2pdf</module>
 		<module>http-message-converter</module>
 		<module>jmh</module>
+		<module>jpa</module>
 		<module>junit5</module>
 		<module>jws-webservice</module>
 		<module>mocktest</module>
@@ -34,6 +35,7 @@
 		<module>sharding-jdbc</module>
 		<module>skills</module>
 		<module>spring-security</module>
+		<module>spring-security-webflux</module>
 		<module>spring-statemachine</module>
 		<module>spring5</module>
 		<module>webservice-client</module>
@@ -43,7 +45,6 @@
 		<module>protostuff</module>
         <module>shiro-servlet</module>
 		<module>shiro-webflux</module>
-        <module>spring-security-webflux</module>
     </modules>
 
 	<properties>
