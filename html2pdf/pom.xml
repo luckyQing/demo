@@ -15,7 +15,7 @@
 		<freemarker>2.3.28</freemarker>
 		<flying-saucer-pdf>9.1.16</flying-saucer-pdf>
 		<slf4j>1.7.25</slf4j>
-		<log4j2>2.11.1</log4j2>
+		<log4j2>2.15.0</log4j2>
 		<junit>4.12</junit>
 	</properties>
 
