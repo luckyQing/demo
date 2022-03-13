@@ -45,7 +45,8 @@
 		<module>protostuff</module>
         <module>shiro-servlet</module>
 		<module>shiro-webflux</module>
-    </modules>
+		<module>quasar</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
