@@ -2,7 +2,6 @@ package com.liyulin.jpa.service;
 
 import com.liyulin.jpa.entity.ProductInfoEntity;
 import com.liyulin.jpa.repository.ProductInfoRepository;
-import org.hibernate.id.IdentifierGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
