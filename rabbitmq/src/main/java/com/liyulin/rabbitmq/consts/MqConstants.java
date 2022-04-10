@@ -13,7 +13,8 @@ public final class MqConstants {
 	/** 普通json消息 */
 	public static final class StandardJson {
 		private static final String PREFIX = "standard_json_";
-		public static final String QUEUE = PREFIX + "mq";
+		public static final String QUEUE1 = PREFIX + "mq1";
+		public static final String QUEUE2 = PREFIX + "mq2";
 		public static final String EXCHANGE = PREFIX + "exchange";
 		public static final String ROUTING = PREFIX + "routingKey";
 	}

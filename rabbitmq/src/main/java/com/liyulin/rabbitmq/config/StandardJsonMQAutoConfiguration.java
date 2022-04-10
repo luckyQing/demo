@@ -18,8 +18,12 @@ import org.springframework.context.annotation.Configuration;
 public class StandardJsonMQAutoConfiguration {
 
     @Bean
-    public Queue amqpJsonQueue() {
-        return new Queue(MqConstants.StandardJson.QUEUE, true);
+    public Queue amqpJsonQueue1() {
+        return new Queue(MqConstants.StandardJson.QUEUE1, true);
+    }
+    @Bean
+    public Queue amqpJsonQueue2() {
+        return new Queue(MqConstants.StandardJson.QUEUE2, true);
     }
 
     @Bean
@@ -28,8 +32,13 @@ public class StandardJsonMQAutoConfiguration {
     }
 
     @Bean
-    public Binding bindingJsonDerect() {
-        return BindingBuilder.bind(amqpJsonQueue()).to(directJsonExchange()).with(MqConstants.StandardJson.ROUTING);
+    public Binding bindingAmqpJsonQueue1() {
+        return BindingBuilder.bind(amqpJsonQueue1()).to(directJsonExchange()).with(MqConstants.StandardJson.ROUTING);
+    }
+
+    @Bean
+    public Binding bindingAmqpJsonQueue2() {
+        return BindingBuilder.bind(amqpJsonQueue2()).to(directJsonExchange()).with(MqConstants.StandardJson.ROUTING);
     }
 
 }
