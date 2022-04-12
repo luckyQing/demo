@@ -1,10 +1,7 @@
 package com.liyulin.rabbitmq;
 
 import com.liyulin.rabbitmq.dto.ProductDto;
-import com.liyulin.rabbitmq.mq.producer.BatchMQProducerService;
-import com.liyulin.rabbitmq.mq.producer.DeadLetterMQProducerService;
-import com.liyulin.rabbitmq.mq.producer.StandardJsonMQProducerService;
-import com.liyulin.rabbitmq.mq.producer.StandardMQProducerService;
+import com.liyulin.rabbitmq.mq.producer.*;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +22,8 @@ public class MQTest {
     private DeadLetterMQProducerService delayMQProducerService;
     @Autowired
     private BatchMQProducerService batchMQProducerService;
+    @Autowired
+    private FanoutJsonMQProducerService fanoutJsonMQProducerService;
 
     @Test
     public void testStandardMQSend() throws InterruptedException {
@@ -50,4 +49,9 @@ public class MQTest {
         TimeUnit.SECONDS.sleep(5);
     }
 
+    @Test
+    public void testFanoutJsonMQSend() throws InterruptedException {
+        fanoutJsonMQProducerService.sendJson(new ProductDto().setId(1L).setName("huawei mobile").setPrice(100L));
+        TimeUnit.SECONDS.sleep(10);
+    }
 }

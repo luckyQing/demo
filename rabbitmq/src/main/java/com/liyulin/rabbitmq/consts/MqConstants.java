@@ -41,4 +41,12 @@ public final class MqConstants {
 		public static final String ROUTING = PREFIX + "routingKey";
 	}
 
+	/** fanoutjson消息 */
+	public static final class Fanoutson {
+		private static final String PREFIX = "fanout_json_";
+		public static final String QUEUE1 = PREFIX + "mq1";
+		public static final String QUEUE2 = PREFIX + "mq2";
+		public static final String EXCHANGE = PREFIX + "exchange";
+	}
+
 }
