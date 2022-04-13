@@ -15,11 +15,16 @@ import java.util.Map;
 public class StandardJsonMQConsumerService {
 
     @RabbitListener(queues = MqConstants.StandardJson.QUEUE1)
-    public void consumerJsonAmqp1(@Payload ProductDto productDto, @Headers Map<String, Object> headers) {
+    public void consumerJsonAmqp11(@Payload ProductDto productDto, @Headers Map<String, Object> headers) {
         String msgId = String.valueOf(headers.get("id"));
-        log.info("receiver1|msgId={},msg={}", msgId, productDto);
+        log.info("receiver11|msgId={},msg={}", msgId, productDto);
     }
 
+    @RabbitListener(queues = MqConstants.StandardJson.QUEUE1)
+    public void consumerJsonAmqp12(@Payload ProductDto productDto, @Headers Map<String, Object> headers) {
+        String msgId = String.valueOf(headers.get("id"));
+        log.info("receiver12|msgId={},msg={}", msgId, productDto);
+    }
 
     @RabbitListener(queues = MqConstants.StandardJson.QUEUE2)
     public void consumerJsonAmqp2(@Payload ProductDto productDto, @Headers Map<String, Object> headers) {
