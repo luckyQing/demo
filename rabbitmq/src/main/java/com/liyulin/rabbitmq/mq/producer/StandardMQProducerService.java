@@ -19,7 +19,7 @@ public class StandardMQProducerService {
      * @param message
      */
     public void send(String message) {
-        log.info("send msg:" + message);
+        log.info("send msg:{}", message);
         rabbitTemplate.convertAndSend(MqConstants.Standard.EXCHANGE, MqConstants.Standard.ROUTING, message);
     }
 

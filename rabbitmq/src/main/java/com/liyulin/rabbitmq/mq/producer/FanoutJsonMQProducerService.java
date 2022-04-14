@@ -20,7 +20,7 @@ public class FanoutJsonMQProducerService {
      * @param productDto
      */
     public void sendJson(ProductDto productDto) {
-        log.info("send msg:" + productDto);
+        log.info("send msg:{}", productDto);
         rabbitTemplate.convertAndSend(MqConstants.Fanoutson.EXCHANGE, null, productDto);
     }
 

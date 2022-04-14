@@ -9,19 +9,19 @@ import org.springframework.stereotype.Service;
 
 @Service
 @Slf4j
-public class StandardJsonMQProducerService {
+public class TopicJsonMQProducerService {
 
     @Autowired
     private RabbitTemplate rabbitTemplate;
 
     /**
-     * 发送普通消息
+     * 发送topic消息
      *
      * @param productDto
      */
     public void sendJson(ProductDto productDto) {
         log.info("send msg:{}", productDto);
-        rabbitTemplate.convertAndSend(MqConstants.StandardJson.EXCHANGE, MqConstants.StandardJson.ROUTING, productDto);
+        rabbitTemplate.convertAndSend(MqConstants.Topic.EXCHANGE, MqConstants.Topic.REDIRECT_ROUTING, productDto);
     }
 
 }

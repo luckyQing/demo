@@ -24,6 +24,8 @@ public class MQTest {
     private BatchMQProducerService batchMQProducerService;
     @Autowired
     private FanoutJsonMQProducerService fanoutJsonMQProducerService;
+    @Autowired
+    private TopicJsonMQProducerService topicJsonMQProducerService;
 
     @Test
     public void testStandardMQSend() throws InterruptedException {
@@ -54,4 +56,11 @@ public class MQTest {
         fanoutJsonMQProducerService.sendJson(new ProductDto().setId(1L).setName("huawei mobile").setPrice(100L));
         TimeUnit.SECONDS.sleep(10);
     }
+
+    @Test
+    public void testTopicMQSend() throws InterruptedException {
+        topicJsonMQProducerService.sendJson(new ProductDto().setId(1L).setName("huawei mobile").setPrice(100L));
+        TimeUnit.SECONDS.sleep(10);
+    }
+
 }

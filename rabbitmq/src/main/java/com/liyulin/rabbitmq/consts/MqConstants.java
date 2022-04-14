@@ -49,4 +49,15 @@ public final class MqConstants {
 		public static final String EXCHANGE = PREFIX + "exchange";
 	}
 
+	/** topic消息 */
+	public static final class Topic {
+		private static final String PREFIX = "topic_json_";
+		public static final String QUEUE1 = PREFIX + "mq1";
+		public static final String QUEUE2 = PREFIX + "mq2";
+		public static final String EXCHANGE = PREFIX + "exchange";
+		public static final String REDIRECT_ROUTING = PREFIX + "routingKey.abc.123";
+		public static final String REDIRECT_ROUTING1 = PREFIX + "routingKey.#.123";
+		public static final String REDIRECT_ROUTING2 = PREFIX + "routingKey.abc.#";
+	}
+
 }

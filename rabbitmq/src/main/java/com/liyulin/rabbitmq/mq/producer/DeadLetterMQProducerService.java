@@ -23,7 +23,7 @@ public class DeadLetterMQProducerService {
 	 * @param message
 	 */
 	public void send(String message) {
-		log.info("send delay msg:" + message);
+		log.info("send msg:{}", message);
 		rabbitTemplate.convertAndSend(MqConstants.DeadLetter.EXCHANGE, MqConstants.DeadLetter.ROUTING, message,
 				messagePostProcessor -> {
 					messagePostProcessor.getMessageProperties()
