@@ -33,7 +33,7 @@ public class LoginController {
         try {
             // 登录验证
             userSubject.login(token);
-            return ServerResponseVO.success(UUID.randomUUID().toString().replaceAll("-", ""));
+            return ServerResponseVO.success(userSubject.getSession().getId());
         } catch (UnknownAccountException e) {
             return ServerResponseVO.error(ServerResponseEnum.ACCOUNT_NOT_EXIST);
         } catch (DisabledAccountException e) {
@@ -60,6 +60,12 @@ public class LoginController {
     @RequiresRoles("vip")
     public String role() {
         return "测试Vip角色";
+    }
+
+    @GetMapping("/vipx")
+    @RequiresRoles("vipx")
+    public String vipx() {
+        return "测试vipx角色";
     }
 
     @GetMapping("/permission")

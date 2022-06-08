@@ -39,9 +39,9 @@ public class UserRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
-        User user = (User) principalCollection.getPrimaryPrincipal();
+        Integer uid = (Integer) principalCollection.getPrimaryPrincipal();
         SimpleAuthorizationInfo authorizationInfo = new SimpleAuthorizationInfo();
-        List<Role> roleList = roleService.findRoleByUserId(user.getId());
+        List<Role> roleList = roleService.findRoleByUserId(uid);
         Set<String> roleSet = new HashSet<>();
         List<Integer> roleIds = new ArrayList<>();
         for (Role role : roleList) {
@@ -70,7 +70,7 @@ public class UserRealm extends AuthorizingRealm {
         if (user == null) {
             return null;
         }
-        return new SimpleAuthenticationInfo(user, user.getPassword(), getName());
+        return new SimpleAuthenticationInfo(user.getId(), user.getPassword(), getName());
     }
 
 }

@@ -8,6 +8,17 @@ spring:
     url: jdbc:mysql://127.0.0.1:3306/demo_shiro?serverTimezone=Asia/Shanghai&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true
     username: root
     password: 123456
+  redis:
+    host: 192.168.15.67
+    port: 6379
+    password: welcome123
+    timeout: 10000ms
+    lettuce:
+      pool:
+        max-active: 1000
+        min-idle: 0
+        max-idle: 100
+        max-wait: 10000ms
 mybatis:
   type-aliases-package: com.liyulin.shiro.entity
   mapper-locations: classpath:com/liyulin/shiro/mapper/*.xml
