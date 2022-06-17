@@ -20,7 +20,7 @@
 		<mapper>2.1.5</mapper>
 		<pagehelper>5.1.8</pagehelper>
 		<podam>7.2.3.RELEASE</podam>
-		<fastjson>1.2.47</fastjson>
+		<fastjson>1.2.83</fastjson>
 		<powermock>2.0.2</powermock>
 	</properties>
 
