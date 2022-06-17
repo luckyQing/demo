@@ -29,7 +29,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java>1.8</java>
-		<fastjson>1.2.47</fastjson>
+		<fastjson>1.2.83</fastjson>
 	</properties>
 
 	<dependencies>
