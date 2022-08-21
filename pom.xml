@@ -46,7 +46,8 @@
         <module>shiro-servlet</module>
 		<module>shiro-webflux</module>
 		<module>quasar</module>
-	</modules>
+        <module>mybatis-plus</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
