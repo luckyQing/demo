@@ -47,6 +47,7 @@
 		<module>shiro-webflux</module>
 		<module>quasar</module>
         <module>mybatis-plus</module>
+        <module>retrofit</module>
     </modules>
 
 	<properties>

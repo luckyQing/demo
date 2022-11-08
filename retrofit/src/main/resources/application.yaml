@@ -1,0 +1,10 @@
+server:
+  tomcat:
+    uri-encoding: utf-8
+  port: 80
+  servlet:
+    context-path: /
+
+spring:
+  application:
+    name: retrofit
