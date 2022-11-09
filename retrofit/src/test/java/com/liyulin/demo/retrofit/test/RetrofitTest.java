@@ -2,6 +2,8 @@ package com.liyulin.demo.retrofit.test;
 
 import com.liyulin.demo.retrofit.test.api.ITestClient;
 import io.github.smart.cloud.common.pojo.Response;
+import io.github.smart.cloud.constants.CommonReturnCodes;
+import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -22,7 +24,11 @@ public class RetrofitTest {
 
         ITestClient testClient = retrofit.create(ITestClient.class);
         Call<Response<String>> result = testClient.test("collin");
-        System.out.println(result.execute().body());
+        Response<String> response = result.execute().body();
+        Assertions.assertThat(response).isNotNull();
+        Assertions.assertThat(response.getHead()).isNotNull();
+        Assertions.assertThat(response.getHead().getCode()).isEqualTo(CommonReturnCodes.SUCCESS);
+        Assertions.assertThat(response.getBody()).isNotNull();
     }
 
 }
