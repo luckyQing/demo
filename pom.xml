@@ -26,6 +26,7 @@
 		<module>jpa</module>
 		<module>junit5</module>
 		<module>jws-webservice</module>
+		<module>logback</module>
 		<module>mocktest</module>
 		<module>mongodb</module>
 		<module>protobuf</module>
