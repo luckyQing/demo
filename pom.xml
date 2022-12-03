@@ -39,6 +39,7 @@
 		<module>spring-security-webflux</module>
 		<module>spring-statemachine</module>
 		<module>spring5</module>
+		<module>spring-cloud-gateway</module>
 		<module>webservice-client</module>
 		<module>webservice-server</module>
 		<module>websocket-client</module>
@@ -49,7 +50,7 @@
 		<module>quasar</module>
         <module>mybatis-plus</module>
         <module>retrofit</module>
-    </modules>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
