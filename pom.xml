@@ -10,6 +10,7 @@
 
 	<modules>
 		<module>algorithm</module>
+		<module>canal</module>
 		<module>design-patterns</module>
 		<module>distributed-transaction</module>
 		<module>docker</module>

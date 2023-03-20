@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: rabbitmq
+  rabbitmq:
+    host: 192.168.15.67
+    port: 5672
+    virtual-host: hela_credit_vhost
+    username: wandao
+    password: welcome123
