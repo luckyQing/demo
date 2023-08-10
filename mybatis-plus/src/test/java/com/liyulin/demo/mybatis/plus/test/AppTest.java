@@ -11,8 +11,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
 
-import static org.junit.Assert.assertTrue;
-
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 public class AppTest {
@@ -21,9 +19,28 @@ public class AppTest {
     private ITestService testService;
 
     @Test
-    public void shouldAnswerWithTrue() {
+    public void testInsert() {
+        TestEntity testEntity = new TestEntity();
+        testEntity.setName("lss订单");
+        testService.save(testEntity);
+    }
+
+    @Test
+    public void testSelect() {
         LambdaQueryWrapper<TestEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.in(TestEntity::getName, new ArrayList<>());
+        testService.list(queryWrapper);
+    }
+
+    @Test
+    public void testLogicDelete() {
+        testService.removeById(1689463406473592834L);
+    }
+
+    @Test
+    public void testSelectLogicDeleted() {
+        LambdaQueryWrapper<TestEntity> queryWrapper = new LambdaQueryWrapper<>();
+        queryWrapper.eq(TestEntity::getDel, 1);
         testService.list(queryWrapper);
     }
 
