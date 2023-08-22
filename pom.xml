@@ -52,6 +52,7 @@
         <module>mybatis-plus</module>
         <module>retrofit</module>
         <module>rocketmq</module>
+        <module>openfeign</module>
     </modules>
 
 	<properties>
