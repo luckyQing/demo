@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <springProperty scope="context" name="app_name" source="spring.application.name" defaultValue="app"/>
+    <springProperty scope="context" name="log_path" source="logging.base-dir" defaultValue="/data/logs"/>
+
+    <property name="log_format" value="%d{yyyy-MM-dd HH:mm:ss.SSS} %level %thread [%logger{36} %method %line] %m%n"/>
+
+    <!-- 开发环境使用 打印在控制台-->
+    <appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>${log_format}</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="local_disk_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${log_path}/${app_name}.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${log_path}/${app_name}.%d{yyyyMMddHH}.%i.gz</fileNamePattern>
+            <timeBasedFileNamingAndTriggeringPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+                <maxFileSize>512MB</maxFileSize>
+            </timeBasedFileNamingAndTriggeringPolicy>
+            <maxHistory>120</maxHistory>
+            <totalSizeCap>20GB</totalSizeCap>
+        </rollingPolicy>
+        <append>true</append>
+        <!-- 日志文件的格式 -->
+        <encoder>
+            <pattern>${log_format}</pattern>
+        </encoder>
+    </appender>
+
+    <root>
+        <level value="warn"/>
+        <appender-ref ref="console"/>
+        <appender-ref ref="local_disk_file"/>
+    </root>
+
+</configuration>

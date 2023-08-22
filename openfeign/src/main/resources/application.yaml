@@ -1,0 +1,17 @@
+logging:
+  level:
+    com.liyulin.demo.openfeign: debug
+
+server:
+  port: 10001
+
+spring:
+  cloud:
+    discovery:
+      client:
+        simple:
+          instances:
+            feigntest[0].uri: http://192.168.1.112:10001
+            feigntest[1].uri: http://192.168.1.112:10001
+  application:
+    name: feigntest-test
