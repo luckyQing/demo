@@ -30,7 +30,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<mapper>2.1.5</mapper>
-		<pagehelper>5.1.8</pagehelper>
+		<pagehelper>5.3.1</pagehelper>
 		<sharding-jdbc>4.0.0-RC1</sharding-jdbc>
 		<fastjson>1.2.47</fastjson>
 		<jasypt>2.1.1</jasypt>
