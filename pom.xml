@@ -53,6 +53,7 @@
         <module>retrofit</module>
         <module>rocketmq</module>
         <module>openfeign</module>
+        <module>binlog</module>
     </modules>
 
 	<properties>
