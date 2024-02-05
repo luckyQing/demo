@@ -17,7 +17,7 @@
 		<dom4j>2.1.1</dom4j>
 		<mongo-java-driver>3.10.1</mongo-java-driver>
 		<slf4j>1.7.25</slf4j>
-		<log4j2>2.11.1</log4j2>
+		<log4j2>2.12.4</log4j2>
 		<junit>4.12</junit>
 		<assertj>3.12.0</assertj>
 	</properties>
