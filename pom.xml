@@ -54,7 +54,8 @@
         <module>rocketmq</module>
         <module>openfeign</module>
         <module>binlog</module>
-    </modules>
+		<module>spring-life-cycle</module>
+	</modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
