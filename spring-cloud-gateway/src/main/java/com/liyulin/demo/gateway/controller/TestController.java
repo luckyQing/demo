@@ -15,18 +15,28 @@ public class TestController {
     @GetMapping("get")
     public ResponseEntity<GetDTO> get(GetDTO dto) {
         log.info("getDTO={}", dto);
+        dto.setHeight(dto.getHeight() + 1);
+        return ResponseEntity.ok(dto);
+    }
+
+    @GetMapping("getBody")
+    public ResponseEntity<GetDTO> getBody(@RequestBody GetDTO dto) {
+        log.info("getDTO={}", dto);
+        dto.setHeight(dto.getHeight() + 2);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping("form")
     public ResponseEntity<FormDTO> form(FormDTO dto) {
         log.info("formDTO={}", dto);
+        dto.setPrice(dto.getPrice() + 3);
         return ResponseEntity.ok(dto);
     }
 
     @PostMapping("body")
-    public ResponseEntity<BodyDTO> body(@RequestBody BodyDTO dto) {
-        log.info("bodyDTO={}", dto);
+    public ResponseEntity<BodyDTO> body(@RequestBody BodyDTO dto, String x) {
+        log.info("bodyDTO={}, x={}", dto, x);
+        dto.setLength(dto.getLength() + 4);
         return ResponseEntity.ok(dto);
     }
 

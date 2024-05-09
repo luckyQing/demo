@@ -86,7 +86,7 @@ public class GatewayFilterConfig implements WebFilter, Ordered {
     private Map<String, Object> updateRequestParam(ServerWebExchange exchange) throws NoSuchFieldException, IllegalAccessException, JsonProcessingException {
         ServerHttpRequest request = exchange.getRequest();
         URI uri = request.getURI();
-        String query = uri.getQuery();
+        String query = uri.getRawQuery();
         if (query != null && query.length() > 0) {
             String[] kvStrs = query.split("&");
             Map<String, Object> kvs = new LinkedHashMap<>();

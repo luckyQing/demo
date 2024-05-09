@@ -1,2 +1,16 @@
 server:
   port: 80
+
+spring:
+  application:
+    name: supportServiceGateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: user
+          uri: lb://basicServiceUser
+          predicates:
+            - Path=/test1/**
