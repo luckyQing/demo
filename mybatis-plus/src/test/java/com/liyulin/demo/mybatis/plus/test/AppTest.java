@@ -10,6 +10,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
@@ -27,8 +28,9 @@ public class AppTest {
 
     @Test
     public void testSelect() {
+        List<String> names = new ArrayList<>();
         LambdaQueryWrapper<TestEntity> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.in(TestEntity::getName, new ArrayList<>());
+        queryWrapper.eq(!names.isEmpty(), TestEntity::getName, names);
         testService.list(queryWrapper);
     }
 
