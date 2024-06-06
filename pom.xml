@@ -55,7 +55,8 @@
         <module>openfeign</module>
         <module>binlog</module>
 		<module>spring-life-cycle</module>
-	</modules>
+        <module>api-version</module>
+    </modules>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
