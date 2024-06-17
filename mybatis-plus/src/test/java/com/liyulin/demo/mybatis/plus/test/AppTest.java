@@ -46,4 +46,20 @@ public class AppTest {
         testService.list(queryWrapper);
     }
 
+    @Test
+    public void testStreamQuery() {
+        List<TestEntity> testEntities = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            TestEntity testEntity = new TestEntity();
+            testEntity.setName("lss订单" + i);
+            testEntities.add(testEntity);
+        }
+        testService.saveBatch(testEntities);
+
+        testService.streamQuery(context -> {
+            Long id = context.getResultObject();
+            System.out.println(id);
+        });
+    }
+
 }
