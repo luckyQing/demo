@@ -13,4 +13,11 @@ public interface ITestService extends IService<TestEntity> {
      */
     void streamQuery(ResultHandler<Long> resultHandler);
 
+    /**
+     * 流式查询（带参数）
+     *
+     * @return
+     */
+    void streamQueryWithParams(Long minId, Long maxId, ResultHandler<Long> resultHandler);
+
 }

@@ -7,4 +7,8 @@
         select f_id from t_test
     </select>
 
+    <select id="streamQueryWithParams" resultType="java.lang.Long" fetchSize="-2147483648">
+        select f_id from t_test where f_id >=#{minId} and f_id <![CDATA[<=]]> #{maxId}
+    </select>
+
 </mapper>

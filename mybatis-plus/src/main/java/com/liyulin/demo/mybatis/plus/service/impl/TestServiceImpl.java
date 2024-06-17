@@ -15,4 +15,9 @@ public class TestServiceImpl extends ServiceImpl<TestMapper, TestEntity> impleme
         baseMapper.streamQuery(resultHandler);
     }
 
+    @Override
+    public void streamQueryWithParams(Long minId, Long maxId, ResultHandler<Long> resultHandler) {
+        baseMapper.streamQueryWithParams(minId, maxId, resultHandler);
+    }
+
 }
