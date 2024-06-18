@@ -64,6 +64,23 @@ public class AppTest {
     }
 
     @Test
+    public void testStreamQueryList() {
+        List<TestEntity> testEntities = new ArrayList<>();
+        for (int i = 0; i < 1000; i++) {
+            TestEntity testEntity = new TestEntity();
+            testEntity.setId(i + 1L);
+            testEntity.setName("lss订单" + i);
+            testEntities.add(testEntity);
+        }
+        testService.saveBatch(testEntities);
+
+        testService.streamQueryList(context -> {
+            Long id = context.getResultObject();
+            System.out.println(id);
+        });
+    }
+
+    @Test
     public void testStreamQueryWithParams() {
         List<TestEntity> testEntities = new ArrayList<>();
         for (int i = 0; i < 1000; i++) {

@@ -7,12 +7,19 @@ import com.liyulin.demo.mybatis.plus.service.ITestService;
 import org.apache.ibatis.session.ResultHandler;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TestServiceImpl extends ServiceImpl<TestMapper, TestEntity> implements ITestService {
 
     @Override
     public void streamQuery(ResultHandler<Long> resultHandler) {
         baseMapper.streamQuery(resultHandler);
+    }
+
+    @Override
+    public void streamQueryList(ResultHandler<Long> resultHandler) {
+        baseMapper.streamQueryList(resultHandler);
     }
 
     @Override
