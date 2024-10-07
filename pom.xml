@@ -57,6 +57,7 @@
 		<module>spring-life-cycle</module>
         <module>api-version</module>
         <module>bytebuddy</module>
+        <module>spring-event</module>
     </modules>
 
 	<properties>
