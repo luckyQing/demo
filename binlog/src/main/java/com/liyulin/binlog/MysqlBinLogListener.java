@@ -3,9 +3,9 @@ package com.liyulin.binlog;
 import com.github.shyiko.mysql.binlog.BinaryLogClient;
 import com.github.shyiko.mysql.binlog.event.*;
 import com.github.shyiko.mysql.binlog.network.SSLMode;
-import com.google.common.collect.Sets;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
@@ -13,11 +13,15 @@ import java.util.concurrent.ConcurrentMap;
 public class MysqlBinLogListener {
 
     private static final ConcurrentMap<Long, String> TABLEID_MAP = new ConcurrentHashMap<>();
-    private static final Set<String> LISTENER_TABLES = Sets.newHashSet("rc_deploy_ser_db.t_deploy_records",
-            "rc_deploy_ser_db.t_rule_deploy_records",
-            "strategy_config_db.t_decision_package_detail",
-            "strategy_config_db.t_decision_basic_rule_detail",
-            "strategy_config_bypass_db.t_deploy_records");
+    private static final Set<String> LISTENER_TABLES = new HashSet<>();
+
+    static {
+        LISTENER_TABLES.add("rc_deploy_ser_db.t_deploy_records");
+        LISTENER_TABLES.add("rc_deploy_ser_db.t_rule_deploy_records");
+        LISTENER_TABLES.add("strategy_config_db.t_decision_package_detail");
+        LISTENER_TABLES.add("strategy_config_db.t_decision_basic_rule_detail");
+        LISTENER_TABLES.add("strategy_config_bypass_db.t_deploy_records");
+    }
 
     /**
      * 连接mysqlBinLog
