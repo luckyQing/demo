@@ -1,6 +1,7 @@
 package com.collin.demo.spring.life.cycle.test;
 
 import com.collin.demo.spring.life.cycle.App;
+import com.collin.demo.spring.life.cycle.util.PrintUtil;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,7 +13,7 @@ public class AppTest {
 
     @Test
     public void test() {
-
+        PrintUtil.print();
     }
 
 }

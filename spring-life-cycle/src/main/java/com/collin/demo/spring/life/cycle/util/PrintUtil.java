@@ -15,8 +15,8 @@ public class PrintUtil {
     }
 
     public static void print(){
-        System.out.println("\n\n\n");
-        METHODS.forEach(System.out::println);
+        System.out.println("\n\n\n======================");
+        METHODS.forEach(System.err::println);
     }
 
 }
