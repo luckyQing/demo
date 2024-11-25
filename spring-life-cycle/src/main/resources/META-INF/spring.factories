@@ -1,0 +1,14 @@
+org.springframework.cloud.bootstrap.BootstrapConfiguration=\
+com.collin.demo.spring.life.cycle.bean.processor.BootstrapConfiguration
+
+org.springframework.boot.BootstrapRegistryInitializer=\
+com.collin.demo.spring.life.cycle.bean.MyBootstrapRegistryInitializer
+
+org.springframework.context.ApplicationContextInitializer=\
+com.collin.demo.spring.life.cycle.bean.MyApplicationContextInitializer
+
+org.springframework.boot.SpringApplicationRunListener=\
+com.collin.demo.spring.life.cycle.bean.MySpringApplicationRunListener
+
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.collin.demo.spring.life.cycle.bean.processor.MyEnvironmentPostProcessor
