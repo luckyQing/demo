@@ -8,6 +8,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import lombok.extern.slf4j.Slf4j;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -70,6 +71,24 @@ public final class JacksonUtil {
         try {
             t = OBJECT_MAPPER.readValue(content, valueType);
         } catch (JsonProcessingException e) {
+            log.error("parse object error", e);
+        }
+
+        return t;
+    }
+
+    /**
+     * json转对象
+     *
+     * @param content
+     * @param valueType
+     * @return
+     */
+    public static <T> T parseObject(byte[] content, Class<T> valueType) {
+        T t = null;
+        try {
+            t = OBJECT_MAPPER.readValue(content, valueType);
+        } catch (IOException e) {
             log.error("parse object error", e);
         }
 

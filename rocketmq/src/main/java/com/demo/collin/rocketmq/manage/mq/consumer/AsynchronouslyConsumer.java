@@ -10,8 +10,8 @@ import org.springframework.stereotype.Component;
 
 @Slf4j
 @Component
-@RocketMQMessageListener(consumerGroup = MqConstants.Group.SYNCHRONOUSLY, topic = MqConstants.Topic.SYNCHRONOUSLY)
-public class SynchronouslyConsumer implements RocketMQListener<SynchronouslyDTO> {
+@RocketMQMessageListener(consumerGroup = MqConstants.Group.ASYNCHRONOUSLY, topic = MqConstants.Topic.ASYNCHRONOUSLY)
+public class AsynchronouslyConsumer implements RocketMQListener<SynchronouslyDTO> {
 
     @Override
     public void onMessage(SynchronouslyDTO message) {
