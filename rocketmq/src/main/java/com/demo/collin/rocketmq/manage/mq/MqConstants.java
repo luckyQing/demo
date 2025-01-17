@@ -25,6 +25,10 @@ public interface MqConstants {
          * 批量消费
          */
         String BATCH_CONSUMER = PREFIX + "batch_consumer" + TAIL;
+        /**
+         * 事务消费
+         */
+        String TRANSACTION_CONSUMER = PREFIX + "transaction_consumer" + TAIL;
     }
 
     interface Topic {
@@ -49,6 +53,10 @@ public interface MqConstants {
          * 批量消费
          */
         String BATCH_CONSUMER = PREFIX + "batch_consumer";
+        /**
+         * 事务消息
+         */
+        String TRANSACTION_CONSUMER = PREFIX + "transaction";
     }
 
 }

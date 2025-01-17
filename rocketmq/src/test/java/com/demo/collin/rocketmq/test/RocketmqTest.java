@@ -1,6 +1,7 @@
 package com.demo.collin.rocketmq.test;
 
 import com.demo.collin.rocketmq.dto.*;
+import com.demo.collin.rocketmq.enums.TransactionCode;
 import com.demo.collin.rocketmq.manage.mq.MqConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
@@ -17,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 @Slf4j
@@ -132,7 +134,24 @@ public class RocketmqTest {
         TimeUnit.SECONDS.sleep(10);
     }
 
-    // 顺序消费
-    // oneway
-    // TODO:事务消息
+    /**
+     * 事务消息
+     */
+    @Test
+    public void testTransaction() throws InterruptedException {
+        BuyDTO dto = new BuyDTO();
+        dto.setAmount(100L);
+        dto.setBuyer(1L);
+        dto.setSkuId(1L);
+        dto.setSkuCount(100L);
+        dto.setTransactionCode(TransactionCode.BUY);
+        dto.setTransactionNo(UUID.randomUUID().toString().replaceAll("-", ""));
+
+        Message<BuyDTO> message = MessageBuilder.withPayload(dto)
+                .build();
+
+        rocketMQTemplate.sendMessageInTransaction(MqConstants.Topic.TRANSACTION_CONSUMER, message, BuyDTO.class);
+        TimeUnit.MINUTES.sleep(10);
+    }
+
 }

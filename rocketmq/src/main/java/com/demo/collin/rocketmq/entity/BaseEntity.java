@@ -3,6 +3,8 @@ package com.demo.collin.rocketmq.entity;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -15,6 +17,8 @@ import java.time.LocalDateTime;
  * @author collin
  * @since 2025-01-15
  */
+@Getter
+@Setter
 public class BaseEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
