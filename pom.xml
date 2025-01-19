@@ -58,6 +58,7 @@
         <module>api-version</module>
         <module>bytebuddy</module>
         <module>spring-event</module>
+        <module>kafka</module>
     </modules>
 
 	<properties>
