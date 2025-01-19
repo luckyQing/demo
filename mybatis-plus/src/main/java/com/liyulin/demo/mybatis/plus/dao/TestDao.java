@@ -1,15 +1,21 @@
-package com.liyulin.demo.mybatis.plus.mapper;
+package com.liyulin.demo.mybatis.plus.dao;
 
-import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import com.liyulin.demo.mybatis.plus.entity.TestEntity;
+import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.*;
 import org.apache.ibatis.mapping.ResultSetType;
 import org.apache.ibatis.session.ResultHandler;
 
-import java.util.List;
-
+/**
+ * <p>
+ *  Mapper 接口
+ * </p>
+ *
+ * @author collin
+ * @since 2025-01-19
+ */
 @Mapper
-public interface TestMapper extends BaseMapper<TestEntity> {
+public interface TestDao extends BaseMapper<TestEntity> {
 
     /**
      * 流式查询

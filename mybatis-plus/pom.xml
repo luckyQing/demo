@@ -6,7 +6,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.1.5.RELEASE</version>
+        <version>2.6.15</version>
     </parent>
     <groupId>com.liyulin</groupId>
     <artifactId>mybatis-plus</artifactId>
@@ -15,14 +15,30 @@
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
+        <mybatis-plus>3.5.3.2</mybatis-plus>
     </properties>
 
     <dependencies>
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>3.5.3.2</version>
+            <version>${mybatis-plus}</version>
         </dependency>
+
+        <!--代码生成 start-->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-generator</artifactId>
+            <version>${mybatis-plus}</version>
+            <scope>test</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.freemarker</groupId>
+            <artifactId>freemarker</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!--代码生成 end-->
 
         <dependency>
             <groupId>mysql</groupId>

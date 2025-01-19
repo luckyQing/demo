@@ -1,8 +1,6 @@
 package com.liyulin.demo.mybatis.plus.entity;
 
 import com.baomidou.mybatisplus.annotation.TableField;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
@@ -14,16 +12,9 @@ import lombok.experimental.Accessors;
 @Setter
 @Accessors(chain = true)
 @TableName("t_test")
-public class TestEntity {
-
-    @TableId("f_id")
-    private Long id;
+public class TestEntity extends BaseEntity {
 
     @TableField("f_name")
     private String name;
-
-    @TableLogic
-    @TableField("f_del")
-    private Integer del;
 
 }

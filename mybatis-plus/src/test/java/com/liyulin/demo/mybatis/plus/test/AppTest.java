@@ -1,29 +1,31 @@
 package com.liyulin.demo.mybatis.plus.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.liyulin.demo.mybatis.plus.biz.TestBiz;
 import com.liyulin.demo.mybatis.plus.entity.TestEntity;
-import com.liyulin.demo.mybatis.plus.service.ITestService;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-@RunWith(SpringJUnit4ClassRunner.class)
+@ExtendWith(SpringExtension.class)
 @SpringBootTest
 public class AppTest {
 
     @Autowired
-    private ITestService testService;
+    private TestBiz testBiz;
 
     @Test
     public void testInsert() {
         TestEntity testEntity = new TestEntity();
         testEntity.setName("lss订单");
-        testService.save(testEntity);
+        testEntity.setSysInsertTime(LocalDateTime.now());
+        testBiz.save(testEntity);
     }
 
     @Test
@@ -31,19 +33,19 @@ public class AppTest {
         List<String> names = new ArrayList<>();
         LambdaQueryWrapper<TestEntity> queryWrapper = new LambdaQueryWrapper<>();
         queryWrapper.eq(!names.isEmpty(), TestEntity::getName, names);
-        testService.list(queryWrapper);
+        testBiz.list(queryWrapper);
     }
 
     @Test
     public void testLogicDelete() {
-        testService.removeById(1689463406473592834L);
+        testBiz.removeById(1689463406473592834L);
     }
 
     @Test
     public void testSelectLogicDeleted() {
         LambdaQueryWrapper<TestEntity> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(TestEntity::getDel, 1);
-        testService.list(queryWrapper);
+        queryWrapper.eq(TestEntity::getSysDelState, 1);
+        testBiz.list(queryWrapper);
     }
 
     @Test
@@ -53,11 +55,12 @@ public class AppTest {
             TestEntity testEntity = new TestEntity();
             testEntity.setId(i + 1L);
             testEntity.setName("lss订单" + i);
+            testEntity.setSysInsertTime(LocalDateTime.now());
             testEntities.add(testEntity);
         }
-        testService.saveBatch(testEntities);
+        testBiz.saveBatch(testEntities);
 
-        testService.streamQuery(context -> {
+        testBiz.streamQuery(context -> {
             Long id = context.getResultObject();
             System.out.println(id);
         });
@@ -70,11 +73,12 @@ public class AppTest {
             TestEntity testEntity = new TestEntity();
             testEntity.setId(i + 1L);
             testEntity.setName("lss订单" + i);
+            testEntity.setSysInsertTime(LocalDateTime.now());
             testEntities.add(testEntity);
         }
-        testService.saveBatch(testEntities);
+        testBiz.saveBatch(testEntities);
 
-        testService.streamQueryList(context -> {
+        testBiz.streamQueryList(context -> {
             Long id = context.getResultObject();
             System.out.println(id);
         });
@@ -87,11 +91,12 @@ public class AppTest {
             TestEntity testEntity = new TestEntity();
             testEntity.setId(i + 1L);
             testEntity.setName("lss订单" + i);
+            testEntity.setSysInsertTime(LocalDateTime.now());
             testEntities.add(testEntity);
         }
-        testService.saveBatch(testEntities);
+        testBiz.saveBatch(testEntities);
 
-        testService.streamQueryWithParams(1L, 50L, context -> {
+        testBiz.streamQueryWithParams(1L, 50L, context -> {
             Long id = context.getResultObject();
             System.out.println(id);
         });

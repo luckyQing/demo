@@ -1,28 +1,40 @@
-package com.liyulin.demo.mybatis.plus.service.impl;
+package com.liyulin.demo.mybatis.plus.biz;
 
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
+import com.liyulin.demo.mybatis.plus.dao.TestDao;
 import com.liyulin.demo.mybatis.plus.entity.TestEntity;
-import com.liyulin.demo.mybatis.plus.mapper.TestMapper;
-import com.liyulin.demo.mybatis.plus.service.ITestService;
 import org.apache.ibatis.session.ResultHandler;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
+/**
+ * <p>
+ * 服务实现类
+ * </p>
+ *
+ * @author collin
+ * @since 2025-01-19
+ */
 @Service
-public class TestServiceImpl extends ServiceImpl<TestMapper, TestEntity> implements ITestService {
+public class TestBiz extends ServiceImpl<TestDao, TestEntity> {
 
-    @Override
+    /**
+     * 流式查询
+     *
+     * @return
+     */
     public void streamQuery(ResultHandler<Long> resultHandler) {
         baseMapper.streamQuery(resultHandler);
     }
 
-    @Override
     public void streamQueryList(ResultHandler<Long> resultHandler) {
         baseMapper.streamQueryList(resultHandler);
     }
 
-    @Override
+    /**
+     * 流式查询（带参数）
+     *
+     * @return
+     */
     public void streamQueryWithParams(Long minId, Long maxId, ResultHandler<Long> resultHandler) {
         baseMapper.streamQueryWithParams(minId, maxId, resultHandler);
     }
