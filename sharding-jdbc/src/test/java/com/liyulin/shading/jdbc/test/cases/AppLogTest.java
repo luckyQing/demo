@@ -1,75 +1,61 @@
 package com.liyulin.shading.jdbc.test.cases;
 
-import java.util.List;
-
-import org.apache.ibatis.session.SqlSessionFactory;
+import com.liyulin.shading.jdbc.Application;
+import com.liyulin.shading.jdbc.entity.ThirdLogEntity;
+import com.liyulin.shading.jdbc.repository.ThirdLogRepository;
 import org.assertj.core.api.Assertions;
-import org.junit.Before;
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
+import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.github.pagehelper.PageHelper;
-import com.liyulin.shading.jdbc.base.BaseEntity;
-import com.liyulin.shading.jdbc.entity.ApiLogEntity;
-import com.liyulin.shading.jdbc.enums.DelStateEnum;
-import com.liyulin.shading.jdbc.mapper.ApiLogBaseMapper;
-import com.liyulin.shading.jdbc.test.data.AppLogData;
-import com.liyulin.shading.jdbc.uitl.DbTableUtil;
-import com.liyulin.shading.jdbc.uitl.WeekShardingUtil;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-import tk.mybatis.mapper.entity.Example;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest
+@ExtendWith(SpringExtension.class)
+@SpringBootTest(classes = Application.class)
 public class AppLogTest {
 
-	@Autowired
-	private SqlSessionFactory sqlSessionFactory;
-	@Autowired
-	private ApiLogBaseMapper apiLogBaseMapper;
-	@Autowired
-	private AppLogData appLogData;
-	private String startTime = "2019-06-01 00:00:00";
-	private String endTime = "2019-06-03 00:00:00";
+    @Autowired
+    private ThirdLogRepository thirdLogRepository;
 
-	@Before
-	public void setBefore() {
-		String logicTableName = WeekShardingUtil.getLogicTableName(ApiLogEntity.class);
-		DbTableUtil.cleanTable(logicTableName, sqlSessionFactory);
+    @Test
+    public void testSave() {
+        ThirdLogEntity thirdLogEntity = new ThirdLogEntity();
+        thirdLogEntity.setVendor("izidata");
+        thirdLogEntity.setUrl("https://test");
+        thirdLogEntity.setReqStartTime(LocalDateTime.now());
+        thirdLogEntity.setReqEndTime(LocalDateTime.now());
+        thirdLogEntity.setCostTime(2);
+        thirdLogEntity.setReqParams("test");
+        thirdLogEntity.setResponse("success");
+        LocalDateTime createTime = LocalDateTime.of(2023, 5, 1, 0, 0, 0);
+        thirdLogEntity.setCreateTime(createTime);
+        // 插入数据
+        Assertions.assertThat(thirdLogRepository.save(thirdLogEntity)).isTrue();
+    }
 
-		String actualTableName22 = WeekShardingUtil.getActualTableName(WeekShardingUtil.parse(startTime),
-				logicTableName);
-		String actualTableName23 = WeekShardingUtil.getActualTableName(WeekShardingUtil.parse(endTime), logicTableName);
-		// 创建表
-		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName22, sqlSessionFactory);
-		DbTableUtil.createTableIfAbsent(logicTableName, actualTableName23, sqlSessionFactory);
-	}
-
-	@Test
-	public void testInsert() {
-		Assertions.assertThat(appLogData.insert("2019-06-02 00:00:00")).isTrue();
-	}
-
-	@Test
-	public void testPage() {
-		// 插入数据
-		appLogData.batchInsert(startTime, 8);
-		appLogData.batchInsert(endTime, 8);
-
-		Example example = new Example(ApiLogEntity.class);
-		example.createCriteria().andBetween(BaseEntity.Columns.ADD_TIME.getProperty(), startTime, endTime)
-				.andEqualTo(BaseEntity.Columns.DEL_STATE.getProperty(), DelStateEnum.NORMAL.getDelState());
-		// 分页查询
-		int pageIndex = 2;
-		int pageSize = 5;
-
-		PageHelper.startPage(pageIndex, pageSize, true);
-		List<ApiLogEntity> list = apiLogBaseMapper.selectByExample(example);
-		Assertions.assertThat(list).isNotNull();
-		Assertions.assertThat(list.size()).isEqualTo(pageSize);
-	}
+    @Test
+    public void testBatchSave() {
+        List<ThirdLogEntity> logEntityList = new ArrayList<>();
+        for (int year = 2022; year <= 2025; year++) {
+            ThirdLogEntity thirdLogEntity = new ThirdLogEntity();
+            thirdLogEntity.setVendor("izidata");
+            thirdLogEntity.setUrl("https://test");
+            thirdLogEntity.setReqStartTime(LocalDateTime.now());
+            thirdLogEntity.setReqEndTime(LocalDateTime.now());
+            thirdLogEntity.setCostTime(2);
+            thirdLogEntity.setReqParams("test");
+            thirdLogEntity.setResponse("success");
+            LocalDateTime createTime = LocalDateTime.of(year, 1, 1, 0, 0, 0);
+            thirdLogEntity.setCreateTime(createTime);
+            logEntityList.add(thirdLogEntity);
+        }
+        // 插入数据
+        Assertions.assertThat(thirdLogRepository.saveBatch(logEntityList)).isTrue();
+    }
 
 }

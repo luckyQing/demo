@@ -18,7 +18,7 @@
 		<module>encryption</module>
 		<module>excel</module>
 		<module>flyway</module>
-		<module>gradle</module>
+		<!--<module>gradle</module>-->
 		<module>grpc-module</module>
 		<module>hibernate-validator</module>
 		<module>html2pdf</module>

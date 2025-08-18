@@ -1,31 +1,45 @@
-logging:
-  config: classpath:log4j2.xml
+mybatis-plus:
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
 
-mybatis:
-  type-aliases-package: com.liyulin.shading.jdbc.demo.entity
-  mapper-locations: classpath:mapper/*.xml
-
-jasypt:
-  encryptor:
-    password: 123456
-
-mapper:
-  not-empty: true
-  identity: MYSQL
-spring:  shardingsphere:    datasource:      names: log
-      log:
-        type: com.zaxxer.hikari.HikariDataSource
-        driverClassName: com.mysql.cj.jdbc.Driver
-        jdbcUrl: jdbc:mysql://127.0.0.1:3306/demo_log?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
-        username: ENC(Ell/BrCjyLFI0+iZgPqo6w==)
-        password: ENC(Aq90bjkofJr0svNO4mtFfw==)
+spring:
+  shardingsphere:
+    mode:
+      type: Memory
     props:
       sql.show: true
-    sharding:      default-data-source-name: log
-      tables:
-        t_api_log: 
-          table-strategy:
-            standard: 
-              sharding-column: f_sys_add_time
-              precise-algorithm-class-name: com.liyulin.shading.jdbc.algorithm.WeekPreciseShardingAlgorithm
-              range-algorithm-class-name: com.liyulin.shading.jdbc.algorithm.WeekRangeShardingAlgorithm
+    datasource:
+      names: dslog
+      dslog:
+        type: com.zaxxer.hikari.HikariDataSource
+        driver-class-name: com.mysql.cj.jdbc.Driver
+        jdbc-url: jdbc:mysql://127.0.0.1:3306?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+        #        jdbc-url: jdbc:mysql://127.0.0.1:3306/sharding_log_db_2022?characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&allowMultiQueries=true&serverTimezone=Asia/Shanghai
+        username: root
+        password: 123456
+    rules:
+      sharding:
+        tables:
+          t_thrid_log:
+            actual-data-nodes: dslog.sharding_log_db_$->{2022..2025}.t_thrid_log_$->{(1..12).collect{t ->t.toString().padLeft(2,'0')}}
+            # 分库策略（按年分库）
+            database-strategy:
+              standard:
+                sharding-column: f_create_time # 日志年份字段
+                sharding-algorithm-name: db-year-algorithm
+            # 分表策略（按天分表）
+            table-strategy:
+              standard:
+                sharding-column: f_create_time # 日志日期字段
+                sharding-algorithm-name: tbl-month-algorithm
+        sharding-algorithms:
+          #          db-year-algorithm:
+          #            type: CLASS_BASED
+          #            props:
+          #              strategy: standard
+          #              algorithmClassName: com.liyulin.shading.jdbc.algorithm.YearShardingAlgorithm
+          tbl-month-algorithm:
+            type: CLASS_BASED
+            props:
+              strategy: standard
+              algorithmClassName: com.liyulin.shading.jdbc.algorithm.MonthShardingAlgorithm
