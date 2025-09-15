@@ -1,12 +1,16 @@
 spring:
+  sql:
+    init:
+      schema-locations: classpath:sql/db.sql
   datasource:
-    driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://127.0.0.1:3306/test_db?useUnicode=true&characterEncoding=utf8&useSSL=true&serverTimezone=UTC
+    url: jdbc:h2:mem:collin_test_db2;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;MODE=MYSQL
     username: root
     password: 123456
+    driver-class-name: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource
 
 mybatis-plus:
-  configuration:
-    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+#  configuration:
+#    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
   mapper-locations:
     - classpath*:mapper/*Mapper.xml

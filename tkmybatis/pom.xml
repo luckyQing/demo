@@ -8,37 +8,23 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>2.6.15</version>
     </parent>
+
     <groupId>com.liyulin</groupId>
-    <artifactId>mybatis-plus</artifactId>
+    <artifactId>tkmybatis</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
         <maven.compiler.target>8</maven.compiler.target>
-        <mybatis-plus>3.5.3.2</mybatis-plus>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
         <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-boot-starter</artifactId>
-            <version>${mybatis-plus}</version>
+            <groupId>tk.mybatis</groupId>
+            <artifactId>mapper-spring-boot-starter</artifactId>
+            <version>2.1.5</version>
         </dependency>
-
-        <!--代码生成 start-->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-generator</artifactId>
-            <version>${mybatis-plus}</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.freemarker</groupId>
-            <artifactId>freemarker</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <!--代码生成 end-->
 
         <dependency>
             <groupId>org.projectlombok</groupId>

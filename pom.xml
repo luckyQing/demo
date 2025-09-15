@@ -59,6 +59,7 @@
         <module>bytebuddy</module>
         <module>spring-event</module>
         <module>kafka</module>
+		<module>tkmybatis</module>
     </modules>
 
 	<properties>

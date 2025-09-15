@@ -1,4 +1,6 @@
-CREATE TABLE `t_test` (
+SET MODE=MySQL;
+
+CREATE TABLE IF NOT EXISTS `t_test` (
   `f_id` bigint(20) NOT NULL AUTO_INCREMENT,
   `f_name` varchar(50) DEFAULT NULL,
   `f_sys_insert_time` datetime NOT NULL COMMENT '创建时间',

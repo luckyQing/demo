@@ -22,10 +22,22 @@ public class AppTest {
 
     @Test
     public void testInsert() {
-        TestEntity testEntity = new TestEntity();
-        testEntity.setName("lss订单");
-        testEntity.setSysInsertTime(LocalDateTime.now());
-        testBiz.save(testEntity);
+        long t1 = System.currentTimeMillis();
+        for (int k = 0; k < 1000; k++) {
+            List<TestEntity> data = new ArrayList<>();
+            for (int i = 0; i < 1000; i++) {
+                TestEntity testEntity = new TestEntity();
+                testEntity.setName("lss订单");
+                testEntity.setSysInsertTime(LocalDateTime.now());
+                testEntity.setSysUpdTime(LocalDateTime.now());
+                testEntity.setSysInsertUser(123L);
+                testEntity.setSysDelState((byte) 1);
+                data.add(testEntity);
+            }
+            testBiz.saveBatch(data);
+        }
+        long t2 = System.currentTimeMillis();
+        System.out.println(t2 - t1);
     }
 
     @Test

@@ -1,0 +1,13 @@
+mapper:
+  notEmpty: true
+
+spring:
+  sql:
+    init:
+      schema-locations: classpath:sql/db.sql
+  datasource:
+    url: jdbc:h2:mem:collin_test_db1;DB_CLOSE_DELAY=-1;DATABASE_TO_UPPER=false;MODE=MYSQL
+    username: root
+    password: 123456
+    driver-class-name: org.h2.Driver
+    type: com.zaxxer.hikari.HikariDataSource
