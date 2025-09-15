@@ -4,6 +4,8 @@ import com.liyulin.demo.tkmybatis.entity.TestEntity;
 import tk.mybatis.mapper.common.Mapper;
 import tk.mybatis.mapper.common.special.InsertListMapper;
 
+import java.util.List;
+
 /**
  * <p>
  * Mapper 接口
@@ -13,5 +15,7 @@ import tk.mybatis.mapper.common.special.InsertListMapper;
  * @since 2025-01-19
  */
 public interface TestDao extends Mapper<TestEntity>, InsertListMapper<TestEntity> {
+
+    Integer addBatch(List<TestEntity> list);
 
 }

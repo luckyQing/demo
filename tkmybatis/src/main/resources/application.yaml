@@ -1,3 +1,5 @@
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
 mapper:
   notEmpty: true
 

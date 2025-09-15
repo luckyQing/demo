@@ -36,7 +36,27 @@ public class TkMybatisTest {
             testDao.insertList(data);
         }
         long t2 = System.currentTimeMillis();
-        System.out.println(t2 - t1);
+        System.out.println(String.format("insertList:%sms", t2 - t1));
+    }
+
+    @Test
+    public void testAddBatch() {
+        long t1 = System.currentTimeMillis();
+        for (int k = 0; k < 1000; k++) {
+            List<TestEntity> data = new ArrayList<>();
+            for (int i = 0; i < 1000; i++) {
+                TestEntity testEntity = new TestEntity();
+                testEntity.setName("lss订单");
+                testEntity.setSysInsertTime(LocalDateTime.now());
+                testEntity.setSysUpdTime(LocalDateTime.now());
+                testEntity.setSysInsertUser(123L);
+                testEntity.setSysDelState((byte) 1);
+                data.add(testEntity);
+            }
+            testDao.addBatch(data);
+        }
+        long t2 = System.currentTimeMillis();
+        System.out.println(String.format("addBatch:%sms", t2 - t1));
     }
 
 }

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liyulin.demo.tkmybatis.dao.TestDao">
+
+    <insert id="addBatch" parameterType="java.util.List">
+        insert into t_test(f_name,f_sys_insert_time,f_sys_upd_time,f_sys_del_time,f_sys_insert_user,f_sys_upd_user,f_sys_del_user,f_sys_del_state)
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                    #{item.name},
+                    #{item.sysInsertTime},
+                    #{item.sysUpdTime},
+                    #{item.sysDelTime},
+                    #{item.sysInsertUser},
+                    #{item.sysUpdUser},
+                    #{item.sysDelUser},
+                    #{item.sysDelState}
+            </trim>
+        </foreach>
+    </insert>
+
+</mapper>
