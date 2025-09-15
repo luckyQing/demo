@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.liyulin.demo.tkmybatis.dao.TradeReqDao">
+
+    <insert id="addBatch" parameterType="java.util.List">
+        insert into trade_req
+        (`user_id`,
+        `user_id_short`,
+        `fund_account`,
+        `account_business_type`,
+        `partner_trade_no`,
+        `trade_type`,
+        `trade_sub_type`,
+        `business_id`,
+        `money_type`,
+        `exchange_type`,
+        `trade_status`,
+        `tran_date`,
+        `business_time`,
+        `req_url`,
+        `req_data`,
+        `resp_data`,
+        `remark`,
+        `version`,
+        `create_time`,
+        `update_time`)
+        VALUES
+        <foreach item="item" index="index" collection="list" separator=",">
+            <trim prefix="(" suffix=")" suffixOverrides=",">
+                #{item.userId,jdbcType=BIGINT},
+                #{item.userIdShort,jdbcType=BIGINT},
+                #{item.fundAccount,jdbcType=VARCHAR},
+                #{item.accountBusinessType,jdbcType=SMALLINT},
+                #{item.partnerTradeNo,jdbcType=VARCHAR},
+                #{item.tradeType,jdbcType=INTEGER},
+                #{item.tradeSubType,jdbcType=VARCHAR},
+                #{item.businessId,jdbcType=BIGINT},
+                #{item.moneyType,jdbcType=VARCHAR},
+                #{item.exchangeType,jdbcType=VARCHAR},
+                #{item.tradeStatus,jdbcType=TINYINT},
+                #{item.tranDate,jdbcType=DATE},
+                #{item.businessTime,jdbcType=TIMESTAMP},
+                #{item.reqUrl,jdbcType=VARCHAR},
+                #{item.reqData,jdbcType=LONGVARCHAR},
+                #{item.respData,jdbcType=VARCHAR},
+                #{item.remark,jdbcType=VARCHAR},
+                #{item.version,jdbcType=INTEGER},
+                #{item.createTime,jdbcType=TIMESTAMP},
+                #{item.updateTime,jdbcType=TIMESTAMP},
+            </trim>
+        </foreach>
+    </insert>
+
+</mapper>
