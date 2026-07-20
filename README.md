@@ -1,29 +1,167 @@
-# 说明
-demo下所有项目皆为学习示例项目。
+# Java 技术栈学习示例
 
------
->| 项目名 | 说明 | 
->| - | - | 
->| [algorithm](https://github.com/luckyQing/demo#ed469618898d75b149e5c7c4b6a1c415-62a32b2b2fd7c200899aeef09806a7de46cf0f85) | 算法与数据结构 | 
->| [design-patterns](https://github.com/luckyQing/demo#805ff504dd6f5f5ffdb399737f2a1318-fbfb90000378c2e8b9478ad2d38da208af9710b9) | 设计模式 | 
->| [distributed-transaction](https://github.com/luckyQing/demo#b9cd18008362449c30915d08a7facc0a-1644d9f85fcde09b5a7ff857ea5bec785fbcf3ec) | 分布式事务 | 
->| [elasticsearch](https://github.com/luckyQing/demo#18897dcfce6a4e7ae63a3baeed443c48-c51ce110fb7d48874a0900f504ca996692310ce3) | es实例 | 
->| [encryption](https://github.com/luckyQing/demo#5bdf74912a51c34815f11e9a3d20b609-36292ef4d179c57c2b142579b70e7ebc89933429) | 加密 | 
->| [excel](https://github.com/luckyQing/demo#bf57c906fa7d2bb66d07372e41585d96-d9aec1fb5e2018ce47fe74b628563ee4d24dcc13) | excel读写实例 | 
->| [flyway](https://github.com/luckyQing/demo#38288c94180dea0b79d1be658ee293c8-cc7a33e967c1c26d52d25cfcee1387a5171a65e8) | flyway实例 | 
->| [hibernate-validator](https://github.com/luckyQing/demo#b7cf3ac66a305ead7159053ddba34327-295dcad441b840ef21bb69185a3ef61f32a00ce3) | 参数校验 |
->| [html2pdf](https://github.com/luckyQing/demo#893cea39bf5d717d55f869739d40e91f-f074a18f81b7d37c4fb5e54aec8ee99534e2f9cf) | html模板生成pdf |
->| [http-message-converter](https://github.com/luckyQing/demo#5d6be723b87ca69a7878e643c83e7eee-747cfbcbe2100a6eae700f88b7b0a1da88b24907) | xml、json、protobuf等格式消息转化 | 
->| [jws-webservice](https://github.com/luckyQing/demo#10eee1b564d4e1d5c64fd5684c34a97a-c6348e04305c37d75d217d3bfc227c43c8a70a98) | jax-ws | 
->| [mocktest](https://github.com/luckyQing/demo#49cc991c053ba034e97fc497c18c5670-893b93f96c024410b90d3440659893ee85b74957) | mock测试 | 
->| [mongodb](https://github.com/luckyQing/demo#685a5f7cc75b4796f6c6e00ccd384f01-1d34581b71db8e13f36afa079ec723db821456a0) | mongodb实例 | 
->| [protobuf](https://github.com/luckyQing/demo#606eaf846c6579916354199b45953ee2-d963f556261af00e567f5f64f3bea4eb9059589f) | protobuf示例 | 
->| [rabbitmq](https://github.com/luckyQing/demo#aedb75dfc563674e1263316b01879722-8884be55333e228f9b3d83db403e5066fcf74954) | 消息队列rabbitmq | 
->| [redis](https://github.com/luckyQing/demo#86a1b907d54bf7010394bf316e183e67-1fa208fe8cb5e520c58f7a21494aca9851255112) | redis操作 | 
->| [sharding-jdbc](https://github.com/luckyQing/demo#43f0b52f408cba37278fcc6eda7e4229-68bc663ff9dc558d40c47bbe373ef0a77e68c0ae) | sharding jdbc分表 | 
->| [skills](https://github.com/luckyQing/demo#a658279f9b983958149f31e4d8487673-90181fb68b09d1fb96c30753c3085182448704ed) | java基础知识 | 
->| [spring5](https://github.com/luckyQing/demo#1cf589e0476e94e51ca2eea2c6c08d81-9b94a4a76fbe84a1c17e3f88098e989302bac9dc) | spring5 响应式编程 | 
->| [webservice-client](https://github.com/luckyQing/demo#48aec61bc33ed72189e17f2c2b408b1f-c044eb6c57377e119f0712bf095e5a67fd181a95) | webservice客户端 | 
->| [webservice-server](https://github.com/luckyQing/demo#cd9ca27568db2b3577e5d868bfe9f915-4fdadac3498529b3c741bbfdd91ff858a41f7dde) | webservice服务端 | 
->| [websocket-client](https://github.com/luckyQing/demo#b458b1c253f71e4952b8a7398b697d5b-7899a90dedb68edf85ebae59941996f0d0334332) | websocket服务端 | 
->| [websocket-server](https://github.com/luckyQing/demo#392516a6b709d6132fe372df894693d7-e29c4db64c166976af548a08a8f86e32042c93a5) | websocket服务端 | 
+> 📚 涵盖 Java 后端开发中常用技术栈的实战示例，每个模块独立可运行，适合学习和查阅。
+
+![Java](https://img.shields.io/badge/Java-8+-orange.svg)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.x-brightgreen.svg)
+![Maven](https://img.shields.io/badge/Maven-3.x-blue.svg)
+![License](https://img.shields.io/badge/License-MIT-green.svg)
+
+---
+
+## 📖 简介
+
+本项目是一个 **Java 后端技术栈示例集合**，每个子模块对应一项具体技术，代码简洁、可直接运行。涵盖：
+
+- 🏗️ 设计模式与算法
+- 🌱 Spring 全家桶（Security、Event、生命周期、状态机、Cloud Gateway）
+- 💾 数据库与缓存（JPA、MyBatis-Plus、Redis、MongoDB、Elasticsearch、分库分表）
+- 📨 消息队列（RabbitMQ、RocketMQ、Kafka）
+- 🔗 微服务与 RPC（gRPC、OpenFeign、Retrofit、WebService）
+- 🔐 安全框架（Spring Security、Shiro、加解密）
+- 🛠️ 实用工具（Excel、PDF、Protobuf、Docker、限流、WebSocket 等）
+
+---
+
+## 🚀 快速开始
+
+```bash
+# 克隆项目
+git clone https://github.com/luckyQing/demo.git
+
+# 编译（跳过测试）
+mvn clean install -DskipTests
+```
+
+> 各模块相对独立，进入感兴趣的子模块目录查看其 README 即可。
+
+---
+
+## 📂 模块目录
+
+### 🏗️ 基础与算法
+
+| 模块 | 说明 |
+|------|------|
+| [algorithm](algorithm) | 算法与数据结构 |
+| [design-patterns](design-patterns) | 设计模式（工厂、策略、代理、单例、模板方法等） |
+| [skills](skills) | Java 基础知识（多线程、集合、网络、Lambda、反射等） |
+| [jmh](jmh) | JMH 性能基准测试 |
+
+### 🌱 Spring 生态
+
+| 模块 | 说明 |
+|------|------|
+| [spring5](spring5) | Spring 5 响应式编程（WebFlux） |
+| [spring-life-cycle](spring-life-cycle) | Spring Bean 生命周期 |
+| [spring-event](spring-event) | Spring 事件驱动机制 |
+| [spring-statemachine](spring-statemachine) | Spring 状态机 |
+| [spring-cloud-gateway](spring-cloud-gateway) | Spring Cloud Gateway 网关 |
+| [api-version](api-version) | API 版本管理 |
+
+### 💾 数据库与缓存
+
+| 模块 | 说明 |
+|------|------|
+| [jpa](jpa) | Spring Data JPA |
+| [mybatis-plus](mybatis-plus) | MyBatis-Plus |
+| [tkmybatis](tkmybatis) | TK MyBatis 通用 Mapper |
+| [sharding-jdbc](sharding-jdbc) | ShardingSphere 分库分表 |
+| [flyway](flyway) | Flyway 数据库版本管理 |
+| [redis](redis) | Redis 操作示例 |
+| [mongodb](mongodb) | MongoDB 操作示例 |
+| [elasticsearch](elasticsearch) | Elasticsearch 搜索示例 |
+
+### 📨 消息队列
+
+| 模块 | 说明 |
+|------|------|
+| [rabbitmq](rabbitmq) | RabbitMQ 消息队列 |
+| [rocketmq](rocketmq) | RocketMQ（含事务消息） |
+| [kafka](kafka) | Kafka 消息队列 |
+
+### 🔗 微服务与 RPC
+
+| 模块 | 说明 |
+|------|------|
+| [grpc-module](grpc-module) | gRPC 服务提供与消费 |
+| [openfeign](openfeign) | OpenFeign 声明式调用 |
+| [retrofit](retrofit) | Retrofit HTTP 客户端 |
+| [webservice-server](webservice-server) | WebService 服务端（CXF） |
+| [webservice-client](webservice-client) | WebService 客户端 |
+| [jws-webservice](jws-webservice) | JAX-WS 原生 WebService |
+
+### 🔐 安全与权限
+
+| 模块 | 说明 |
+|------|------|
+| [spring-security](spring-security) | Spring Security（Servlet） |
+| [spring-security-webflux](spring-security-webflux) | Spring Security（WebFlux） |
+| [shiro-servlet](shiro-servlet) | Apache Shiro（Servlet） |
+| [shiro-webflux](shiro-webflux) | Apache Shiro（WebFlux） |
+| [encryption](encryption) | 加解密算法示例 |
+
+### 🛠️ 工具与中间件
+
+| 模块 | 说明 |
+|------|------|
+| [excel](excel) | Excel 读写（EasyExcel / POI） |
+| [html2pdf](html2pdf) | HTML 模板生成 PDF |
+| [protobuf](protobuf) | Protocol Buffers 序列化 |
+| [protostuff](protostuff) | Protostuff 序列化 |
+| [http-message-converter](http-message-converter) | HTTP 消息转换器（XML/JSON/Protobuf） |
+| [hibernate-validator](hibernate-validator) | 参数校验 |
+| [logback](logback) | Logback 日志配置 |
+| [docker](docker) | Docker 容器化部署 |
+| [canal](canal) | Canal 监听 MySQL Binlog |
+| [binlog](binlog) | MySQL Binlog 解析 |
+| [bytebuddy](bytebuddy) | ByteBuddy 字节码增强 |
+| [quasar](quasar) | Quasar 轻量级协程 |
+| [rate-limiter](rate-limiter) | 接口限流 |
+| [distributed-transaction](distributed-transaction) | 分布式事务方案 |
+
+### 🌐 WebSocket
+
+| 模块 | 说明 |
+|------|------|
+| [websocket-server](websocket-server) | WebSocket 服务端 |
+| [websocket-client](websocket-client) | WebSocket 客户端 |
+
+### 🧪 测试
+
+| 模块 | 说明 |
+|------|------|
+| [junit5](junit5) | JUnit 5 单元测试 |
+| [mocktest](mocktest) | Mockito Mock 测试 |
+
+---
+
+## 🛠️ 技术栈
+
+- **语言**：Java 8+
+- **构建工具**：Maven
+- **核心框架**：Spring Boot 2.x / Spring 5
+- **ORM**：JPA、MyBatis-Plus、TK MyBatis
+- **数据库**：MySQL、MongoDB、Redis、Elasticsearch
+- **消息队列**：RabbitMQ、RocketMQ、Kafka
+- **RPC**：gRPC、OpenFeign、Retrofit、WebService
+- **安全**：Spring Security、Apache Shiro
+- **其他**：Docker、Flyway、ShardingSphere、Protobuf、ByteBuddy、Quasar
+
+---
+
+## 📌 环境要求
+
+- JDK 8+
+- Maven 3.x
+- 部分模块需要本地启动对应中间件（Redis、RabbitMQ、RocketMQ 等），具体见各模块 README
+
+---
+
+## 📄 License
+
+[MIT](LICENSE)
+
+---
+
+> ⭐ 如果对你有帮助，欢迎 **Star** 支持一下！
