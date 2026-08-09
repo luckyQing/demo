@@ -12,7 +12,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java>1.8</java>
 		<lombok>1.18.2</lombok>
-		<mysql>6.0.6</mysql>
+		<mysql>8.0.28</mysql>
 		<jdom>2.0.2</jdom>
 		<dom4j>2.1.1</dom4j>
 		<mongo-java-driver>3.10.1</mongo-java-driver>
