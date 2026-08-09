@@ -14,7 +14,7 @@
 		<mysql>6.0.6</mysql>
 		<lombok>1.18.2</lombok>
 		<slf4j>1.7.25</slf4j>
-		<log4j2>2.11.1</log4j2>
+		<log4j2>2.12.4</log4j2>
 		<junit>4.12</junit>
 	</properties>
 
