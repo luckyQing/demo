@@ -31,7 +31,7 @@
 		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 		<mapper>2.1.5</mapper>
 		<pagehelper>5.1.8</pagehelper>
-		<fastjson>1.2.47</fastjson>
+		<fastjson>1.2.83</fastjson>
 	</properties>
 
 	<dependencies>
